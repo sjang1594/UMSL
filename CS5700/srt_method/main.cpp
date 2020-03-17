@@ -38,7 +38,9 @@ int main(int argc, char** argv){
     cout<< AQ <<endl;
     cout<< B <<endl;
 
+    //Check how many shifts should be done.
     AQ = error_check(AQ, B);
+    cout << AQ << endl;
     cout<< setw(10) <<"The dividend length: "<<AQ.length()<<endl;
     cout<< setw(10) <<"The divisor length : "<<B.length()<<endl;
 
