@@ -10,6 +10,7 @@ $(TARGET): $(OBJS)
 	$(CXX) -o $@ $(OBJS)
 
 main.o: SRT_method.h main.cpp
+
 SRT_method.o : SRT_method.h SRT_method.cpp
 
 clean:

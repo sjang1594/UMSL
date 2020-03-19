@@ -26,28 +26,26 @@ string error_check(string a, string b){
 //This is to check whether it is binary number.
 //1 is the binary number, 0 is hexadecimal.
 //The portion of code can be found in http://www.cplusplus.com/forum/general/54757/
-bool binary_checker(string a){
-    for (int i = 0 ; i < a.length(); i++){
-        if(a.at(i)=='1' || a.at(i) == '0'){
-            cout<<"This is Binary Number"<<endl;
-            return true;
-        }
-        else{
-            cout<<"This is not a Binary Number "<<endl;
-            return false;
-        }
+/*int binary_checker(string a){
+    if(a.at(a.length() -2 ) == '1'){
+        return 1;
     }
-
-}
+    return 0;
+}*/
 
 //Hexa Number to Binary Number.
+//Here is some error situation could happen when it comes to binary, then you have to switch the if statement back
 string Hextobinary(string a) {
-    int checker = binary_checker(a);
+    //int checker = binary_checker(a);
     //Binary Number
     string bNum = ".";
 
     //Check if input is binary Number
-    if (checker) {
+    if(a.at(a.length() -2 ) == 'y') {
+        return a.substr(0, a.length() - 8);
+    }
+    //You have to erase it if it is binary number otherwise it will throw an error
+    if(a.at(a.length() -2 ) == '1'){
         return a.substr(0, a.length() - 8);
     }
 
@@ -160,9 +158,7 @@ string complement_converter(string a){
 }
 
 //This function returns the structure of normalized string and delay time.
-Srt norm(string a){
-
-    Srt record;
+Srt norm(string a, Srt &record){
     int delay =0;
     string temp = a;
     int shift = 0;
@@ -175,14 +171,15 @@ Srt norm(string a){
         else
             break;
     }
+    //Store the normalized B.
+    record.original_B = temp;
 
     //update the #shift
     record.shift = shift;
 
     //Convert number to normalized number
     string temp1 = temp;
-    string comp1 = complement_converter(temp1);
-
+    string comp1 = complement_converter(temp1.insert(0, "0"));
     //update that string
     record.str = comp1;
 
@@ -209,4 +206,139 @@ string adjustAQ(string a, Srt &record){
     }
     record.delay = record.delay + delay * 3;
     return adjust_AQ;
+}
+
+//This function is to shift zeros until it finds a 0
+string shiftAQ(string a, Srt &record, Shift &shift){
+    int delay = 0;
+    string str = a;
+    //Loop until it finds the '1'
+    for(int i = 0; i < a.length(); i++){
+        if(shift.total_num_shift > str.length()/2){
+            break;
+        }
+        else if(a[i] == '0'){
+            str.push_back('0');
+            str = str.substr(1);
+            shift.total_num_shift++;
+            delay++;
+        }
+        else
+            break;
+    }
+    //Increment the delay
+    record.delay = record.delay + delay * 3;
+    cout<<setw(10) <<"Shift Over 0's        :"<<" 0."<< str.substr(0, str.length()/2)<<" "<<
+    str.substr(str.length()/2, str.length())<<endl;
+    cout<<setw(10) <<"Delay Time            : "<<record.delay<<"Δt"<<endl;
+    return str;
+}
+
+string shiftAQ_ONE(string a, Srt &record, Shift &shift){
+    int delay = 0;
+    string str = a;
+    for(int i = 0; i < a.length(); i++){
+        if(shift.total_num_shift > str.length()/2){
+            break;
+        }
+        else if(a[i] == '1') {
+            str.push_back('1');
+            str = str.substr(1);
+            shift.total_num_shift++;
+            delay++;
+        }
+        else
+            break;
+    }
+    record.delay = record.delay + delay *3;
+    cout<<setw(10) <<"Shift Over 1's    :"<<" 1."<< str.substr(0, str.length()/2)<<" "<<
+    str.substr(str.length()/2, str.length())<<endl;
+    cout<<setw(10) <<"The Delay Time    : "<<record.delay<<"Δt"<<endl;
+
+    return str;
+}
+
+string add(string a, string b, Srt &record){
+    string result = get_string(a.insert(0, "1"));
+    result = add_helper(a, b.insert(0, "0"), record);
+    cout<<setw(10)<<"Add    B : "<<b.substr(1, b.length())<<endl;
+    result = result.append(a.length()/2 + 1, a.length());
+    return result;
+}
+
+//This function is to get a half of the string in register AQ.
+string get_string(string a){
+    return a.substr(0, a.length()/2 + 1);
+}
+
+//This function actually adding a numbers.
+string add_helper(string a, string b, Srt &record){
+    string result;
+    int track_bitA, track_bitB, sum_bit;
+    int carry_bit = 0;
+
+    for(int i = a.length()-1 ; i>=0 ; i--){
+
+        if(a.at(i) == '*' || b.at(i) == '*'){
+            result = result + '*';
+            carry_bit = 0;
+        }
+        else{
+            //Bit wise track the bit of each 4 bits in register
+            //If do - '0' which is the ascii code 48, then 48 - 48 will become 0.
+            //If do - '1' which is the ascii code 49, then 49 - 48 will leave as the character '1'
+            track_bitA = a.at(i) - '0';
+            track_bitB = b.at(i) - '0';
+
+            //Using XOR gate to get the summation of bits together as following.
+            //If sum_bit consist of 1, 0, 0, it will return as 1.
+            //If sum_bit consist of 1, 1, 0, it will return as 0.
+            //If sum_bit consist of 1, 1, 1, it will return as 1.
+            sum_bit = (track_bitA ^ track_bitB ^ carry_bit) + '0';
+
+            //Then cast the ascii code back to character.
+            result = (char)sum_bit + result;
+
+            //Carry bit can be decided by looking at each bits, but design it such that
+            //carry bit to be three 'and' gate and two 'or' gate at the last. (like full adder).
+            carry_bit = (track_bitA & track_bitB) | (track_bitB & carry_bit) | (track_bitA & carry_bit);
+        }
+    }
+    record.delay = record.delay + ((a.length()/2 - 1) * 2 + 6);
+    return result;
+}
+
+//This function will be done in the first step after adjusting AQ.
+//In order to subtract better, I insert 0 in the front, so that we can check
+//how the operation(addition/subtraction) can be done for first 4 bits in A.
+string subtract(string a, string b, Srt &record){
+    string result = get_string(a.insert(0, "0"));
+    string b_comp = complement_converter(b.insert(0, "0"));
+    cout<< setw(10) <<"subtract B            : "<<b_comp.substr(0,1)<<"."<<b_comp.substr(1, b.length())<<endl;
+    cout<< setw(10) <<"----------------------------------------"<<endl;
+    result = add_helper(result, b_comp, record);
+    result = result.append(a.substr(a.length()/2 + 1, a.length()));
+    return result;
+}
+
+//This is utility function for printing remainder.
+string print_remainder(string a){
+    int count = 0;
+    int len = 2 * a.length();
+    string Rem = "";
+    for(int i = 0 ; i < len/2; i++){
+        if(a[i] == '*')
+            break;
+        else
+            Rem = Rem + a[i];
+        count++;
+    }
+
+    string Zeros ="";
+    for(int i = count; i < len; i++){
+        Zeros.append("0");
+    }
+
+    Rem = Zeros.append(Rem);
+    return Rem;
 }
