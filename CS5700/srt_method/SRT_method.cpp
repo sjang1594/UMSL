@@ -45,10 +45,9 @@ string Hextobinary(string a) {
         return a.substr(0, a.length() - 8);
     }
     //You have to erase it if it is binary number otherwise it will throw an error
-    if(a.at(a.length() -2 ) == '1'){
+    /*if(a.at(a.length() -2 ) == '1'){
         return a.substr(0, a.length() - 8);
-    }
-
+    }*/
     //The part of code was taken and modified from
     //https://www.geeksforgeeks.org/program-to-convert-hexadecimal-number-to-binary/
     for (int i = 1; i < a.length(); i++) {
@@ -148,7 +147,7 @@ string complement_converter(string a){
             }
             else if(carry_bit == 1 && b[i] == '1'){
                 b[i] = '0';
-                carry_bit =0;
+                carry_bit =1;
             }
         }
     }
@@ -159,10 +158,11 @@ string complement_converter(string a){
 
 //This function returns the structure of normalized string and delay time.
 Srt norm(string a, Srt &record){
+    int length = a.length();
     int delay =0;
     string temp = a;
     int shift = 0;
-    for(int i = 0; i < a.length(); i++){
+    for(int i = 0; i < length; i++){
         if(a[i] == '0'){
             temp.push_back('0');
             temp = temp.substr(1);
@@ -194,9 +194,10 @@ Srt norm(string a, Srt &record){
 
 //This function returns the adjusted AQ, also updating the delay time when there is a shift
 string adjustAQ(string a, Srt &record){
+    int length = a.length();
     int delay=0;
     string adjust_AQ = a;
-    for(int i = 0; i < a.length(); i++){
+    for(int i = 0; i < length; i++){
         if(a[i] == '0' && record.shift > 0 ){
             adjust_AQ.push_back('*');
             adjust_AQ = adjust_AQ.substr(1);
@@ -208,13 +209,16 @@ string adjustAQ(string a, Srt &record){
     return adjust_AQ;
 }
 
-//This function is to shift zeros until it finds a 0
+//This function is to shift zeros by checking how many shift left
 string shiftAQ(string a, Srt &record, Shift &shift){
+    int length = a.length();
     int delay = 0;
     string str = a;
+    int num_shift = 0;
     //Loop until it finds the '1'
-    for(int i = 0; i < a.length(); i++){
-        if(shift.total_num_shift > str.length()/2){
+    for(int i = 0; i < length; i++){
+        int result_length = str.length()/2;
+        if(shift.total_num_shift > result_length){
             break;
         }
         else if(a[i] == '0'){
@@ -222,23 +226,30 @@ string shiftAQ(string a, Srt &record, Shift &shift){
             str = str.substr(1);
             shift.total_num_shift++;
             delay++;
+            num_shift++;
         }
         else
             break;
     }
     //Increment the delay
-    record.delay = record.delay + delay * 3;
-    cout<<setw(10) <<"Shift Over 0's        :"<<" 0."<< str.substr(0, str.length()/2)<<" "<<
-    str.substr(str.length()/2, str.length())<<endl;
-    cout<<setw(10) <<"Delay Time            : "<<record.delay<<"Δt"<<endl;
+    if(num_shift > 0) {
+        record.delay = record.delay + delay * 3;
+        cout << setw(20) << "Shift Over 0's        :" << " 0." << str.substr(0, str.length() / 2) << " " <<
+             str.substr(str.length() / 2, str.length()) << endl;
+        cout << setw(20) << "Delay Time            : " << record.delay << "Δt" << endl;
+    }
     return str;
 }
 
+//This function is to shift ones by checking how many shift left
 string shiftAQ_ONE(string a, Srt &record, Shift &shift){
+    int length = a.length();
     int delay = 0;
     string str = a;
-    for(int i = 0; i < a.length(); i++){
-        if(shift.total_num_shift > str.length()/2){
+    int num_shift = 0;
+    for(int i = 0; i < length; i++){
+        int result_length = str.length()/2;
+        if(shift.total_num_shift > result_length){
             break;
         }
         else if(a[i] == '1') {
@@ -246,22 +257,24 @@ string shiftAQ_ONE(string a, Srt &record, Shift &shift){
             str = str.substr(1);
             shift.total_num_shift++;
             delay++;
+            num_shift++;
         }
         else
             break;
     }
-    record.delay = record.delay + delay *3;
-    cout<<setw(10) <<"Shift Over 1's    :"<<" 1."<< str.substr(0, str.length()/2)<<" "<<
-    str.substr(str.length()/2, str.length())<<endl;
-    cout<<setw(10) <<"The Delay Time    : "<<record.delay<<"Δt"<<endl;
-
+    if(num_shift > 0) {
+        record.delay = record.delay + delay * 3;
+        cout << setw(20) << "Shift Over 1's         :" << " 1." << str.substr(0, str.length() / 2) << " " <<
+             str.substr(str.length() / 2, str.length()) << endl;
+        cout << setw(20) << "The Delay Time         :" << record.delay << "Δt" << endl;
+    }
     return str;
 }
 
 string add(string a, string b, Srt &record){
     string result = get_string(a.insert(0, "1"));
-    result = add_helper(a, b.insert(0, "0"), record);
-    cout<<setw(10)<<"Add    B : "<<b.substr(1, b.length())<<endl;
+    result = add_helper(result, b.insert(0, "0"), record);
+    cout<<setw(20) <<"Add B                  :"<<"."<<b.substr(1, b.length())<<endl;
     result = result.append(a.length()/2 + 1, a.length());
     return result;
 }
@@ -271,30 +284,27 @@ string get_string(string a){
     return a.substr(0, a.length()/2 + 1);
 }
 
-//This function actually adding a numbers.
+//This function actually adding a numbers by checking each bit-wise of two strings.
 string add_helper(string a, string b, Srt &record){
     string result;
-    int track_bitA, track_bitB, sum_bit;
     int carry_bit = 0;
-
-    for(int i = a.length()-1 ; i>=0 ; i--){
-
+    for(int i = a.length() -1; i >= 0 ; i--){
         if(a.at(i) == '*' || b.at(i) == '*'){
             result = result + '*';
             carry_bit = 0;
         }
         else{
             //Bit wise track the bit of each 4 bits in register
-            //If do - '0' which is the ascii code 48, then 48 - 48 will become 0.
+            //If do - '0' which is the ascii codecout<<b_comp.length()<<endl; 48, then 48 - 48 will become 0.
             //If do - '1' which is the ascii code 49, then 49 - 48 will leave as the character '1'
-            track_bitA = a.at(i) - '0';
-            track_bitB = b.at(i) - '0';
+            int track_bitA = a.at(i) - '0';
+            int track_bitB = b.at(i) - '0';
 
             //Using XOR gate to get the summation of bits together as following.
             //If sum_bit consist of 1, 0, 0, it will return as 1.
             //If sum_bit consist of 1, 1, 0, it will return as 0.
             //If sum_bit consist of 1, 1, 1, it will return as 1.
-            sum_bit = (track_bitA ^ track_bitB ^ carry_bit) + '0';
+            int sum_bit = (track_bitA ^ track_bitB ^ carry_bit) + '0';
 
             //Then cast the ascii code back to character.
             result = (char)sum_bit + result;
@@ -304,6 +314,10 @@ string add_helper(string a, string b, Srt &record){
             carry_bit = (track_bitA & track_bitB) | (track_bitB & carry_bit) | (track_bitA & carry_bit);
         }
     }
+
+    if(carry_bit)
+        result = '1' + result;
+
     record.delay = record.delay + ((a.length()/2 - 1) * 2 + 6);
     return result;
 }
@@ -314,7 +328,7 @@ string add_helper(string a, string b, Srt &record){
 string subtract(string a, string b, Srt &record){
     string result = get_string(a.insert(0, "0"));
     string b_comp = complement_converter(b.insert(0, "0"));
-    cout<< setw(10) <<"subtract B            : "<<b_comp.substr(0,1)<<"."<<b_comp.substr(1, b.length())<<endl;
+    cout<< setw(10) <<"subtract B            : "<<b_comp.substr(0,1)<<"."<<b_comp.substr(1, b_comp.length())<<endl;
     cout<< setw(10) <<"----------------------------------------"<<endl;
     result = add_helper(result, b_comp, record);
     result = result.append(a.substr(a.length()/2 + 1, a.length()));
@@ -341,4 +355,21 @@ string print_remainder(string a){
 
     Rem = Zeros.append(Rem);
     return Rem;
+}
+
+//This function returns the result of Quotient and Remainder.
+void print_result(string a, string b, string c, Srt &record){
+    if(record.flag == 1){
+        cout << setw(10) << "<--Result Logs-->" << endl;
+        cout << setw(10) << " Remainder " << "." << print_remainder(a) << endl;
+        cout << setw(10) << " Quotient  " << "." << b << endl;
+        cout << setw(10) << " Delay     " << record.delay << "Δt" << endl;
+    }
+    else{
+        string remainder = print_remainder(c.substr(0, c.length()/2));
+        cout << setw(10) << "<--Result Logs-->" << endl;
+        cout << setw(10) << " Remainder " << "." << remainder <<endl;
+        cout << setw(10) << " Quotient  " << "." << c.substr(c.length()/2, c.length())<<endl;
+        cout << setw(10) << " Delay     " << record.delay << "Δt" << endl;
+    }
 }

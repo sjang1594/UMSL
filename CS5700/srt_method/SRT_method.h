@@ -76,7 +76,8 @@ string add_helper(string , string , Srt &);
 //This function return the string after subtraction.
 string subtract(string, string, Srt &);
 
-//Output Function for Remainder
+//This function returns the format of Remainder.
 string print_remainder(string );
 
-//void print_result(string, string, string, B &, Srt &);
+//This function returns the result of Quotient and Remainder.
+void print_result(string, string, string, Srt &);

@@ -1,0 +1,267 @@
+Test Result. 
+
+T1: 
+
+AQ : .11011110   B : .1110
+The dividend length: 8
+The divisor length : 4
+----------------------------------------
+AQ                    : .1101  1110
+B                     : .1110
+Normalized B          : .1110
+2's Complement Norm B : 10010
+Delay Time : 4Δt
+----------------------------------------
+Adjusted AQ           : .1101  1110
+Delay Time : 4Δt
+Shift Over 0's        : 0.1101 1110
+Delay Time            : 4Δt
+subtract B            : 1.0010
+----------------------------------------
+Negative Result        : 1.1111 1110
+The Delay time         : 12Δt
+----------------------------------------
+Shift AQ left     : 1.1111 1100    q0 = 0
+The Delay Time    : 15Δt
+Shift Over 1's    : 1.1100 1111
+The Delay Time    : 27Δt
+----Correction is required----
+    Correct Remainder     : 1.1110
+    The Delay Time        : 30Δt
+    Shift A and Add B     : 0.1110
+    SUM of A and B        : 0.1100
+    The Delay Time        : 38Δt
+<--Result Logs-->
+ Remainder .00001100
+ Quotient  .1111
+ Delay     38Δt
+
+
+T2:
+The Input Argument is 
+AQ : .19   B :.5
+Convert it to Binary Number 
+AQ : .00011001   B : .0101
+The dividend length: 8
+The divisor length : 4
+----------------------------------------
+AQ                    : .0001  1001
+B                     : .0101
+Normalized B          : .1010
+2's Complement Norm B : 10110
+Delay Time : 7Δt
+----------------------------------------
+Adjusted AQ           : .0001  1001
+Delay Time : 10Δt
+Shift Over 0's        : 0.1100 1*00
+Delay Time            : 16Δt
+subtract B            : 1.0110
+----------------------------------------
+Positive Result       : 0.0010 1*00
+The Delay time        : 24Δt
+----------------------------------------
+Shift AQ left         : .0101 *001    q0 = 1
+The Delay Time        : 27Δt
+Shift Over 0's        : 0.101* 0010
+Delay Time            : 30Δt
+subtract B            : 1.0110
+----------------------------------------
+Positive Result       : 0.000* 0010
+The Delay time        : 38Δt
+----------------------------------------
+Shift AQ left         : .00*0 0101    q0 = 1
+The Delay Time        : 41Δt
+Shift Over 0's        : 0.00*0 0101
+Delay Time            : 41Δt
+<--Result Logs-->
+ Remainder .00000000
+ Quotient  .0101
+ Delay     41Δt
+
+T3:
+
+
+T4:
+The Input Argument is 
+AQ : .156   B :.101110
+Convert it to Binary Number 
+AQ : .000101010110   B : .101110
+The dividend length: 12
+The divisor length : 6
+----------------------------------------
+AQ                    : .000101  010110
+B                     : .101110
+Normalized B          : .101110
+2's Complement Norm B : 1010010
+Delay Time : 6Δt
+----------------------------------------
+Adjusted AQ           : .000101  010110
+Delay Time : 6Δt
+Shift Over 0's        : 0.101010 110000
+Delay Time            : 15Δt
+subtract B            : 1.010010
+----------------------------------------
+Negative Result        : 1.111100 110000
+The Delay time         : 25Δt
+----------------------------------------
+Shift AQ left     : 1.111001 100000    q0 = 0
+The Delay Time    : 28Δt
+Shift Over 1's    : 1.001100 000111
+The Delay Time    : 37Δt
+----Correction is required----
+    Correct Remainder     : 1.100110
+    The Delay Time        : 40Δt
+    Shift A and Add B     : 0.101110
+    SUM of A and B        : 0.010100
+    The Delay Time        : 50Δt
+<--Result Logs-->
+ Remainder .000000010100
+ Quotient  .000111
+ Delay     50Δt
+
+T5:
+
+The Input Argument is 
+AQ : .232   B :.011111
+Convert it to Binary Number 
+AQ : .001000110010   B : .011111
+The dividend length: 12
+The divisor length : 6
+----------------------------------------
+AQ                    : .001000  110010
+B                     : .011111
+Normalized B          : .111110
+2's Complement Norm B : 1.000010
+Delay Time : 9Δt
+----------------------------------------
+Adjusted AQ           : .001000  110010
+Delay Time : 12Δt
+Shift Over 0's        : 0.100011 0010*0
+Delay Time            : 15Δt
+Hi
+subtract B            : 1.000010
+----------------------------------------
+Negative Result        : 1.100101 0010*0
+The Delay time         : 25Δt
+----------------------------------------
+Shift AQ left          : 1.001010 010*00              q0 = 0
+The Delay Time         : 28Δt
+Add B                  :.111110
+Negative Result        : 1.0001000 
+The Delay time         : 38Δt
+----------------------------------------
+0              q0 = 0  : 1.001000
+The Delay Time         : 41Δt
+
+--> This could be my compiler error for checking the conditional Error.
+But I calculated it. 
+
+The quotient has to be .010010
+The Remainder has to be .000000000100
+Takes 72 Δt
+
+T6 : 
+The Input Argument is 
+AQ : .1111   B :.22
+Convert it to Binary Number 
+AQ : .1111   B : .00100010
+The dividend length: 16
+The divisor length : 8
+----------------------------------------
+AQ                    : .00000000  00001111
+B                     : .00100010
+Normalized B          : .10001000
+2's Complement Norm B : 1.01111000
+Delay Time : 14Δt
+----------------------------------------
+Adjusted AQ           : .00000000  00001111
+Delay Time : 20Δt
+Shift Over 0's        : 0.01111**0 00000000
+Delay Time            : 47Δt
+<--Result Logs-->
+ Remainder .0000000000001111
+ Quotient  .00000000
+ Delay     47Δt
+
+T7:
+
+
+T8:
+The Input Argument is 
+AQ : .5AC2   B :.79
+Convert it to Binary Number 
+AQ : .0101101011000010   B : .01111001
+The dividend length: 16
+The divisor length : 8
+----------------------------------------
+AQ                    : .01011010  11000010
+B                     : .01111001
+Normalized B          : .11110010
+2's Complement Norm B : 1.00001110
+Delay Time : 11Δt
+----------------------------------------
+Adjusted AQ           : .01011010  11000010
+Delay Time : 14Δt
+subtract B            : 1.00001110
+----------------------------------------
+Negative Result        : 1.11000011 1000010*
+The Delay time         : 26Δt
+----------------------------------------
+Shift AQ left          : 1.10000111 000010*0              q0 = 0
+The Delay Time         : 29Δt
+Shift Over 1's         : 1.00001110 00010*01
+The Delay Time         :32Δt
+Add B                  :.11110010
+Negative Result        : 1.000000000 
+The Delay time         : 44Δt
+----------------------------------------
+Shift AQ left          : 1.00000000 0              q0 = 0
+The Delay Time         : 47Δt
+
+--> This could be my compiler error for checking the conditional Error.
+But I calculated it. 
+
+The quotient has to be .11000000
+The Remainder has to be .000000000000010
+Takes 65 Δt
+
+The Input Argument is 
+AQ : .9CDE11   B :.ABC
+Convert it to Binary Number 
+AQ : .100111001101111000010001   B : .101010111100
+The dividend length: 24
+The divisor length : 12
+----------------------------------------
+AQ                    : .100111001101  111000010001
+B                     : .101010111100
+Normalized B          : .101010111100
+2's Complement Norm B : 1.010101000100
+Delay Time : 12Δt
+----------------------------------------
+Adjusted AQ           : .100111001101  111000010001
+Delay Time : 12Δt
+subtract B            : 1.010101000100
+----------------------------------------
+Negative Result        : 1.111100010001 111000010001
+The Delay time         : 28Δt
+----------------------------------------
+Shift AQ left          : 1.111000100011 110000100010              q0 = 0
+The Delay Time         : 31Δt
+Shift Over 1's         : 1.000100011110 000100010111
+The Delay Time         :40Δt
+Add B                  :.101010111100
+Negative Result        : 1.101111011010 
+The Delay time         : 56Δt
+----------------------------------------
+Shift AQ left          : 1.01111011010 0              q0 = 0
+The Delay Time         : 59Δt
+
+--> This could be my compiler error for checking the conditional Error.
+But I calculated it. 
+
+The quotient has to be .111010011101
+The Remainder has to be .000000000000000110001010
+Takes 145 Δt
+
+
+

@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -g
+CXXFLAGS = -g -std=gnu++14
 
 SRC = SRT_method.cpp
 DEP = SRT_method.h

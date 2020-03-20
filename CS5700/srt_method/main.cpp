@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
          << AQ.substr(AQ.length() / 2, AQ.length()) << endl;
     cout << setw(10) << "B                     : " << "." << B << endl;
     cout << setw(10) << "Normalized B          : " << "." << record.original_B << endl;
-    cout << setw(10) << "2's Complement Norm B : " << record.str << endl;
+    cout << setw(10) << "2's Complement Norm B : " << record.str.substr(0,1) << "." << record.str.substr(1, record.str.length())<<endl;
     cout << setw(10) << "Delay Time : " << record.delay << "Δt" << endl;
 
     cout << setw(10) << "----------------------------------------" << endl;
@@ -74,30 +74,30 @@ int main(int argc, char** argv) {
     string result;
     char pos_result = '0';
 
+    string temp = record.original_B;
+
     //Loop until the shift is all used.
     while (shift.total_num_shift <= B.length()) {
         if (pos_result == '0') {
-            result = subtract(AQ, record.original_B, record);
+            result = subtract(AQ, temp, record);
         }
         else {
-            result = add(AQ, record.original_B, record);
+            result = add(AQ, temp, record);
         }
 
         //Negative Result
         if (result.substr(0, 1) == "1") {
-            cout << setw(10) << "Negative Result        : " << result.substr(0, 1) << "."
-                 << result.substr(1, result.length() / 2) << " "
-                 << result.substr(result.length() / 2 + 1, result.length()) << endl;
-            cout << setw(10) << "The Delay time         : " << record.delay << "Δt" << endl;
-            cout << setw(10) << "----------------------------------------" << endl;
+            cout << setw(20) << "Negative Result        : " << result.substr(0, 1) << "."
+                 << result.substr(1, result.length() / 2) << " "<< result.substr(result.length() / 2 + 1, result.length()) << endl;
+            cout << setw(20) << "The Delay time         : " << record.delay << "Δt" << endl;
+            cout << setw(20) << "----------------------------------------" << endl;
         }
         //Positive Result
         else {
-            cout << setw(10) << "Positive Result       : " << result.substr(0, 1) << "." <<
-                 result.substr(1, result.length() / 2) << " " << result.substr(result.length() / 2 + 1, result.length())
-                 << endl;
-            cout << setw(10) << "The Delay time        : " << record.delay << "Δt" << endl;
-            cout << setw(10) << "----------------------------------------" << endl;
+            cout << setw(30) << "Positive Result        :" << result.substr(0, 1) << "." <<result.substr(1, result.length() / 2)
+            << " " << result.substr(result.length() / 2 + 1, result.length())<< endl;
+            cout << setw(20) << "The Delay time         : " << record.delay << "Δt" << endl;
+            cout << setw(20) << "----------------------------------------" << endl;
         }
 
         pos_result = result[0];
@@ -110,69 +110,64 @@ int main(int argc, char** argv) {
 
             record.delay = record.delay + 3;
             shift.total_num_shift += 1;
+            cout << setw(30) << "Shift AQ left         : " << "." << result.substr(0, result.length() / 2);
 
-            cout << setw(10) << "Shift AQ left         : " << "." << result.substr(0, result.length() / 2) << " "
-                 << result.substr(result.length() / 2, result.length()) << setw(10) << "q0 = 1" << endl;
-            cout << setw(10) << "The Delay Time        : " << record.delay << "Δt" << endl;
+            cout << " "<< result.substr(result.length()/ 2, result.length()) << "q0 = 1" << endl;
+            cout << setw(20) << "The Delay Time        : " << record.delay << "Δt" << endl;
 
             result = shiftAQ(result, record, shift);
-
-            if (shift.total_num_shift > result.length() / 2) {
+            if (shift.total_num_shift > (int) result.length()/2) {
                 AQ = result;
                 break;
             }
             AQ = result;
         }
+        //When result AQ is negative.
         else if (pos_result == '1') {
             result.push_back('0');
             result = result.substr(1);
 
+            //Update Delay and Total number of shift.
             record.delay = record.delay + 3;
             shift.total_num_shift += 1;
 
-            cout << setw(10) << "Shift AQ left     : " << "1" << "." << result.substr(0, result.length() / 2)
-                 << " " << result.substr(result.length() / 2, result.length()) << setw(10) << "q0 = 0" << endl;
-            cout << setw(10) << "The Delay Time    : " << record.delay << "Δt" << endl;
-
+            cout << setw(20) << "Shift AQ left          : " << "1" << "." << result.substr(0, result.length() / 2)
+                 << " " << result.substr(result.length() / 2, result.length())<<setw(20) << "q0 = 0" << endl;
+            cout << setw(20) << "The Delay Time         : " << record.delay << "Δt" << endl;
 
             result = shiftAQ_ONE(result, record, shift);
-            if (shift.total_num_shift > record.original_B.length()) {
+            if (shift.total_num_shift > (int) B.length()) {
                 AQ = result;
                 break;
             }
             AQ = result;
         }
     }
+
+    //the result of A is = 1; this means that I have to correct the remainder.
     if (pos_result == '1') {
-        string final_result = AQ.substr(0, AQ.length() / 2);
-
+        string final_result = AQ.substr(AQ.length() / 2);
         string half_AQ = get_string(AQ.insert(0, "1"));
-
         string correct_string = half_AQ;
-        //cout<<correct_string<<endl;
         correct_string = correct_string.substr(0, half_AQ.length() - 1);
         record.delay += 3;
-        cout << setw(10) << "----Correction is required----" << endl;
-        cout << setw(10) << "    Correct Remainder     : " << "1." << correct_string << endl;
-        cout << setw(10) << "    The Delay Time        : " << record.delay << "Δt" << endl;
-        cout << setw(10) << "    Shift A and Add B     : " << "0." << record.original_B << endl;
-        //cout<<correct_string<<endl;
+        cout << setw(20) << "----Correction is required----" << endl;
+        cout << setw(20) << "    Correct Remainder     : " << "1." << correct_string << endl;
+        cout << setw(20) << "    The Delay Time        : " << record.delay << "Δt" << endl;
+        cout << setw(20) << "    Shift A and Add B     : " << "0." << record.original_B << endl;
         correct_string = add_helper(correct_string, record.original_B, record);
-        cout << setw(10) << "    SUM of A and B        : " << "0." << final_result << endl;
-        cout << setw(10) << "    The Delay Time        : " << record.delay << "Δt" << endl;
+        cout << setw(20) << "    SUM of A and B        : " << "0." << correct_string << endl;
+        cout << setw(20) << "    The Delay Time        : " << record.delay << "Δt" << endl;
 
-        cout << setw(10) << "<--Result Logs-->" << endl;
-        cout << setw(10) << " Remainder " << "." << print_remainder(correct_string) << endl;
-        cout << setw(10) << " Quotient  " << "." << final_result << endl;
-        cout << setw(10) << " Delay     " << record.delay << "Δt" << endl;
+        record.flag = 1;
         string empty = " ";
-        //print_result(final_result, test_a.substr(test_a.length()/2, test_a.length()), empty, c, record);
-    } else {
-        string a = " ";
-        string b = " ";
-        //c.flag = 0;
-        //print_result(a, b, test_a, c, record);
+        print_result(correct_string, final_result, empty, record);
     }
-
+    //Correction does not required.
+    else {
+        record.flag = 0;
+        string empty = " ", emtpy1 = " ";
+        print_result(empty, emtpy1, AQ, record);
+    }
     return 0;
 }
