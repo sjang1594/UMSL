@@ -81,3 +81,6 @@ string print_remainder(string );
 
 //This function returns the result of Quotient and Remainder.
 void print_result(string, string, string, Srt &);
+
+//Check overflow could happen for input strings
+int overflow_checker(string , string );

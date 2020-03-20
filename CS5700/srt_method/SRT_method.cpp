@@ -45,9 +45,9 @@ string Hextobinary(string a) {
         return a.substr(0, a.length() - 8);
     }
     //You have to erase it if it is binary number otherwise it will throw an error
-    /*if(a.at(a.length() -2 ) == '1'){
+    if(a.at(a.length() -2 ) == '1'){
         return a.substr(0, a.length() - 8);
-    }*/
+    }
     //The part of code was taken and modified from
     //https://www.geeksforgeeks.org/program-to-convert-hexadecimal-number-to-binary/
     for (int i = 1; i < a.length(); i++) {
@@ -147,7 +147,7 @@ string complement_converter(string a){
             }
             else if(carry_bit == 1 && b[i] == '1'){
                 b[i] = '0';
-                carry_bit =1;
+                carry_bit = 1;
             }
         }
     }
@@ -315,9 +315,6 @@ string add_helper(string a, string b, Srt &record){
         }
     }
 
-    if(carry_bit)
-        result = '1' + result;
-
     record.delay = record.delay + ((a.length()/2 - 1) * 2 + 6);
     return result;
 }
@@ -372,4 +369,24 @@ void print_result(string a, string b, string c, Srt &record){
         cout << setw(10) << " Quotient  " << "." << c.substr(c.length()/2, c.length())<<endl;
         cout << setw(10) << " Delay     " << record.delay << "Δt" << endl;
     }
+}
+
+//This function returns whether input string has overflow.
+int overflow_checker(string a, string b){
+    bool zeros = true;
+
+    for(int i = 0; i < b.length(); i++){
+        if(b[i] == '1'){
+            zeros = false;
+            break;
+        }
+    }
+    if(zeros == true)
+        return -1;
+
+    string ovflow = a.substr(0, a.length()/2);
+    if(a.compare(b) >= 0){
+        return -2;
+    }
+    return 0;
 }

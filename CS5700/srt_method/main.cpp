@@ -10,7 +10,7 @@ using namespace std;
 int main(int argc, char** argv) {
     Shift shift;
     Srt record;
-
+    string half_AQ;
     //Error Checking
     if (argc < 3) {
         cout << "------Help Message------" << endl;
@@ -52,6 +52,26 @@ int main(int argc, char** argv) {
     shift.total_num_shift = 0;
     record.shift = 0;
 
+    int overflow_bit = overflow_checker(AQ, B);
+
+    if(overflow_bit == -1){
+        cout<<"error occured"<<endl;
+        return -1;
+    }
+    else{
+        if(overflow_bit == -2){
+            cout<<"Correcting Bits now because it overflow"<<endl;
+
+            string half_AQ = AQ.substr(0, AQ.length()/2);
+            while(half_AQ.compare(B) >= 0){
+                AQ = AQ.insert(0, "00");
+                B = B.insert(0, "0");
+                half_AQ = AQ.substr(0, AQ.length()/2);
+            }
+        }
+
+
+    //Normalize B
     norm(B, record);
     cout << setw(10) << "----------------------------------------" << endl;
     cout << setw(10) << "AQ                    : " << "." << AQ.substr(0, AQ.length() / 2) << "  "
@@ -94,7 +114,7 @@ int main(int argc, char** argv) {
         }
         //Positive Result
         else {
-            cout << setw(30) << "Positive Result        :" << result.substr(0, 1) << "." <<result.substr(1, result.length() / 2)
+            cout << setw(20) << "Positive Result        :" << result.substr(0, 1) << "." <<result.substr(1, result.length() / 2)
             << " " << result.substr(result.length() / 2 + 1, result.length())<< endl;
             cout << setw(20) << "The Delay time         : " << record.delay << "Δt" << endl;
             cout << setw(20) << "----------------------------------------" << endl;
@@ -168,6 +188,8 @@ int main(int argc, char** argv) {
         record.flag = 0;
         string empty = " ", emtpy1 = " ";
         print_result(empty, emtpy1, AQ, record);
+
+    }
     }
     return 0;
 }
