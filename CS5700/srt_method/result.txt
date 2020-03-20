@@ -80,6 +80,47 @@ Delay Time            : 41Δt
 
 T3:
 
+The Input Argument is 
+AQ : .CD   B :.A
+Convert it to Binary Number 
+AQ : .11001101   B : .1010
+The dividend length: 8
+The divisor length : 4
+Correcting Bits now because it overflow
+----------------------------------------
+AQ                    : .00110  01101
+B                     : .01010
+Normalized B          : .10100
+2's Complement Norm B : 1.01100
+Delay Time : 8Δt
+----------------------------------------
+Adjusted AQ           : .00110  01101
+Delay Time : 11Δt
+Shift Over 0's        : 0.11001 101*0
+Delay Time            : 14Δt
+subtract B            : 1.01100
+----------------------------------------
+      Positive Result        :0.00101 101*0
+The Delay time         : 24Δt
+----------------------------------------
+      Shift AQ left         : .01011 01*01q0 = 1
+The Delay Time        : 27Δt
+Shift Over 0's        : 0.10110 1*010
+Delay Time            : 30Δt
+subtract B            : 1.01100
+----------------------------------------
+      Positive Result        :0.00010 1*010
+The Delay time         : 40Δt
+----------------------------------------
+      Shift AQ left         : .00101 *0101q0 = 1
+The Delay Time        : 43Δt
+Shift Over 0's        : 0.101*0 10100
+Delay Time            : 49Δt
+<--Result Logs-->
+ Remainder .0000000101
+ Quotient  .10100
+ Delay     49Δt
+
 
 T4:
 The Input Argument is 
@@ -263,5 +304,6 @@ The quotient has to be .111010011101
 The Remainder has to be .000000000000000110001010
 Takes 145 Δt
 
+Rest of it, I was not able to figure it out
 
 
