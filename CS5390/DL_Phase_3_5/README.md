@@ -1,7 +1,7 @@
-# The Requirement for phase 3 through 5.
+## The Requirement for phase 3 through 5.
 > Phase 3 is conflicted with DL_Phase_1_3.
 
-## The following description was the requirements for the phase.
+### The following description was the requirements for the phase.
 
 3. Split and evaluate on test set
 Split your data into training, development, and test set
