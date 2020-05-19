@@ -1,0 +1,3 @@
+/home/seungho/img_process/CMakeFiles/rebuild_cache.dir
+/home/seungho/img_process/CMakeFiles/obj.dir
+/home/seungho/img_process/CMakeFiles/edit_cache.dir
