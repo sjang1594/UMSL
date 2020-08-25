@@ -26,6 +26,8 @@ Recall: 71.08%
 F1-score: 73.54  
   
 ## Final Presentation.
+<p align="center">
+  <img src="1.jpg" width="400" height="350" >
+</p>
 
-<img src="1.jpg" width="400" height="350" >
 
