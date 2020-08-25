@@ -27,5 +27,5 @@ F1-score: 73.54
   
 ## Final Presentation.
 
-![1](https://user-images.githubusercontent.com/40439472/71214439-eca7dd00-227a-11ea-8fd4-915e994b317f.jpg)
+<img src="" width="400" height="350" >
 
