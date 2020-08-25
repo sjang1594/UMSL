@@ -20,10 +20,10 @@ About this project : This project is to detect which types of the cancer cell is
 
 
 ## Result
-Accuracy: 71.08%  
-Precision: 76.18%  
-Recall: 71.08%  
-F1-score: 73.54  
+* Accuracy: 71.08%  
+* Precision: 76.18%  
+* Recall: 71.08%  
+* F1-score: 73.54  
   
 ## Final Presentation.
 <p align="center">
