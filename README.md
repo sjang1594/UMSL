@@ -1,5 +1,10 @@
 # UMSL
 
+## Languages :
+<img align="left" alt="Python" width="30px" src="https://img.icons8.com/color/48/000000/python.png" />
+<img align="left" alt="C++" width="30px" src="https://img.icons8.com/color/48/000000/c-plus-plus-logo.png"/>
+<img align="left" alt="C" width="30px" src="https://img.icons8.com/color/48/000000/c-programming.png"/>
+
 ### CS 2750 : System Programming - UNIX/C
 
 ### CS 5130 : Advanced Algorithm 
