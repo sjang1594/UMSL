@@ -13,6 +13,7 @@ The list of courses/project that I worked on.
 
 ### CS 5300 : Introduction to Artficial Intelligence
 - Project : Skin Cancer Detection using Feed Forward Neural Network/Convolutional Neural Networks.
+</br>
               - Solving imbalanced Data by using imblearn package
 
 ### CS 5340 : Machine Learning
