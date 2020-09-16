@@ -13,8 +13,7 @@ The list of courses/project that I worked on.
 
 ### CS 5300 : Introduction to Artficial Intelligence
 - Project : Skin Cancer Detection using Feed Forward Neural Network/Convolutional Neural Networks.
-</br>
-              - Solving imbalanced Data by using imblearn package
+            * Solving imbalanced Data by using imblearn package
 
 ### CS 5340 : Machine Learning
 
@@ -25,6 +24,6 @@ The list of courses/project that I worked on.
 
 ### CS 5700 : Computer System
 - Project : SRT division Algorithm with binary numbers.
-            - String manipulation : Converting 2's complement number, addition, subtraction, and shifting operation was involved
+            * String manipulation : Converting 2's complement number, addition, subtraction, and shifting operation was involved
 
 ### CS 5880 : Independent Study 
