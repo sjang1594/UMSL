@@ -12,13 +12,18 @@ The list of courses/project that I worked on.
 ### CS 5130 : Advanced Algorithm 
 
 ### CS 5300 : Introduction to Artficial Intelligence
+- Project : Skin Cancer Detection using Feed Forward Neural Network/Convolutional Neural Networks.
+  - Solving imbalanced Data by using imblearn package
 
 ### CS 5340 : Machine Learning
 
 ### CS 5390 : Deep Learning
+- Project : Harry Potter Face Recognition
 
 ### CS 5500 : Software Engineering
 
 ### CS 5700 : Computer System
+- Project : SRT division Algorithm with binary numbers.
+  - String manipulation : Converting 2's complement number, addition, subtraction, and shifting operation was involved
 
 ### CS 5880 : Independent Study 
