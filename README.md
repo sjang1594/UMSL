@@ -28,6 +28,7 @@ The list of courses/project that I worked on.
   - Fixed Length vs Variable Length Codes.
   - How to construct Huffman Tree [How to Constructu Huffman Tree](https://www.youtube.com/watch?v=qE4tfsiTGjE&feature=youtu.be&ab_channel=BadriAdhikari)
     - Canonical Huffman Tree (Elements have equal frequency)
+  - Apply Huffman code to problem : reddit_relationshipadvice_legaladvice_2000 
   
 ### CS 5300 : Introduction to Artficial Intelligence
 - Project : Skin Cancer Detection using Feed Forward Neural Network/Convolutional Neural Networks.
