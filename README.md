@@ -21,6 +21,13 @@ The list of courses/project that I worked on.
   - Recursive & Dynamic Programming Approach solving for Activity Selection Problem
   - Recursive & Iterative Greedy Algorithm
   - Running Comparison on Iterative Greedy Algorithm with sorted & unsorted inputs
+
+- HW5 : Greedy Algorithm Application : Huffman Coding.
+  - What is Prefix Code : Reference [Mathematics in Prefix Code](https://www.youtube.com/watch?v=HST2r5pvJCA&ab_channel=mathematicalmonk) and [Prefix Example](https://gist.github.com/joepie91/26579e2f73ad903144dd5d75e2f03d83)
+  - What is Huffman Coding - CLRS(16.3)
+  - Fixed Length vs Variable Length Codes.
+  - How to construct Huffman Tree [How to Constructu Huffman Tree](https://www.youtube.com/watch?v=qE4tfsiTGjE&feature=youtu.be&ab_channel=BadriAdhikari)
+    - Canonical Huffman Tree (Elements have equal frequency)
   
 ### CS 5300 : Introduction to Artficial Intelligence
 - Project : Skin Cancer Detection using Feed Forward Neural Network/Convolutional Neural Networks.
