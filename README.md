@@ -10,7 +10,18 @@ The list of courses/project that I worked on.
 ### CS 2750 : System Programming - UNIX/C
 
 ### CS 5130 : Advanced Algorithm 
-
+- HW1 : Compare & Contrast on different growth functions
+- HW2 : Recursive & Dynamic Programming Approach(Top-down & Bottom-up) Comparison.
+  - Cutting Rod Problem
+- HW3 : Application & Example on Dynamic Programming Approach
+  - Matrix Multiplication
+  - Longest Common Sub-sequence
+- HW4 : Dynamic Programming Approach & Greedy Algorithm
+  - Background : Activity Selection Problem & Optimal Substructure
+  - Recursive & Dynamic Programming Approach solving for Activity Selection Problem
+  - Recursive & Iterative Greedy Algorithm
+  - Running Comparison on Iterative Greedy Algorithm with sorted & unsorted inputs
+  
 ### CS 5300 : Introduction to Artficial Intelligence
 - Project : Skin Cancer Detection using Feed Forward Neural Network/Convolutional Neural Networks.
   - Solving imbalanced Data by using imblearn package
