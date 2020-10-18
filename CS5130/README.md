@@ -23,7 +23,7 @@
 - HW6 : Amortized Analysis (One of Aggregate Analysis) & Average Analysis
 
 
-- HW7 : Dealing with Disjoint-Sets Data Structures.
+- Extra Reading : Dealing with Disjoint-Sets Data Structures.
   - Disjoint-set Operation (Make-sets, Union(x, y), Find-Set(x))
     - Make-set(x) creates a new set whos only member is x. Since the sets are disjoint, we require that x not already be in the some other set --> Initializing
     - Union(x, y) unites the dynamic sets that contain x and y, says S_x and S_y, into a new set that is the union of these two sets
@@ -34,3 +34,5 @@
     - union-by-rank
     - path compression 
     - reference [Disjoint-set forest](https://www.youtube.com/watch?v=ID00PMy0-vE&ab_channel=TusharRoy-CodingMadeSimple)
+
+- HW 7: Elementary Graph Algorithms
