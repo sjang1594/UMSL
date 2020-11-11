@@ -38,4 +38,14 @@
     - reference [Disjoint-set forest](https://www.youtube.com/watch?v=ID00PMy0-vE&ab_channel=TusharRoy-CodingMadeSimple)
 
 - HW 7: Elementary Graph Algorithms
-  - 
+  - Topological Sorting
+    - GCC Library
+  - Adjacency List & Adjacency Matrix
+  - Breadth First Search
+  - Depth First Search
+
+- HW 8: Minimum Spanning Tree
+  - Muddy City Problem
+  - Kruskal's Algorithm
+  - Prim's Algorithm
+  - The Cut Property
