@@ -21,8 +21,10 @@
   - Apply Huffman code to problem : reddit_relationshipadvice_legaladvice_2000
 
 - HW6 : Amortized Analysis (One of Aggregate Analysis) & Average Analysis
-
-
+  - Amorized Analysis versus Average Analysis
+    - Stack Operation : POP, PUSH, MULTI-POP
+    - K-bit Counter
+    
 - Extra Reading : Dealing with Disjoint-Sets Data Structures.
   - Disjoint-set Operation (Make-sets, Union(x, y), Find-Set(x))
     - Make-set(x) creates a new set whos only member is x. Since the sets are disjoint, we require that x not already be in the some other set --> Initializing
@@ -36,3 +38,4 @@
     - reference [Disjoint-set forest](https://www.youtube.com/watch?v=ID00PMy0-vE&ab_channel=TusharRoy-CodingMadeSimple)
 
 - HW 7: Elementary Graph Algorithms
+  - 
