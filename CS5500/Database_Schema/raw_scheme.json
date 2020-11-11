@@ -1,0 +1,47 @@
+{
+  "type": "object",
+  "properties": {
+    "_id": {
+      "type": "number"
+    },
+    "device_id": {
+      "type": "number"
+    },
+    "interaction_date_time": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "interaction_id": {
+      "type": "number"
+    },
+    "recorded_type": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "device_id",
+    "date_time",
+    "interaction_id",
+    "recorded_type"
+  ],
+  "dependencies": {
+    "recorded_type": {
+      "properties": {
+        "data_type": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": "number"
+        },
+        "quality": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "data_type",
+        "quantity",
+        "quality"
+      ]
+    }
+  }
+}
