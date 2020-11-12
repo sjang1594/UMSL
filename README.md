@@ -10,7 +10,7 @@ The list of courses/project that I worked on.
 ### CS 2750 : System Programming - UNIX/C
 
 ### CS 5130 : Advanced Algorithm 
-- Homework from this course : [CS5130 - Advanced Algorithm](https://github.com/badriadhikari/Algorithms-2020fall)
+- Homeworks from this course : [CS5130 - Advanced Algorithm](https://github.com/badriadhikari/Algorithms-2020fall)
 - Project :
 ### CS 5300 : Introduction to Artficial Intelligence
 - Project : Skin Cancer Detection using Feed Forward Neural Network/Convolutional Neural Networks.
