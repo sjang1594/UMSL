@@ -23,6 +23,7 @@ The list of courses/project that I worked on.
 - Project : Harry Potter Face Recognition
 
 ### CS 5500 : Software Engineering
+- Project : Health Care Software Product with Alexa - [Alexa](https://github.com/sntrenter/FA2020GroupProject)
 
 ### CS 5700 : Computer System
 - Project : SRT division Algorithm with binary numbers.
