@@ -8,6 +8,7 @@ The list of courses/project that I worked on.
 <br/>
 
 ### CS 2750 : System Programming - UNIX/C
+- Project : IPC - Communication between walker and master.
 
 ### CS 5130 : Advanced Algorithm 
 - Homeworks from this course : [CS5130 - Advanced Algorithm](https://github.com/badriadhikari/Algorithms-2020fall)
