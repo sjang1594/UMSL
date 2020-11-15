@@ -51,4 +51,4 @@
   - The Cut Property
 
 - HW 9: Single Source Shortest Path
-  - Dijkstra Algorithm (weighted directed graph)
+  - Dijkstra Algorithm (weighted directed graph); Reference : [Dijkstra Algorithm](https://www.youtube.com/watch?v=XB4MIexjvY0&ab_channel=AbdulBari)
