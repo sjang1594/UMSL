@@ -49,3 +49,6 @@
   - Kruskal's Algorithm
   - Prim's Algorithm
   - The Cut Property
+
+- HW 9: Single Source Shortest Path
+  - Dijkstra Algorithm (weighted directed graph)
