@@ -1,4 +1,5 @@
 ## CS5130 - Advanced Algorithm 
+**Most of Reference 
 
 - HW1 : Compare & Contrast on different growth functions
 - HW2 : Recursive & Dynamic Programming Approach(Top-down & Bottom-up) Comparison.
