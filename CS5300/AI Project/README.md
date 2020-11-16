@@ -4,7 +4,7 @@ The data can be found in this link : [Skin Cancer MNIST](https://www.kaggle.com/
 
 About this project : This project is to detect which types of the cancer cell is given input image pixels.
 
-## There Are Two Distinct Arcitectures.
+## There are Two Distinct Arcitectures.
 1. Feed Foward Neural Network
    - The input pixels are flatten.
    - Comparison between Sigmoid/ReLU
