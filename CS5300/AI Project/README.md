@@ -1,6 +1,6 @@
 # This is for UMSL CS5300
 
-The data can be found in this link : [https://www.kaggle.com/kmader/skin-cancer-mnist-ham10000]
+The data can be found in this link : [Skin Cancer MNIST](https://www.kaggle.com/kmader/skin-cancer-mnist-ham10000)
 
 About this project : This project is to detect which types of the cancer cell is given input image pixels.
 
