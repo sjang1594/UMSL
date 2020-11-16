@@ -1,5 +1,5 @@
 ## CS5130 - Advanced Algorithm 
-**Most of Reference was taken from : ** [CLRS - 3rd Edition](https://www.amazon.com/Introduction-Algorithms-3rd-MIT-Press/dp/0262033844#ace-g7448806443)
+**Most of Reference was taken from :** [CLRS - 3rd Edition](https://www.amazon.com/Introduction-Algorithms-3rd-MIT-Press/dp/0262033844#ace-g7448806443)
 
 - HW1 : Compare & Contrast on different growth functions
 - HW2 : Recursive & Dynamic Programming Approach(Top-down & Bottom-up) Comparison.
