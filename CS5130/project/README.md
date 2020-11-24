@@ -5,11 +5,13 @@ This is robotics problem, where the robot has to do certain task as following :
 2. The robot should localize itself
 3. The robot has to have some sort of planning after each iteration.
 
-The first step is to draw the map by tile map editor : [Tile Map Editor]()
+Few Requirement : 
+tile map editor : [Tile Map Editor](https://www.mapeditor.org/)
+Loading the map file ``tmx`` file.
 
+Process : 
+1. Draw the map by tile map editor
 
-
-
-The tile map was created and designed by Kenny, which is free-license [Kenny]()
-
-
+Comments 
+1. The tile map was created and designed by Kenny, which is free-license [Kenny](https://kenney.nl/assets/topdown-shooter)
+2. 
