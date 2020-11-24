@@ -14,4 +14,4 @@ Process :
 
 Comments 
 1. The tile map was created and designed by Kenny, which is free-license [Kenny](https://kenney.nl/assets/topdown-shooter)
-2. 
+2. You can find the open source & free licensed game art [Open Game Art](https://opengameart.org/)
