@@ -7,7 +7,7 @@ This is robotics problem, where the robot has to do certain task as following :
 
 Few Requirement : 
 1. tile map editor : [Tile Map Editor](https://www.mapeditor.org/)
-2. Loading the map file ``tmx`` file.
+2. Loading the map file ``tmx`` file, use this command ``pip install pytmx``
 
 Process : 
 1. Draw the map by tile map editor
