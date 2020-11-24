@@ -6,8 +6,8 @@ This is robotics problem, where the robot has to do certain task as following :
 3. The robot has to have some sort of planning after each iteration.
 
 Few Requirement : 
-tile map editor : [Tile Map Editor](https://www.mapeditor.org/)
-Loading the map file ``tmx`` file.
+1. tile map editor : [Tile Map Editor](https://www.mapeditor.org/)
+2. Loading the map file ``tmx`` file.
 
 Process : 
 1. Draw the map by tile map editor
