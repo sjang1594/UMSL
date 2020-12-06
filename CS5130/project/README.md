@@ -6,11 +6,13 @@ This is robotics problem, where the robot has to do certain task as following :
 3. The robot has to have some sort of planning after each iteration.
 
 Few Requirement : 
-1. tile map editor : [Tile Map Editor](https://www.mapeditor.org/)
+1. Tile map editor : [Tile Map Editor](https://www.mapeditor.org/)
 2. Loading the map file ``tmx`` file, use this command ``pip install pytmx``
 
 Process : 
 1. Draw the map by tile map editor
+2. Creat object layer on the wall and obstacles
+3. Make a boundary on the map.
 
 Comments 
 1. The tile map was created and designed by Kenny, which is free-license [Kenny](https://kenney.nl/assets/topdown-shooter)
