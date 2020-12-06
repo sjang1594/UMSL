@@ -2,6 +2,11 @@ import pygame as pg
 import pytmx
 from settings import *
 
+# Check every time the user hits the wall
+def collide_hit_rect(one, two):
+    return one.hit_rect.colliderect(two.rect)
+
+# Text Map Testing
 class Map:
     def __init__(self, filename):
         self.data = []
@@ -17,25 +22,28 @@ class Map:
         self.width = self.tileWidth * TILESIZE
         self.height = self.tileHeight * TILESIZE
 
+# Designed TileMap Testing
 class TiledMap:
     def __init__(self, filename):
         tm = pytmx.load_pygame(filename, pixelalpha=True)
+        # Total width and height
         self.width = tm.width * tm.tilewidth
         self.height = tm.height * tm.tileheight
         self.tmxdata = tm
 
     def render(self, surface):
-        #Grab Certain Identifier
+        # Grab Certain Global Identifier
         ti = self.tmxdata.get_tile_image_by_gid
         for layer in self.tmxdata.visible_layers:
             if isinstance(layer, pytmx.TiledTileLayer):
-                #Read Layers
-                for x, y, grid, in layer:
-                    tile = ti(grid)
+                # Read Layers
+                for x, y, gid, in layer:
+                    tile = ti(gid)
                     if tile:
                         surface.blit(tile, (x * self.tmxdata.tilewidth,
                                             y * self.tmxdata.tileheight))
 
+    # Create a surface to draw map on to.
     def make_map(self):
         #Create a surface to draw a map on to
         temp_surface = pg.Surface((self.width, self.height))
@@ -55,8 +63,8 @@ class Camera:
         return rect.move(self.camera.topleft)
 
     def update(self, target):
-         x = -target.rect.x + int(WIDTH / 2)
-         y = -target.rect.y + int(HEIGHT / 2)
+         x = -target.rect.centerx + int(WIDTH / 2)
+         y = -target.rect.centery + int(HEIGHT / 2)
 
          x = min(0, x)  # left
          y = min(0, y)  # top
