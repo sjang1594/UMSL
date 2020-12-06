@@ -96,12 +96,23 @@ class Trash(pg.sprite.Sprite):
     def __init__(self, game, x, y):
         self.groups = game.all_sprites, game.trashs
         pg.sprite.Sprite.__init__(self, self.groups)
-        self.gmae = game
+        self.game = game
         self.image = game.trash_img
         self.rect = self.image.get_rect()
-        self.rect = self.center = (x, y)
-        self.pos = vec(x, y) * TILESIZE
+        self.hit_rect = MOB_HIT_RECT.copy()
+        self.hit_rect.center = self.rect.center
+        self.pos = vec(x, y)
         self.rect.center =  self.pos
+
+    # def update(self):
+    #     self.rect.center = self.pos
+    #     self.hit_rect.centerx = self.pos.x
+    #     collide_with_walls(self, self.game.walls, 'x')
+    #     self.hit_rect.centery = self.pos.y
+    #     collide_with_walls(self, self.game.walls, 'y')
+    #     self.rect.center = self.hit_rect.center
+
+
 
 class Obstacle(pg.sprite.Sprite):
     def __init__(self, game, x, y, w, h):

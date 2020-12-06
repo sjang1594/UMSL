@@ -29,3 +29,4 @@ PLAYER_HIT_RECT = pg.Rect(0, 0, 35, 35)
 
 #Trash Settings
 TRASH_IMG = 'trash.png'
+MOB_HIT_RECT = pg.Rect(0, 0, 35, 35)

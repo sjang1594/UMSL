@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="19" nextobjectid="96">
+<map version="1.4" tiledversion="1.4.3" orientation="orthogonal" renderorder="right-down" width="40" height="30" tilewidth="64" tileheight="64" infinite="0" nextlayerid="19" nextobjectid="105">
  <tileset firstgid="1" source="../Tile_sheet.tsx"/>
  <layer id="1" name="Ground" width="40" height="30">
   <data encoding="csv">
@@ -81,7 +81,7 @@
   <object id="48" name="Wall" x="512" y="832" width="384" height="64"/>
   <object id="49" name="Wall" x="128" y="1088" width="16" height="128"/>
   <object id="50" name="Wall" x="320" y="832" width="192" height="16"/>
-  <object id="51" name="Robot" x="960" y="640" width="32" height="32"/>
+  <object id="51" name="Robot" x="976" y="656" width="32" height="32"/>
   <object id="52" name="Wall" x="976" y="1232" width="32" height="32"/>
   <object id="53" name="Wall" x="592" y="1232" width="32" height="32"/>
   <object id="54" name="Wall" x="640" y="1360" width="320" height="32"/>
@@ -122,6 +122,15 @@
   <object id="93" name="Wall" x="848" y="592" width="32" height="32"/>
   <object id="94" name="Wall" x="1040" y="592" width="32" height="32"/>
   <object id="95" name="Wall" x="720" y="592" width="32" height="32"/>
+  <object id="96" name="Trash" x="1296" y="1168" width="32" height="32"/>
+  <object id="97" name="Trash" x="1776" y="912" width="32" height="32"/>
+  <object id="98" name="Trash" x="2384" y="848" width="32" height="32"/>
+  <object id="99" name="Trash" x="2288" y="1232" width="32" height="32"/>
+  <object id="100" name="Trash" x="2384" y="1712" width="32" height="32"/>
+  <object id="101" name="Trash" x="1392" y="1664" width="32" height="32"/>
+  <object id="102" name="Trash" x="496" y="1728" width="32" height="32"/>
+  <object id="103" name="Trash" x="976" y="720" width="32" height="32"/>
+  <object id="104" name="Trash" x="976" y="288" width="32" height="32"/>
  </objectgroup>
  <layer id="15" name="Items" width="40" height="30">
   <data encoding="csv">

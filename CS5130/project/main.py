@@ -1,10 +1,12 @@
 import pygame as pg
 import sys
 from os import path
+from random import uniform
+
 from settings import *
 from sprites import *
 from tile_map import *
-from random import uniform
+from path_algorithm import *
 
 class Game:
     def __init__(self):
@@ -36,10 +38,16 @@ class Game:
                              tile_object.y + tile_object.height/2)
             if tile_object.name == 'Robot':
                 self.player = Player(self, obj_center.x, obj_center.y)
+            if tile_object.name == 'Trash':
+                Trash(self, tile_object.x, tile_object.y)
             if tile_object.name == 'Wall':
                 Obstacle(self, tile_object.x, tile_object.y,
                         tile_object.width, tile_object.height)
+                wall_list = []
+                wall_list.append((tile_object.x, tile_object.y))
+                print(wall_list)
         self.camera = Camera(self.map.width, self.map.height)
+
         #Very Important : To Check what is robot is acutally colliding with
         self.draw_debug = False
 
@@ -61,9 +69,9 @@ class Game:
         self.all_sprites.update()
         self.camera.update(self.player)
 
-        hits = pg.sprite.groupcollide(self.trashs, self.player, False, True)
-        for hit in hits:
-            hit.kill()
+        #hits = pg.sprite.groupcollide(self.trashs, self.player, False, True)
+        #for hit in hits:
+            #hit.kill()
 
     def draw_grid(self):
         for x in range(0, WIDTH, TILESIZE):
@@ -86,7 +94,7 @@ class Game:
         if self.draw_debug:
             for wall in self.walls:
                 pg.draw.rect(self.screen, BLACK, self.camera.apply_rect(wall.rect), 1)
-        #pg.draw.rect(self.screen, WHITE, self.player.hit_rect, 5)
+
         pg.display.flip()
 
     def events(self):
@@ -100,11 +108,40 @@ class Game:
                 if event.key == pg.K_h:
                     self.draw_debug = not self.draw_debug
 
+                # if event.key == pg.K_LEFT:
+                #     self.player.move(dx=-1)
+                # if event.key == pg.K_RIGHT:
+                #     self.player.move(dx=1)
+                # if event.key == pg.K_UP:
+                #     self.player.move(dy=-1)
+                # if event.key == pg.K_DOWN:
+                #     self.player.move(dy=1)
+
     def show_start_screen(self):
         pass
 
     def show_go_screen(self):
-        pass
+        self.screen.fill(BLACK)
+        self.draw_text("Game Over", self.title_font, 100, RED,
+                       WIDTH/2, HEIGHT/2, align = "center")
+
+        self.draw_text("Press a key to start", self.title_font, 75, WHITE,
+                       WIDTH/2, HEIGHT * 3/4, align = "center")
+
+        pg.display.flip()
+        self.wait_for_key()
+
+    def wait_for_key(self):
+        pg.event.wait()
+        waiting = True
+        while wating:
+            self.clock.tick(FPS)
+            for even in pg.event.get():
+                if event.type == pg.QUIT:
+                    waiting = False
+                    self.quit()
+                if event.type == pg.KEYUP:
+                    waiting = False
 
 # create the game object
 g = Game()
