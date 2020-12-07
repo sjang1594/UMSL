@@ -1,4 +1,4 @@
-# CS5130 - Project : Robot Cleaner
+# CS5130 - Project : Robot Cleaner Guide Planner 
 
 This is robotics problem, where the robot has to do certain task as following :
 1. The robot has to find the shortest path to get rid of the dust and dirt
@@ -11,8 +11,9 @@ Few Requirement :
 
 Goal : 
 Goal is to have seperate module
-1. Robot will be able to contol by human - Controllable Action
-2. Path Planning Module - Give a path to get to pick up trash
+1. Maps are already given in the environment 
+2. Robot will be able to contol by human - Controllable Action
+3. Path Planning Module - Give a path to get to pick up trash
 
 Process : 
 1. Draw the map by tile map editor
