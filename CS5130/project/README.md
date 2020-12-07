@@ -9,6 +9,11 @@ Few Requirement :
 1. Tile map editor : [Tile Map Editor](https://www.mapeditor.org/)
 2. Loading the map file ``tmx`` file, use this command ``pip install pytmx``
 
+Goal : 
+Goal is to have seperate module
+1. Robot will be able to contol by human - Controllable Action
+2. Path Planning Module - Give a path to get to pick up trash
+
 Process : 
 1. Draw the map by tile map editor
 2. Creat object layer on the wall and obstacles
