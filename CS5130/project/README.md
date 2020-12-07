@@ -15,6 +15,10 @@ Process :
 3. Make a boundary on the map.
 4. Collision Testing with Robot and Trash
 
+To Do:
+1. Collision around the map(world).
+2. Do automatic move by path finding algorithm
+
 Comments 
 1. The tile map was created and designed by Kenny, which is free-license [Kenny](https://kenney.nl/assets/topdown-shooter)
 2. You can find the open source & free licensed game art [Open Game Art](https://opengameart.org/)
