@@ -1,4 +1,4 @@
-# CS5130 - Project
+# CS5130 - Project : Robot Cleaner
 
 This is robotics problem, where the robot has to do certain task as following :
 1. The robot has to find the shortest path to get rid of the dust and dirt
@@ -13,6 +13,7 @@ Process :
 1. Draw the map by tile map editor
 2. Creat object layer on the wall and obstacles
 3. Make a boundary on the map.
+4. Collision Testing with Robot and Trash
 
 Comments 
 1. The tile map was created and designed by Kenny, which is free-license [Kenny](https://kenney.nl/assets/topdown-shooter)
