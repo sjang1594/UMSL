@@ -7,10 +7,9 @@ from settings import *
 from sprites import *
 from tile_map import *
 from path_algorithm import *
-
+from utility import *
 
 class Game:
-
     def __init__(self):
         pg.init()
         self.screen = pg.display.set_mode((WIDTH, HEIGHT))
@@ -28,6 +27,9 @@ class Game:
         self.map_rect = self.map_img.get_rect()
         self.player_img = pg.image.load(path.join(img_folder, PLAYER_IMG)).convert_alpha()
         self.trash_img = pg.image.load(path.join(img_folder, TRASH_IMG)).convert_alpha()
+
+        # Direction module
+        self.arrow_img = pg.image.load(path.join(img_folder, ARROW_IMG)).convert_alpha()
 
     def new(self):
         trash_list = []
@@ -47,19 +49,26 @@ class Game:
                              tile_object.y + tile_object.height/2)
             if tile_object.name == 'Robot':
                 self.player = Player(self, obj_center.x, obj_center.y)
-                self.start_location.append(vec(obj_center.x, obj_center.y))
+                self.start_location.append([obj_center.x, obj_center.y])
 
             if tile_object.name == 'Trash':
                 Trash(self, tile_object.x, tile_object.y)
-                self.trash_list.append(vec(tile_object.x, tile_object.y))
+                self.trash_list.append([tile_object.x, tile_object.y])
 
             if tile_object.name == 'Wall':
                 Obstacle(self, tile_object.x, tile_object.y,
                         tile_object.width, tile_object.height)
                 wall_list = []
-                self.wall_list.append(vec(tile_object.x, tile_object.y))
+                self.wall_list.append([tile_object.x, tile_object.y])
+
+        ########################################################################
         print("Wall locatiion is : ", self.wall_list)
         print("Trash Location is : ", self.trash_list)
+
+        self.num_elm = len(trash_list)
+        # Sorting the trash list, so that you can calculate
+        self.sort_trash_list = sortVec(self.trash_list, self.num_elm, self.start_location)
+        print("Sorted Wall locatiion is : ", self.sort_trash_list)
 
         self.camera = Camera(self.map.width, self.map.height)
         #Very Important : To Check what is robot is acutally colliding with
@@ -90,7 +99,6 @@ class Game:
         for hit in hits:
             hit.health -= 1
             hit.vel = vec(0,0)
-
 
     def draw(self):
         # Setting for FPS, so that the game flows well
@@ -123,14 +131,7 @@ class Game:
                 if event.key == pg.K_h:
                     self.draw_debug = not self.draw_debug
 
-                # if event.key == pg.K_LEFT:
-                #     self.player.move(dx=-1)
-                # if event.key == pg.K_RIGHT:
-                #     self.player.move(dx=1)
-                # if event.key == pg.K_UP:
-                #     self.player.move(dy=-1)
-                # if event.key == pg.K_DOWN:
-                #     self.player.move(dy=1)
+            ## How to select the closest one
 
     def show_start_screen(self):
         pass

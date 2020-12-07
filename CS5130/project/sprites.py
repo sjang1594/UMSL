@@ -141,15 +141,7 @@ class Obstacle(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-class Wall(pg.sprite.Sprite):
+class Arrow(pg.sprite.Sprite):
     def __init__(self, game, x, y):
-        self.groups = game.all_sprites, game.walls
+        self.groups = game.all_sprites, game.arrows
         pg.sprite.Sprite.__init__(self, self.groups)
-        self.game = game
-        self.image = pg.Surface((TILESIZE, TILESIZE))
-        self.image.fill(GREEN)
-        self.rect = self.image.get_rect()
-        self.x = x
-        self.y = y
-        self.rect.x = x * TILESIZE
-        self.rect.y = y * TILESIZE

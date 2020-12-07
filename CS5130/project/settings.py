@@ -17,7 +17,7 @@ TITLE = "Cleaning Robots"
 BGCOLOR = DARKGREY
 
 #Tile Setting.
-TILESIZE = 32
+TILESIZE = 64
 GRIDWIDTH = WIDTH / TILESIZE
 GRIDHEIGHT = HEIGHT / TILESIZE
 
@@ -33,3 +33,6 @@ TRASH_IMG = 'trash.png'
 TRASH_HIT_RECT = pg.Rect(0, 0, 35, 35)
 #Kind of like health
 TRASH_HEALTH = 1
+
+#Arrow settings
+ARROW_IMG = 'arrow.png'

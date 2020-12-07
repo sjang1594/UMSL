@@ -129,7 +129,7 @@
   <object id="100" name="Trash" x="2384" y="1712" width="32" height="32"/>
   <object id="101" name="Trash" x="1392" y="1664" width="32" height="32"/>
   <object id="102" name="Trash" x="496" y="1728" width="32" height="32"/>
-  <object id="103" name="Trash" x="976" y="720" width="32" height="32"/>
+  <object id="103" name="Trash" x="576" y="928" width="32" height="32"/>
   <object id="104" name="Trash" x="976" y="288" width="32" height="32"/>
  </objectgroup>
  <layer id="15" name="Items" width="40" height="30">

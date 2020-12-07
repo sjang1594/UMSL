@@ -4,11 +4,8 @@ from collections import deque
 
 vec = pg.math.Vector2
 
-class SquareGrid:
-    def __init__(self, width, height):
-        self.width = width
-        self.height = height
-        self.walls = []
+class Grid:
+    def __init__(self):
         self.connection = [vec(1, 0), vec(-1, 0), vec(0, 1), vec(0, -1)]
 
     def in_bounds(self, node):
@@ -25,11 +22,6 @@ class SquareGrid:
         neighbors = filter(self.passable, neighbors)
         #print(list(neighbors))
         return neighbors
-
-    # def draw(self):
-    #     for wall in self.walls:
-    #         rect = pg.Rect(wall * TILESIZE, (TILESIZE, TILESIZE))
-    #         pg.draw.rect(screen, LIGHTGRAY, rect)
 
 def vec2int(v):
     return (int(v.x), int(v.y))
