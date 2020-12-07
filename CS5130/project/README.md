@@ -11,7 +11,7 @@ Few Requirement :
 
 Basic Map Environment :
 <p align="center">
-  <img src="./image/map_image.PNG" width="800" height="400" >
+  <img src="./image/map_image.PNG" width="800" height="600" >
 </p>
 
 Goal : 
