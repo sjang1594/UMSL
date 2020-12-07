@@ -26,7 +26,10 @@ PLAYER_SPEED = 300
 PLAYER_ROT_SPEED = 250
 PLAYER_IMG = 'robot.png'
 PLAYER_HIT_RECT = pg.Rect(0, 0, 35, 35)
+PLAYER_HEALTH = 1000
 
 #Trash Settings
 TRASH_IMG = 'trash.png'
-MOB_HIT_RECT = pg.Rect(0, 0, 35, 35)
+TRASH_HIT_RECT = pg.Rect(0, 0, 35, 35)
+#Kind of like health
+TRASH_HEALTH = 1

@@ -32,7 +32,6 @@ class Player(pg.sprite.Sprite):
         self.game = game
         self.image = game.player_img
         self.rect = self.image.get_rect()
-        self.rect.center = (x, y)
 
         #since the rectangle around the player changes, make it set box
         #around the player
@@ -45,6 +44,7 @@ class Player(pg.sprite.Sprite):
 
         #Rotation
         self.rot = 0
+        self.health = PLAYER_HEALTH
 
     def get_keys(self):
         #init the rotation and velocity
@@ -68,7 +68,6 @@ class Player(pg.sprite.Sprite):
         #if self.vel.x != 0 and self.vel.y != 0:
         #    self.vel *= 0.7071
 
-
     def update(self):
         self.get_keys()
         #Update the rotation speed and position.
@@ -89,7 +88,6 @@ class Player(pg.sprite.Sprite):
         collide_with_walls(self, self.game.walls, 'x')
         self.hit_rect.centery = self.pos.y
         collide_with_walls(self, self.game.walls, 'y')
-
         self.rect.center = self.hit_rect.center
 
 class Trash(pg.sprite.Sprite):
@@ -99,19 +97,37 @@ class Trash(pg.sprite.Sprite):
         self.game = game
         self.image = game.trash_img
         self.rect = self.image.get_rect()
-        self.hit_rect = MOB_HIT_RECT.copy()
+        self.hit_rect = TRASH_HIT_RECT.copy()
         self.hit_rect.center = self.rect.center
         self.pos = vec(x, y)
+        self.vel = vec(0, 0)
+        self.acc = vec(0, 0)
         self.rect.center =  self.pos
+        self.rot = 0
+        self.health = TRASH_HEALTH
 
-    # def update(self):
-    #     self.rect.center = self.pos
-    #     self.hit_rect.centerx = self.pos.x
-    #     collide_with_walls(self, self.game.walls, 'x')
-    #     self.hit_rect.centery = self.pos.y
-    #     collide_with_walls(self, self.game.walls, 'y')
-    #     self.rect.center = self.hit_rect.center
+    def update(self):
+        self.rect.center = self.pos
+        self.hit_rect.centerx = self.pos.x
+        collide_with_walls(self, self.game.walls, 'x')
+        self.hit_rect.centery = self.pos.y
+        collide_with_walls(self, self.game.walls, 'y')
+        self.rect.center = self.hit_rect.center
 
+        if self.health <= 0 :
+            self.kill()
+
+    def draw_health(self):
+        if self.health > 60:
+            col = GREEN
+        elif self.health > 30:
+            col = YELLOW
+        else:
+            col = RED
+        width = int(self.rect.width * self.health / TRASH_HEALTH)
+        self.health_bar = pg.Rect(0, 0, width, 7)
+        if self.health < TRASH_HEALTH:
+            pg.draw.rect(self.image, col, self.health_bar)
 
 
 class Obstacle(pg.sprite.Sprite):
