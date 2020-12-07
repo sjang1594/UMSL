@@ -9,6 +9,11 @@ Few Requirement :
 1. Tile map editor : [Tile Map Editor](https://www.mapeditor.org/)
 2. Loading the map file ``tmx`` file, use this command ``pip install pytmx``
 
+Basic Map Environment :
+<p align="center">
+  <img src="../image/map_image.png" width="400" height="350" >
+</p>
+
 Goal : 
 Goal is to have seperate module
 1. Maps are already given in the environment 
