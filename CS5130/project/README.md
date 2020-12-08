@@ -9,7 +9,7 @@
 1. Tile map editor : [Tile Map Editor](https://www.mapeditor.org/)
 2. Loading the map file ``tmx`` file, use this command ``pip install pytmx``
 
-### Basic Map Environment :
+### Basic Map Environment: (40 tiles * 64, 30 tiles * 64), 64 is tilesize 
 <p align="center">
   <img src="./image/map_image.PNG" width="780" height="580" >
 </p>
