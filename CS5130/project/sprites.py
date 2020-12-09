@@ -1,10 +1,13 @@
 import pygame as pg
 from settings import *
 from tile_map import *
+from path_algorithm import *
+from utility import *
 
 #Use Vector for Player
 vec = pg.math.Vector2
 
+# Allowing the robot doesn't go outside of the wall and colide wall
 def collide_with_walls(sprite, group, dir):
     if dir == 'x':
         hits = pg.sprite.spritecollide(sprite, group, False, collide_hit_rect)
@@ -26,6 +29,8 @@ def collide_with_walls(sprite, group, dir):
             sprite.hit_rect.centery = sprite.pos.y
 
 class Player(pg.sprite.Sprite):
+    sorted_list = []
+    dist_list = []
     def __init__(self, game, x, y):
         self.groups = game.all_sprites
         pg.sprite.Sprite.__init__(self, self.groups)
@@ -45,7 +50,11 @@ class Player(pg.sprite.Sprite):
         #Rotation
         self.rot = 0
         self.health = PLAYER_HEALTH
+        #print("Player calls Trash ", self.game.trash.position_list)
 
+        self.goal = vec(0,0)
+        self.start = vec(0,0)
+    # Track of movement by user
     def get_keys(self):
         #init the rotation and velocity
         self.rot_speed = 0
@@ -64,9 +73,10 @@ class Player(pg.sprite.Sprite):
         if keys[pg.K_DOWN] or keys[pg.K_s]:
             self.vel = vec(-PLAYER_SPEED / 2, 0).rotate(-self.rot)
 
-        #diagnol movement
-        #if self.vel.x != 0 and self.vel.y != 0:
-        #    self.vel *= 0.7071
+        # In order for user to turn on the navigation module.
+        #if key[pg.K_SPACE]:
+        #    path = breadth_first_search()
+        #print("Player calls Trash ", self.game.trash.position_list)
 
     def update(self):
         self.get_keys()
@@ -90,7 +100,39 @@ class Player(pg.sprite.Sprite):
         collide_with_walls(self, self.game.walls, 'y')
         self.rect.center = self.hit_rect.center
 
+        #Robot's location
+        self.robot_pos = [self.pos.x, self.pos.y]
+        #print(self.robot_pos[0])
+        self.trash_pos_list = self.game.trash.position_list
+        #print(self.trash_pos_list)
+        self.num_elm = len(self.trash_pos_list)
+        #Calculate the euclidean distance from robot pos to trash position
+        # Sort the list.
+        for i in range(self.num_elm):
+            #Calculate the euclidean distance from robot pos to trash position
+            dist = pow((self.robot_pos[0] - self.trash_pos_list[i][0]),2) + pow((self.robot_pos[0] - self.trash_pos_list[i][1]),2)
+            self.dist_list.append([self.trash_pos_list[i][0], self.trash_pos_list[i][1]])
+            if self.num_elm == len(self.dist_list):
+                self.sorted_list.extend(self.dist_list)
+
+            self.sorted_list.sort()
+
+        # Get rid of it once it hits
+        for i in range(self.num_elm):
+            if self.sorted_list[i][0] == self.pos.x:
+                self.game.trash.position_list.pop(i)
+                print(self.game.trash.position_list)
+
+        self.sorted_list = self.game.trash.position_list
+        #print(self.sorted_list)
+
+        self.start = vec(int(self.pos.x), int(self.pos.y))
+        self.goal = vec(int(self.sorted_list[i][0]), int(self.sorted_list[i][1]))
+
+
 class Trash(pg.sprite.Sprite):
+    position_list = []
+    updated_list = []
     def __init__(self, game, x, y):
         self.groups = game.all_sprites, game.trashs
         pg.sprite.Sprite.__init__(self, self.groups)
@@ -100,22 +142,21 @@ class Trash(pg.sprite.Sprite):
         self.hit_rect = TRASH_HIT_RECT.copy()
         self.hit_rect.center = self.rect.center
         self.pos = vec(x, y)
-        self.vel = vec(0, 0)
-        self.acc = vec(0, 0)
+        self.position_list.append([self.pos.x, self.pos.y])
         self.rect.center =  self.pos
-        self.rot = 0
         self.health = TRASH_HEALTH
+
+        for i in range(len(self.position_list) -1):
+            if self.position_list[i][0] == self.game.player.pos.x:
+                self.position_list.pop(i)
 
     def update(self):
         self.rect.center = self.pos
-        self.hit_rect.centerx = self.pos.x
-        collide_with_walls(self, self.game.walls, 'x')
-        self.hit_rect.centery = self.pos.y
-        collide_with_walls(self, self.game.walls, 'y')
-        self.rect.center = self.hit_rect.center
-
         if self.health <= 0 :
             self.kill()
+
+        #self.position_list = self.updated_list
+    #def position_track(self):
 
     def draw_health(self):
         if self.health > 60:
@@ -141,7 +182,23 @@ class Obstacle(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-class Arrow(pg.sprite.Sprite):
-    def __init__(self, game, x, y):
+class Arrows(pg.sprite.Sprite):
+    def __init__(self, game, pos, dir):
         self.groups = game.all_sprites, game.arrows
         pg.sprite.Sprite.__init__(self, self.groups)
+        self.game = game
+        self.image = game.arrow_img
+        self.image = pg.transform.scale(arrow_img, (50, 50))
+        self.rect = self.image.get_rect()
+        self.pos = vec(pos)
+        self.rect.center = pos
+
+        arrows = {}
+        self.arrows = arrows
+        #Allosing left, right, up, down, diagnol direction.
+        self.direction_list = [(1, 0), (0, 1), (-1, 0), (0, -1), (1, 1), (-1, 1), (1, -1), (-1, -1)]
+        self.image = pg.transform.scale(arrow_img, (50, 50))
+        for dir in self.direction_list:
+            arrows[dir] = pg.transform.rotate(arrow_img, vec(dir).angle_to(vec(1,0)))
+
+    #def update(self):
