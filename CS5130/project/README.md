@@ -17,8 +17,8 @@
 
 ### Robot & Trash Image :
 <p align="center">
-  <img src="./image/robot.png" width="480" height="380" >
-  <img src="./image/trash.png" width="480" height="380">
+  <img src="./image/robot.png" width="64" height="64" >
+  <img src="./image/trash.png" width="64" height="64">
 </p>
 
 ## Goal : 
