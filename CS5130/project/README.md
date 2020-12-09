@@ -32,7 +32,7 @@ Goal is to have seperate module
 2. Creat object layer on the wall and obstacles [o]
 3. Make a boundary on the map.[o]
 4. Collision Testing with Robot and Trash [o]
-5. If there were mutliple trash, then you have to update the list of trash(pop that element), sort the trash_list by robot's position, then update the start, goal location. [o]
+5. If there were mutliple trashes, then you have to update the list of trash(pop that element), sort the trash_list by robot's position, then update the start, goal location. [o]
 6. Implement Breathfirst search algorithm for shortest path.
    - Filter out the neighbors that colliding with wall and boundary of the map. [o]
    - Keep track the while by checking the neighbors. [o]
@@ -53,3 +53,5 @@ Robot Pos = [20, 15], Trash Pos = [12,16]
 1. The tile map was created and designed by Kenny, which is free-license [Kenny](https://kenney.nl/assets/topdown-shooter)
 2. You can find the open source & free licensed game art [Open Game Art](https://opengameart.org/)
 
+## What you can do
+1. You can put multiple trashes using ``Tiled`` and put trash object layers.
