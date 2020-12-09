@@ -12,6 +12,7 @@
 ### Basic Map Environment: (40 tiles * 64, 30 tiles * 64), 64 is tilesize 
 <p align="center">
   <img src="./image/map_image.PNG" width="640" height="480" >
+  <img src="./image/snap_object.PNG" width="640" height="480">
 </p>
 
 ## Goal : 
