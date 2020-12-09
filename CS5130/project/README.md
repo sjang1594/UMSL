@@ -17,6 +17,7 @@
 
 ### Robot & Trash Image :
 <p align="center">
+  The Robot's image & Trash image
   <img src="./image/robot.png" width="64" height="64" >
   <img src="./image/trash.png" width="64" height="64">
 </p>
