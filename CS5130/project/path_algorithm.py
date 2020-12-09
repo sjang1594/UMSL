@@ -57,13 +57,15 @@ class Grid:
 
         self.connections = [vec(1, 0), vec(-1, 0), vec(0, 1), vec(0, -1)]
         #self.connections += [vec(1, 1), vec(-1, 1), vec(1, -1), vec(-1, -1)]
-
-    def in_bounds(self, node):
+    
+    # Bounded By Map
+    def is_bounds(self, node):
         #print(node.x, node.y)
         node.x = node.x
         node.y = node.y
         return 0 <= node.x  < self.width and 0 <= node.y  < self.height
-
+    
+    # Whether it's passable by the wall
     def passable(self, node):
         #print(self.walls)
         return node not in self.walls
@@ -76,7 +78,7 @@ class Grid:
             neighbors.reverse()
         #Filter out whether the location can go outside of the world (in_bound)
         #Filter out whether the location doesn't collide with walls.
-        neighbors = filter(self.in_bounds, neighbors)
+        neighbors = filter(self.is_bounds, neighbors)
         neighbors = filter(self.passable, neighbors)
         #print(list(neighbors))
         return neighbors
