@@ -38,7 +38,8 @@ Goal is to have seperate module
    - Keep track the while by checking the neighbors. [o]
    - Blit on the top of the map image.[x]
 
-## Result on Terminal:
+## Testing and the Result on Terminal:
+Robot Pos = [20, 15], Trash Pos = [12,16]
 <img src="./image/result.png" width="50" height="120" >
 
 ## Limitation:
