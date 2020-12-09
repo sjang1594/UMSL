@@ -10,7 +10,7 @@
 2. Loading the map file ``tmx`` file, use this command ``pip install pytmx``
 
 ### Basic Map Environment:
-(40 tiles * 64, 30 tiles * 64 = 2560 Width, 1200 Height), TileSize = 64
+**(40 tiles * 64, 30 tiles * 64 = 2560 Width, 1200 Height), TileSize = 64**
 <p align="center">
   <img src="./image/map_image.PNG" width="480" height="380" >
   <img src="./image/snap_object.PNG" width="480" height="380">
