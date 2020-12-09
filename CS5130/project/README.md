@@ -15,6 +15,12 @@
   <img src="./image/snap_object.PNG" width="480" height="380">
 </p>
 
+### Robot & Trash Image :
+<p align="center">
+  <img src="./image/robot.png" width="480" height="380" >
+  <img src="./image/trash.png" width="480" height="380">
+</p>
+
 ## Goal : 
 Goal is to have seperate module
 1. Maps are already given in the environment 
