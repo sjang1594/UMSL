@@ -28,16 +28,22 @@ Goal is to have seperate module
 3. Path Planning Module - Give a path to get to pick up trash
 
 ## Process : 
-1. Draw the map by tile map editor
-2. Creat object layer on the wall and obstacles
-3. Make a boundary on the map.
-4. Collision Testing with Robot and Trash
+1. Draw the map by tile map editor [o]
+2. Creat object layer on the wall and obstacles [o]
+3. Make a boundary on the map.[o]
+4. Collision Testing with Robot and Trash [o]
+5. If there were mutliple trash, then you have to update the list of trash(pop that element), sort the trash_list by robot's position, then update the start, goal location. [o]
+6. Implement Breathfirst search algorithm for shortest path.
+   - Filter out the neighbors that colliding with wall and boundary of the map. [o]
+   - Keep track the while by checking the neighbors. [o]
+   - Blit on the top of the map image.[x]
 
 ## Result on Terminal:
 <img src="./image/result.png" width="50" height="120" >
 
 ## Limitation:
-1. 
+1. Since the ``Tiled`` application outputs the the location of wall start, I have to create single wall as shown in the image above [o]
+2. Since the screen.blit(map) were set up as background, the arrow were drawn in the back of the map image.[progress...]
 
 ## Comments 
 1. The tile map was created and designed by Kenny, which is free-license [Kenny](https://kenney.nl/assets/topdown-shooter)
