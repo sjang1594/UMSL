@@ -33,9 +33,8 @@ Goal is to have seperate module
 3. Make a boundary on the map.
 4. Collision Testing with Robot and Trash
 
-## To Do:
-1. Collision around the map(world).
-2. Do automatic move by path finding algorithm
+## Result on Terminal:
+<img src="./image/result.png" width="50" height="120" >
 
 ## Comments 
 1. The tile map was created and designed by Kenny, which is free-license [Kenny](https://kenney.nl/assets/topdown-shooter)
