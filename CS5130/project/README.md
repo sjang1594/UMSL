@@ -21,6 +21,8 @@
   <img src="./image/trash.png" width="64" height="64">
 </p>
 
+### Used Breathfirst Search Algorithm as Pathfinding 
+
 ## Goal : 
 Goal is to have seperate module
 1. Maps are already given in the environment 
