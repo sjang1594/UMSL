@@ -40,7 +40,10 @@ Goal is to have seperate module
 
 ## Testing and the Result on Terminal:
 Robot Pos = [20, 15], Trash Pos = [12,16]
-<img src="./image/result.png" width="50" height="120" >
+<p align="bottom">
+  <img src="./image/result.png" width="50" height="120" >
+</p>
+
 
 ## Limitation:
 1. Since the ``Tiled`` application outputs the the location of wall start, I have to create single wall as shown in the image above [o]
