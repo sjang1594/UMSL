@@ -7,7 +7,8 @@
 
 ### Few Requirement : 
 1. Tile map editor : [Tile Map Editor](https://www.mapeditor.org/)
-2. Install pygame by ``python3 -m pip install -U pygame --user``. Look at this pygame official website [How_to_install_pygame](https://www.pygame.org/wiki/GettingStarted)
+2. Install pygame by ``python3 -m pip install -U pygame --user``. 
+   - Look at this pygame official website [How_to_install_pygame](https://www.pygame.org/wiki/GettingStarted)
 3. Loading the map file ``tmx`` file, use this command ``pip install pytmx``
 
 ### Basic Map Environment:
