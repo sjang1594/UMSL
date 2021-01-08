@@ -12,7 +12,8 @@ The list of courses/project that I worked on.
 
 ### CS 5130 : Advanced Algorithm 
 - Homeworks from this course : [CS5130 - Advanced Algorithm](https://github.com/badriadhikari/Algorithms-2020fall)
-- Project :
+- Project : Cleaning Robots Game
+
 ### CS 5300 : Introduction to Artficial Intelligence
 - Project : Skin Cancer Detection using Feed Forward Neural Network/Convolutional Neural Networks.
   - Solving imbalanced Data by using imblearn package
