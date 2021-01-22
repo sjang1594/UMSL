@@ -1,0 +1,144 @@
+
+{
+    "patient_id": "2b7d567f-0dfe-4baa-9b0f-7bafaa0780da",
+    "device_id": "amzn1.ask.device.AGUILHDF6CC3FFH2FWMRKYK533EZMZYCUKIHRUJBB7R46KF2YCWGDMFVTMTMR64YMIIXEZGGCI7COV6VR2GNSAZXW54K25W5J5SFRMNJG7DFRPY5L7DWVLXSYXSV3JRSIPUN4CFGMF3XIJ3SJ4DVS4PONTGHNJQOYDWLINRLSANK23S7VITSM",
+    "interaction_id": "5fa38e444dfc6cffff5156d5",
+    "record_type": "health",
+    "date_time": "2020-11-05T05:31:00",
+    "data": {
+        "data_type": "feelings",
+        "quality": "good",
+        "quantity": 6
+    },
+    "analytics_format_ver": {
+        "format_type": "prototype",
+        "version_major": 1,
+        "version_minor": 0
+    }
+}
+
+{
+    "patient_id": "2b7d567f-0dfe-4baa-9b0f-7bafaa0780da",
+    "device_id": "amzn1.ask.device.AGUILHDF6CC3FFH2FWMRKYK533EZMZYCUKIHRUJBB7R46KF2YCWGDMFVTMTMR64YMIIXEZGGCI7COV6VR2GNSAZXW54K25W5J5SFRMNJG7DFRPY5L7DWVLXSYXSV3JRSIPUN4CFGMF3XIJ3SJ4DVS4PONTGHNJQOYDWLINRLSANK23S7VITSM",
+    "interaction_id": "5fa38e444dfc6cffff5156d5",
+    "record_type": "health",
+    "date_time": "2020-11-06T05:31:00",
+    "data": {
+        "data_type": "feelings",
+        "quality": "okay",
+        "quantity": 2
+    },
+    "analytics_format_ver": {
+        "format_type": "prototype",
+        "version_major": 1,
+        "version_minor": 0
+    }
+}
+
+{
+    "patient_id": "2b7d567f-0dfe-4baa-9b0f-7bafaa0780da",
+    "device_id": "amzn1.ask.device.AGUILHDF6CC3FFH2FWMRKYK533EZMZYCUKIHRUJBB7R46KF2YCWGDMFVTMTMR64YMIIXEZGGCI7COV6VR2GNSAZXW54K25W5J5SFRMNJG7DFRPY5L7DWVLXSYXSV3JRSIPUN4CFGMF3XIJ3SJ4DVS4PONTGHNJQOYDWLINRLSANK23S7VITSM",
+    "interaction_id": "5fa38e444dfc6cffff5156d5",
+    "record_type": "health",
+    "date_time": "2020-11-07T05:31:00",
+    "data": {
+        "data_type": "feelings",
+        "quality": "ok",
+        "quantity": 3
+    },
+    "analytics_format_ver": {
+        "format_type": "prototype",
+        "version_major": 1,
+        "version_minor": 0
+    }
+}
+
+{
+    "patient_id": "2b7d567f-0dfe-4baa-9b0f-7bafaa0780da",
+    "device_id": "amzn1.ask.device.AGUILHDF6CC3FFH2FWMRKYK533EZMZYCUKIHRUJBB7R46KF2YCWGDMFVTMTMR64YMIIXEZGGCI7COV6VR2GNSAZXW54K25W5J5SFRMNJG7DFRPY5L7DWVLXSYXSV3JRSIPUN4CFGMF3XIJ3SJ4DVS4PONTGHNJQOYDWLINRLSANK23S7VITSM",
+    "interaction_id": "5fa38e444dfc6cffff5156d5",
+    "record_type": "health",
+    "date_time": "2020-11-07T05:31:00",
+    "data": {
+        "data_type": "feelings",
+        "quality": "bad",
+        "quantity": 8
+    },
+    "analytics_format_ver": {
+        "format_type": "prototype",
+        "version_major": 1,
+        "version_minor": 0
+    }
+}
+
+{
+    "patient_id": "2b7d567f-0dfe-4baa-9b0f-7bafaa0780da",
+    "device_id": "amzn1.ask.device.AGUILHDF6CC3FFH2FWMRKYK533EZMZYCUKIHRUJBB7R46KF2YCWGDMFVTMTMR64YMIIXEZGGCI7COV6VR2GNSAZXW54K25W5J5SFRMNJG7DFRPY5L7DWVLXSYXSV3JRSIPUN4CFGMF3XIJ3SJ4DVS4PONTGHNJQOYDWLINRLSANK23S7VITSM",
+    "interaction_id": "5fa38e444dfc6cffff5156d5",
+    "record_type": "health",
+    "date_time": "2020-11-08T05:31:00",
+    "data": {
+        "data_type": "feelings",
+        "quality": "bad",
+        "quantity": 8
+    },
+    "analytics_format_ver": {
+        "format_type": "prototype",
+        "version_major": 1,
+        "version_minor": 0
+    }
+}
+
+{
+    "patient_id": "2b7d567f-0dfe-4baa-9b0f-7bafaa0780da",
+    "device_id": "amzn1.ask.device.AGUILHDF6CC3FFH2FWMRKYK533EZMZYCUKIHRUJBB7R46KF2YCWGDMFVTMTMR64YMIIXEZGGCI7COV6VR2GNSAZXW54K25W5J5SFRMNJG7DFRPY5L7DWVLXSYXSV3JRSIPUN4CFGMF3XIJ3SJ4DVS4PONTGHNJQOYDWLINRLSANK23S7VITSM",
+    "interaction_id": "5fa38e444dfc6cffff5156d5",
+    "record_type": "health",
+    "date_time": "2020-11-09T05:31:00",
+    "data": {
+        "data_type": "feelings",
+        "quality": "ok",
+        "quantity": 7
+    },
+    "analytics_format_ver": {
+        "format_type": "prototype",
+        "version_major": 1,
+        "version_minor": 0
+    }
+}
+
+{
+    "patient_id": "2b7d567f-0dfe-4baa-9b0f-7bafaa0780da",
+    "device_id": "amzn1.ask.device.AGUILHDF6CC3FFH2FWMRKYK533EZMZYCUKIHRUJBB7R46KF2YCWGDMFVTMTMR64YMIIXEZGGCI7COV6VR2GNSAZXW54K25W5J5SFRMNJG7DFRPY5L7DWVLXSYXSV3JRSIPUN4CFGMF3XIJ3SJ4DVS4PONTGHNJQOYDWLINRLSANK23S7VITSM",
+    "interaction_id": "5fa38e444dfc6cffff5156d5",
+    "record_type": "health",
+    "date_time": "2020-11-10T05:31:00",
+    "data": {
+        "data_type": "feelings",
+        "quality": "ok",
+        "quantity": 6
+    },
+    "analytics_format_ver": {
+        "format_type": "prototype",
+        "version_major": 1,
+        "version_minor": 0
+    }
+}
+
+{
+    "patient_id": "2b7d567f-0dfe-4baa-9b0f-7bafaa0780da",
+    "device_id": "amzn1.ask.device.AGUILHDF6CC3FFH2FWMRKYK533EZMZYCUKIHRUJBB7R46KF2YCWGDMFVTMTMR64YMIIXEZGGCI7COV6VR2GNSAZXW54K25W5J5SFRMNJG7DFRPY5L7DWVLXSYXSV3JRSIPUN4CFGMF3XIJ3SJ4DVS4PONTGHNJQOYDWLINRLSANK23S7VITSM",
+    "interaction_id": "5fa38e444dfc6cffff5156d5",
+    "record_type": "health",
+    "date_time": "2020-11-11T05:31:00",
+    "data": {
+        "data_type": "feelings",
+        "quality": "ok",
+        "quantity": 3
+    },
+    "analytics_format_ver": {
+        "format_type": "prototype",
+        "version_major": 1,
+        "version_minor": 0
+    }
+}
