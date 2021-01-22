@@ -28,6 +28,7 @@ def collide_with_walls(sprite, group, dir):
             sprite.vel.y = 0
             sprite.hit_rect.centery = sprite.pos.y
 
+#For Robots, which is player
 class Player(pg.sprite.Sprite):
     sorted_list = []
     dist_list = []
@@ -54,6 +55,7 @@ class Player(pg.sprite.Sprite):
 
         self.goal = vec(0,0)
         self.start = vec(0,0)
+        
     # Track of movement by user
     def get_keys(self):
         #init the rotation and velocity
@@ -72,11 +74,6 @@ class Player(pg.sprite.Sprite):
             self.vel = vec(PLAYER_SPEED,0).rotate(-self.rot)
         if keys[pg.K_DOWN] or keys[pg.K_s]:
             self.vel = vec(-PLAYER_SPEED / 2, 0).rotate(-self.rot)
-
-        # In order for user to turn on the navigation module.
-        #if key[pg.K_SPACE]:
-        #    path = breadth_first_search()
-        #print("Player calls Trash ", self.game.trash.position_list)
 
     def update(self):
         self.get_keys()
@@ -129,7 +126,7 @@ class Player(pg.sprite.Sprite):
         self.start = vec(int(self.pos.x), int(self.pos.y))
         self.goal = vec(int(self.sorted_list[i][0]), int(self.sorted_list[i][1]))
 
-
+# Trash class 
 class Trash(pg.sprite.Sprite):
     position_list = []
     updated_list = []
@@ -155,9 +152,6 @@ class Trash(pg.sprite.Sprite):
         if self.health <= 0 :
             self.kill()
 
-        #self.position_list = self.updated_list
-    #def position_track(self):
-
     def draw_health(self):
         if self.health > 60:
             col = GREEN
@@ -170,7 +164,7 @@ class Trash(pg.sprite.Sprite):
         if self.health < TRASH_HEALTH:
             pg.draw.rect(self.image, col, self.health_bar)
 
-
+# Obstacle for spawning the walls.
 class Obstacle(pg.sprite.Sprite):
     def __init__(self, game, x, y, w, h):
         self.groups = game.walls
@@ -182,6 +176,7 @@ class Obstacle(pg.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+# Working on the Arrows for blitting 
 class Arrows(pg.sprite.Sprite):
     def __init__(self, game, pos, dir):
         self.groups = game.all_sprites, game.arrows
@@ -200,5 +195,3 @@ class Arrows(pg.sprite.Sprite):
         self.image = pg.transform.scale(arrow_img, (50, 50))
         for dir in self.direction_list:
             arrows[dir] = pg.transform.rotate(arrow_img, vec(dir).angle_to(vec(1,0)))
-
-    #def update(self):

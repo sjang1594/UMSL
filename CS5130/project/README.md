@@ -7,12 +7,24 @@
 
 ### Few Requirement : 
 1. Tile map editor : [Tile Map Editor](https://www.mapeditor.org/)
-2. Loading the map file ``tmx`` file, use this command ``pip install pytmx``
+2. Install pygame by ``python3 -m pip install -U pygame --user``. 
+   - Look at this pygame official website [How_to_install_pygame](https://www.pygame.org/wiki/GettingStarted)
+3. Loading the map file ``tmx`` file, use this command ``pip install pytmx``
 
-### Basic Map Environment: (40 tiles * 64, 30 tiles * 64), 64 is tilesize 
+### Basic Map Environment:
+**(40 tiles * 64, 30 tiles * 64 = 2560 Width, 1200 Height), TileSize = 64**
 <p align="center">
-  <img src="./image/map_image.PNG" width="640" height="480" >
+  <img src="./image/map_image.PNG" width="480" height="380" >
+  <img src="./image/snap_object.PNG" width="480" height="380">
 </p>
+
+### Robot & Trash Image :
+<p align="center">
+  <img src="./image/robot.png" width="64" height="64" >
+  <img src="./image/trash.png" width="64" height="64">
+</p>
+
+### Used Breathfirst Search Algorithm as Pathfinding 
 
 ## Goal : 
 Goal is to have seperate module
@@ -21,15 +33,30 @@ Goal is to have seperate module
 3. Path Planning Module - Give a path to get to pick up trash
 
 ## Process : 
-1. Draw the map by tile map editor
-2. Creat object layer on the wall and obstacles
-3. Make a boundary on the map.
-4. Collision Testing with Robot and Trash
+1. Draw the map by tile map editor [o]
+2. Creat object layer on the wall and obstacles [o]
+3. Make a boundary on the map.[o]
+4. Collision Testing with Robot and Trash [o]
+5. If there were mutliple trashes, then you have to update the list of trash(pop that element), sort the trash_list by robot's position, then update the start, goal location. [o]
+6. Implement Breathfirst search algorithm for shortest path.
+   - Filter out the neighbors that colliding with wall and boundary of the map. [o]
+   - Keep track the while by checking the neighbors. [o]
+   - Blit on the top of the map image.[x]
 
-## To Do:
-1. Collision around the map(world).
-2. Do automatic move by path finding algorithm
+## Testing and the Result on Terminal:
+Robot Pos = [20, 15], Trash Pos = [12,16]
+<p align="bottom">
+  <img src="./image/result.png" width="50" height="120" >
+</p>
+
+
+## Limitation:
+1. Since the ``Tiled`` application outputs the the location of wall start, I have to create single wall as shown in the image above [o]
+2. Since the screen.blit(map) were set up as background, the arrow were drawn in the back of the map image.[progress...]
 
 ## Comments 
 1. The tile map was created and designed by Kenny, which is free-license [Kenny](https://kenney.nl/assets/topdown-shooter)
 2. You can find the open source & free licensed game art [Open Game Art](https://opengameart.org/)
+
+## What you can do
+1. You can put multiple trashes using ``Tiled`` and put trash object layers.
