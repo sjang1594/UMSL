@@ -19,7 +19,7 @@ Here are the following results of the default shapes and operation result
 ---
 ## Input Images:
 <p align="center">
-  <img src="./image/Input_image.PNG" width="800" height="400" >
+  <img src="./image/Input_image.PNG" width="800" height="380" >
 </p>
 
 ## over:
