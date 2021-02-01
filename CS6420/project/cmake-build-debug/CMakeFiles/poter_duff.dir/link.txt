@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/poter_duff.dir/porter_duff.cpp.o  -o poter_duff 
