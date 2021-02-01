@@ -15,7 +15,7 @@ cv::Mat make_mask(cv::Mat mask)
 	//Check image dimension. 
 	if (mask.depth() != 1) {
 		cv::cvtColor(mask, mask, cv::COLOR_BGR2GRAY, 0);
-		// Using the treshold to obtain the mask
+		// Using the threshold to obtain the mask
 		cv::threshold(mask, mask, 0, 255, cv::THRESH_BINARY);
 	}
 	else {
