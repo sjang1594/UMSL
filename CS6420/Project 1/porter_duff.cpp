@@ -3,41 +3,115 @@
 *  Reference : http://ssp.impulsetrain.com/porterduff.html
 */
 
-#include "porter_duff.h"
+#include "porter_duff.hpp"
+
+// Key for commandline parser
+const char* keys =
+"{help h | | Print help message }"
+"{@image1 | <none> | input image1 }"
+"{@image2 | <none> | input image2 }"
+"{mask1  | | mask 1       }"
+"{mask2  | | mask 2       }";
 
 int main(int argc, char** argv) {
+	cv::Mat img1 = cv::Mat::zeros(sz, CV_8UC3);
+	cv::Mat img2 = cv::Mat::zeros(sz, CV_8UC3);
+	
+	//Command Line Argument 
+	cv::CommandLineParser parser(argc, argv, keys);
 
-	// Just working with two images.
-	// Create two images 640 x 480 pixels if the no arguments are given.
+	// Read help
+	if (parser.has("help")) {
+		//parser.printMessage();
+		help(argv);
+		return 0;
+	}
 	
-	/* Create Circle : 
-						First image should be a circle in the center with radius 150 in blue color
-	*/
-	cv::Point mid_point = cv::Point(window_width / 2, window_height / 2);
-	//std::cout << mid_point.x << " " << mid_point.y << "\n";
-	cv::Mat img1 = cv::Mat::zeros(window_height, window_width , CV_8UC3);
-	
-	cv::circle(img1, mid_point, radius, cv::Scalar(255, 0, 0), cv::FILLED, cv::LINE_8);
-	
-	/*   Create Cross  :
-						Second image contains a cross, created by two rectangles perpednicular to each other.
-						Size of first rectangle is 512 x 96 & second rectangle is 128 x 548 pixels
-						Both rectangle are centered into the image and are colored red
-	*/
-	
-	cv::Mat img2 = cv::Mat::zeros(window_height, window_width, CV_8UC3);
-	cv::Point rect1_point1 = cv::Point((mid_point.x - rect1_width / 2), (mid_point.y - rect1_height / 2));
-	cv::Point rect1_point2 = cv::Point((mid_point.x + rect1_width / 2), (mid_point.y + rect1_height / 2));
-	//std::cout << rect1_point1.x << " " << rect1_point1.y << "\n";
-	//std::cout << rect1_point2.x << " " << rect1_point2.y << "\n";
-	cv::rectangle(img2, rect1_point1, rect1_point2, cv::Scalar(0, 255, 0), -1, cv::LINE_8);
-	
-	cv::Point rect2_point1 = cv::Point((mid_point.x - rect2_width / 2), (mid_point.y - rect2_height / 2));
-	cv::Point rect2_point2 = cv::Point((mid_point.x + rect2_width / 2), (mid_point.y + rect2_height / 2));
-	cv::rectangle(img2, rect2_point1, rect2_point2, cv::Scalar(0, 255, 0), -1, cv::LINE_8);
+	// Read Image.
+	cv::Mat input_img1, input_img2;
+	input_img1 = cv::imread(argv[1]);
+	input_img2 = cv::imread(argv[2]);
 
+	// If both images are empty, then make a default
+	if (input_img1.empty() || input_img2.empty()) {
+		std::cout << "Creating Default Picture because the srcs are empty images" << std::endl;
+		// Draw difault pictures.
+		input_img1 = img1;
+		input_img2 = img2;
+	}
+
+	// Create Circle : First image should be a circle in the center with radius 150 in blue color
+	cv::circle(img1, center, radius, cv::Scalar(255, 0, 0), cv::FILLED);
+
+	//   Create Cross 
+	cv::rectangle(img2, rect1, cv::Scalar(0, 255, 0), cv::FILLED);
+	cv::rectangle(img2, rect2, cv::Scalar(0, 255, 0), cv::FILLED);
+
+	//Create Mask
 	cv::imshow("img1", img1);
 	cv::imshow("img2", img2);
-	cv::waitKey(0);
-		
+	cv::waitKey();
+	
+	// Porter - Duff Operation.
+	cv::Mat mask1, mask2;
+	//cv::Mat mask2; = make_mask(img2);
+
+	// Processing the input masks
+	bool hasMask1 = parser.has("mask1");
+	bool hasMask2 = parser.has("mask2");
+	cv::String mask1_path = parser.get<cv::String>("mask1");
+	cv::String mask2_path = parser.get<cv::String>("mask2");
+	if (hasMask1) {
+		mask1 = cv::imread(mask1_path);
+		mask1 = make_mask(mask1);
+	}
+	else {
+		mask1 = make_mask(img1);
+	}
+
+	if (hasMask2) {
+		mask2 = cv::imread(mask2_path);
+		mask2 = make_mask(mask2);
+	}
+	else {
+		mask2 = make_mask(img2);
+	}
+
+	// Porter - Duff Operation.
+
+	// Over Operation
+	cv::Mat over_img1 = over(img1, img2, mask1, mask2);
+	cv::imshow("img1 over img2", over_img1);
+	cv::Mat over_img2 = over(img2, img1, mask2, mask1);
+	cv::imshow("img2 over img1", over_img2);
+	cv::waitKey();
+	
+	// inside Operation
+	cv::Mat inside_img1 = inside(img1, img2, mask1, mask2);
+	cv::imshow("img1 inside of img2", inside_img1);
+	cv::Mat inside_img2 = inside(img2, img1, mask2, mask1);
+	cv::imshow("img2 inside of img2", inside_img2);
+	cv::waitKey();
+
+	// Out Operation
+	cv::Mat outside_img1 = out(img1, img2, mask1, mask2);
+	cv::imshow("img1 outside of img2", outside_img1);
+	cv::Mat outside_img2 = out(img2, img1, mask2, mask1);
+	cv::imshow("img2 outside of img1", outside_img2);
+	cv::waitKey();
+
+	// Atop Operation
+	cv::Mat atop_img1 = atop(img1, img2, mask1, mask2);
+	cv::imshow("img1 topof img2 ", atop_img1);
+	cv::Mat atop_img2 = atop(img2, img1, mask2, mask1);
+	cv::imshow("img2 topof img1 ", atop_img2);
+	cv::waitKey();
+
+	// XOR Operation
+	cv::Mat xor_img1 = XOR(img1, img2, mask1, mask2);
+	cv::imshow("img1 xor img2", xor_img1);
+	cv::Mat xor_img2 = XOR(img2, img1, mask2, mask1);
+	cv::imshow("im2 xor img1", xor_img2);
+	cv::waitKey();
 }
+
