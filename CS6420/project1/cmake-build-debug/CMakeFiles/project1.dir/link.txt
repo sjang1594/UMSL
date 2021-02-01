@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/project1.dir/operator.cpp.o CMakeFiles/project1.dir/porter_duff.cpp.o  -o project1 
