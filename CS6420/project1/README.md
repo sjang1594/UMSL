@@ -16,7 +16,6 @@ The project detail is located in ./doc folder.
 
 # Result
 Here are the following results of the default shapes and operation result
----
 ## Input Images:
 <p align="center">
   <img src="./image/Input_image.PNG" width="800" height="380" >
@@ -24,25 +23,25 @@ Here are the following results of the default shapes and operation result
 
 ## over:
 <p align="center">
-  <img src="./image/over.PNG" width="1200" height="500" >
+  <img src="./image/over.PNG" width="800" height="380" >
 </p>
 
 ## inside:
 <p align="center">
-  <img src="./image/inside.PNG" width="1200" height="500" >
+  <img src="./image/inside.PNG" width="800" height="380" >
 </p>
 
 ## out:
 <p align="center">
-  <img src="./image/outside.PNG" width="1200" height="500" >
+  <img src="./image/outside.PNG" width="800" height="380" >
 </p>
 
 ## atop:
 <p align="center">
-  <img src="./image/atop.PNG" width="1200" height="500" >
+  <img src="./image/atop.PNG" width="800" height="380" >
 </p>
 
 ## XOR :
 <p align="center">
-  <img src="./image/xor.PNG" width="1200" height="500" >
+  <img src="./image/xor.PNG" width="800" height="380" >
 </p>
