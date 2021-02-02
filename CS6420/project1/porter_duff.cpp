@@ -29,17 +29,26 @@ int main(int argc, char** argv) {
 	
 	// Read Image.
 	cv::Mat input_img1, input_img2;
-	input_img1 = cv::imread(argv[1]);
-	input_img2 = cv::imread(argv[2]);
+	cv::String input_path1 = parser.get<cv::String>(0);
+	cv::String input_path2 = parser.get<cv::String>(1);
+
+	input_img1 = cv::imread(input_path1);
+	input_img2 = cv::imread(input_path2);
+
+	cv::imshow("image1", input_img1);
+	cv::imshow("image2", input_img2);
+	cv::waitKey();
 
 	// If both images are empty, then make a default
-	if (input_img1.empty() || input_img2.empty()) {
-		std::cout << "Creating Default Picture because the srcs are empty images" << std::endl;
+	if (input_img1.empty() && input_img2.empty()) {
+		//input_img1 = img1;
+		//input_img2 = img2;
+		/*std::cout << "Creating Default Picture because the srcs are empty images" << std::endl;
 		std::cout << " Image 1. Blue Circle" << std::endl;
-		std::cout << " IMage 2. Green Cross" << std::endl;
+		std::cout << " IMage 2. Green Cross" << std::endl;*/
 		// Draw difault pictures.
-		input_img1 = img1;
-		input_img2 = img2;
+
+		return 0;
 	}
 
 	// Create Circle : First image should be a circle in the center with radius 150 in blue color
@@ -49,7 +58,7 @@ int main(int argc, char** argv) {
 	cv::rectangle(img2, rect1, cv::Scalar(0, 255, 0), cv::FILLED);
 	cv::rectangle(img2, rect2, cv::Scalar(0, 255, 0), cv::FILLED);
 
-	//Create Mask
+	//Check input image
 	cv::imshow("img1", img1);
 	cv::imshow("img2", img2);
 	cv::waitKey();
@@ -114,6 +123,15 @@ int main(int argc, char** argv) {
 	cv::imshow("img1 xor img2", xor_img1);
 	cv::Mat xor_img2 = XOR(img2, img1, mask2, mask1);
 	cv::imshow("im2 xor img1", xor_img2);
+	cv::waitKey();
+
+	// Extra
+	cv::Mat mask_img1 = cv::Mat::zeros(input_img1.size(), CV_8UC3);
+	cv::Mat final_mask1 = cv::Mat::zeros(input_img1.size(), CV_8UC1);
+	cv::Mat mask_bernie = make_mask(input_img1);
+
+
+	cv::imshow("Bernie Mask", mask_bernie);
 	cv::waitKey();
 }
 

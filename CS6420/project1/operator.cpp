@@ -15,7 +15,7 @@ cv::Mat make_mask(cv::Mat mask)
 	//Check image dimension. 
 	if (mask.depth() != 1) {
 		cv::cvtColor(mask, mask, cv::COLOR_BGR2GRAY, 0);
-		// Using the threshold to obtain the mask
+		// Using the treshold to obtain the mask
 		cv::threshold(mask, mask, 0, 255, cv::THRESH_BINARY);
 	}
 	else {
@@ -67,62 +67,57 @@ cv::Mat copy(cv::Mat input){
 // Over Operation 
 cv::Mat over(cv::Mat i1, cv::Mat i2, cv::Mat m1, cv::Mat m2) {
 	//This is like clear operation
-	cv::Mat output_img = cv::Mat::zeros(i2.size(), i2.type());
-	output_img = copy(i2);
+	cv::Mat output_img1 = cv::Mat::zeros(i1.size(), i1.type());
+	cv::Mat output_img2 = cv::Mat::zeros(i2.size(), i2.type());
+	cv::Mat result_img = clear(i1);
+	output_img1 = copy(i1);
+	output_img2 = copy(i2);
+	
+	cv::Mat inverse_mask = inverse(m1);
+	cv::Mat mask;
+	//cv::bitwise_or(m1, m2, mask1);
 
-	for (int rows = 0; rows < i1.rows; rows++) {
-		for (int cols = 0; cols < i1.cols; cols++) {
-			if (m1.at<uchar>(rows, cols) != 0) {
-				cv::Vec3b color;
-				color = i1.at<cv::Vec3b>(rows, cols);
-				output_img.at<cv::Vec3b>(rows, cols) = color;
-			}
-		}
-	}
-	return output_img;
+	//Save it into result image
+	cv::bitwise_and(output_img1, output_img1, result_img, m1);
+	
+	//Create a mask
+	cv::bitwise_and(m2, inverse_mask, mask);
+	cv::bitwise_and(output_img2, output_img2, result_img, mask);
+	
+	return result_img;
 }
 
 // Inside Operation. 
 cv::Mat inside(cv::Mat i1, cv::Mat i2, cv::Mat m1, cv::Mat m2) {
 	//This is like clear operation
-	cv::Mat output_img = cv::Mat::zeros(i2.size(), i2.type());
-	output_img = copy(i2);
+	cv::Mat output_img = cv::Mat::zeros(i1.size(), i1.type());
+	cv::Mat result_img = clear(i1);
+	output_img = copy(i1);
 
-	for (int rows = 0; rows < i1.rows; rows++) {
-		for (int cols = 0; cols < i1.cols; cols++) {
-			if (m2.at<uchar>(rows, cols) != 0) {
-				cv::Vec3b color;
-				color = i1.at<cv::Vec3b>(rows, cols);
-				output_img.at<cv::Vec3b>(rows, cols) = color;
-			}
-		}
-	}
-	return output_img;
+	cv::Mat mask;
+	// Create a mask
+	cv::bitwise_and(m1, m2, mask);
+	cv::bitwise_or(output_img, output_img, result_img, mask);
+
+	return result_img;
 }
 
 // Outside operation
 cv::Mat out(cv::Mat i1, cv::Mat i2, cv::Mat m1, cv::Mat m2) {
 	//This is like clear operation
 	cv::Mat output_img = cv::Mat::zeros(i1.size(), i1.type());
+	cv::Mat result_img = clear(i1);
+	output_img = copy(i1);
 
 	// Create the mask that has fliped their pixels
 	cv::Mat inversed_mask = inverse(m2);
 	
-	//bitwise_and
-	cv::Mat new_mask;
-	cv::bitwise_and(m1, inversed_mask, new_mask);
-	
-	for (int rows = 0; rows < i1.rows; rows++) {
-		for (int cols = 0; cols < i1.cols; cols++) {
-			if (new_mask.at<uchar>(rows, cols) != 0) {
-				cv::Vec3b color;
-				color = i1.at<cv::Vec3b>(rows, cols);
-				output_img.at<cv::Vec3b>(rows, cols) = color;
-			}
-		}
-	}
+	//bitwise_and 
+	cv::Mat mask;
+	cv::bitwise_and(m1, inversed_mask, mask);
+	cv::bitwise_or(output_img, output_img, result_img, mask);
 
-	return output_img;
+	return result_img;
 }
 
 // Atop operation :  the concatenation of "out" and "inside" Operation. 
@@ -131,35 +126,26 @@ cv::Mat out(cv::Mat i1, cv::Mat i2, cv::Mat m1, cv::Mat m2) {
 //					3. Then loop through the images, put the color in the corresponding area.
 cv::Mat atop(cv::Mat i1, cv::Mat i2, cv::Mat m1, cv::Mat m2) {
 	//This is like clear operation
-	cv::Mat output_img = cv::Mat::zeros(i1.size(), i1.type());
+	cv::Mat output_img1 = cv::Mat::zeros(i1.size(), i1.type());
+	cv::Mat output_img2 = cv::Mat::zeros(i2.size(), i2.type());
+	cv::Mat result_output1 = clear(i1);
+	cv::Mat result_output2 = clear(i2);
+	cv::Mat final_output = clear(i1);
+	output_img1 = copy(i1);  
+	output_img2 = copy(i2);
 
 	// Create the mask that has fliped their pixels
-	cv::Mat inversed_mask = inverse(m1);
+	cv::Mat inverse_mask = inverse(m1);
+	cv::Mat outer_mask, inner_mask;
+	cv::bitwise_and(inverse_mask, m2, outer_mask, m2);
+	cv::bitwise_and(m1, m2, inner_mask, m2);
 
-	// This is for outerside part
-	cv::Mat outer_mask;
-	cv::bitwise_and(inversed_mask, m2, outer_mask);
-	
-	// This is for innerside part
-	cv::Mat inner_mask;
-	cv::bitwise_and(m1, m2, inner_mask);
+	cv::bitwise_and(output_img2, output_img2, result_output1, outer_mask);
+	cv::bitwise_and(output_img1, output_img1, result_output2, inner_mask);
+	cv::bitwise_or(result_output1, result_output2, final_output, m2);
+	cv::waitKey();
 
-	for (int rows = 0; rows < i2.rows; rows++) {
-		for (int cols = 0; cols < i2.cols; cols++) {
-			if (inner_mask.at<uchar>(rows, cols) != 0) {
-				cv::Vec3b color1;
-				color1 = i1.at<cv::Vec3b>(rows, cols);
-				output_img.at<cv::Vec3b>(rows, cols) = color1;
-			}
-
-			if (outer_mask.at<uchar>(rows, cols) != 0) {
-				cv::Vec3b color2;
-				color2 = i2.at<cv::Vec3b>(rows, cols);
-				output_img.at<cv::Vec3b>(rows, cols) = color2;
-			}
-		}
-	}
-	return output_img;
+	return final_output;
 }
 
 // XOR operation : 
@@ -169,7 +155,13 @@ cv::Mat atop(cv::Mat i1, cv::Mat i2, cv::Mat m1, cv::Mat m2) {
 // Note				: XOR operations are commutative if the size of both images are same.
 cv::Mat XOR(cv::Mat i1, cv::Mat i2, cv::Mat m1, cv::Mat m2) {
 	//This is like clear operation
-	cv::Mat output_img = cv::Mat::zeros(i1.size(), i1.type());
+	cv::Mat output_img1 = cv::Mat::zeros(i1.size(), i1.type());
+	cv::Mat output_img2 = cv::Mat::zeros(i2.size(), i2.type());
+	cv::Mat result_output1 = clear(i1);
+	cv::Mat result_output2 = clear(i2);
+	cv::Mat final_output = clear(i1);
+	output_img1 = copy(i1);
+	output_img2 = copy(i2);
 
 	// Create a mask for xor operation. 
 	cv::Mat inversed_mask1 = inverse(m1);
@@ -179,29 +171,12 @@ cv::Mat XOR(cv::Mat i1, cv::Mat i2, cv::Mat m1, cv::Mat m2) {
 	// Bitwise_and & Bitwise_or
 	cv::Mat inner_mask, outer_mask, result_mask;
 	cv::bitwise_and(m1, inversed_mask2, inner_mask);
-	cv::bitwise_and(m2, inversed_mask1, outer_mask);
+	cv::bitwise_and(inversed_mask1, m2, outer_mask);
 	cv::bitwise_or(inner_mask, outer_mask, result_mask);
 
-	// This is two for loops are little bit better way, if the size of two input images is different. 
-	for (int rows = 0; rows < i1.rows; rows++) {
-		for (int cols = 0; cols < i1.cols; cols++) {
-			if (inner_mask.at<uchar>(rows, cols) != 0) {
-				cv::Vec3b color1;
-				color1 = i1.at<cv::Vec3b>(rows, cols);
-				output_img.at<cv::Vec3b>(rows, cols) = color1;
-			}
-		}
-	}
+	cv::bitwise_and(output_img1, output_img1, result_output1, inner_mask);
+	cv::bitwise_and(output_img2, output_img2, result_output2, outer_mask);
+	cv::bitwise_or(result_output1, result_output2, final_output, result_mask);
 
-	for (int rows = 0; rows < i2.rows; rows++) {
-		for (int cols = 0; cols < i2.cols; cols++) {
-			if (outer_mask.at<uchar>(rows, cols) != 0) {
-				cv::Vec3b color2;
-				color2 = i2.at<cv::Vec3b>(rows, cols);
-				output_img.at<cv::Vec3b>(rows, cols) = color2;
-			}
-		}
-	}
-	
-	return output_img;
+	return final_output;
 }
