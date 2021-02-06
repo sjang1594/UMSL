@@ -1,6 +1,6 @@
 README.md
 
-# This is CS6420 Project1 : Porter Duff Operation.
+# CS6420 Project1 : Porter Duff Operation.
 ---
 
 The project detail is located in ./doc folder.
