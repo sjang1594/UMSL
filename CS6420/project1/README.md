@@ -8,7 +8,7 @@ The project detail is located in ./doc folder.
 `cd build` and `cmake .. && make `
 
 `./Porter_Duff_OP [Image1] [Image2] [mask1] [mask2]`
-**Note : [Image1] & [Image2] is positional arguments**.
+- **Note : [Image1] & [Image2] is positional arguments**.
 **if there are no images, then feed any name of image, then it will create default images**
 **[mask1] [mask2] are optional arguments**
 
