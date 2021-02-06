@@ -1,5 +1,3 @@
-README.md
-
 # CS6420 Project1 : Porter Duff Operation.
 ---
 
