@@ -10,6 +10,9 @@ The list of courses/project that I worked on.
 ### CS 2750 : System Programming - UNIX/C
 - Project : IPC - Communication between worker and master.
 
+### CS 4250 : Programming Language - C
+- Project : Lexical Analyzer
+
 ### CS 5130 : Advanced Algorithm 
 - Homeworks from this course : [CS5130 - Advanced Algorithm](https://github.com/badriadhikari/Algorithms-2020fall)
 - Project : Cleaning Robots Game
