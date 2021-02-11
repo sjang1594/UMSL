@@ -1,0 +1,2 @@
+/*comment*/
+x = (sum + 47 ) / total;
