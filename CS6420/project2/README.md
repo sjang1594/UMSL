@@ -4,7 +4,7 @@ What is image registration? - Image registration is the process of `transforming
 
 The spatial relationships between these imags can be rigid (translations and roataions), affine(shears for example), homographies, or complex large deformations models.
 
-![](/Users/seunghojang/project/UMSL/CS6420/project2/images/Multiple Deformation.png)
+![](./images/Multiple Deformation.png)
 
 Image registration has a wide variety of applications: it is essential as soon as the task at hand requires comparing multiple images of the same scene. **It is very common in the field of medical imagery, as well as for satelite image analysis and optical flow**
 
