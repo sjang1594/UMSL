@@ -33,4 +33,11 @@ The list of courses/project that I worked on.
 - Project : SRT division Algorithm with binary numbers.
   - String manipulation : Converting 2's complement number, addition, subtraction, and shifting operation was involved
 
-### CS 5880 : Independent Study 
+### CS 5880 : Independent Study
+- Project 1 : Basic Drawing functions. (BitMap)
+- Project 2 : Historgram Equalization & Stretching.
+- Project 3 : Morphology. (Errosion & Dillusion)
+
+### CS6420 : Topics in Computer Vision & Image Processing
+- Project 1 : Porter-Duff Operations (Bitwise Operation).
+- Project 2 : Image Registeration. 
