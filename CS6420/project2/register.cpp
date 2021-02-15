@@ -9,10 +9,11 @@
 // CommandLineparser Keys
 std::string keys =
 "{h help         |    false			| This is help message }"
-"{M              |					| Perform manual registration }"
+"{M manual       |					| Perform manual registration }"
 "{e epsilon      |    0.0001		| ECC's convergence epsilon }"
 "{m motion_type  |    affine		| type of motion : translation, euclidean, affine, homography}"
-"{o output_warp  |  out_warp.ecc    | warped image}"
+"{o output_warp  |  out_warp.ecc    | Output warp matrix filename }"
+"{w warp_img_file|  warped_ecc.jpg  | Warped Image }"
 "{@image_file    |  home_day.jpg    | input image }"
 "{@template_file |  home_night.jpg  | template image for alignment}"
 "{@warp_file     |		            | Input file containing warp matrix}";
@@ -22,22 +23,24 @@ int main(int argc, char** argv) {
 
 	cv::CommandLineParser parser(argc, argv, keys);
 
-	//Load the image path & template path
+	double ep = parser.get<double>("e"); // epsilon
+	std::string motion_type = parser.get<std::string>("m"); // motion type or warp type
+	std::string final_warp = parser.get<std::string>("o"); // final output 
+	std::string warp_img_file = parser.get<std::string>("w"); // warp image file 
+	bool manual_option_key = parser.has("M"); // Manual option key
+
+	//Load the image, template path, and warp file path
 	const cv::String img_path = parser.get<cv::String>("@image_file"); //0
 	const cv::String template_path = parser.get<cv::String>("@template_file"); //1
 	const cv::String warp_file_path = parser.get<cv::String>("@warp_file"); //2
 
 	// Either argc is one or help, show help message
 	parser.about("Use this script to run image registeration.");
-	if (argc < 1 || parser.get<bool>("help")){
+	if (argc < 1 || parser.get<bool>("help")) {
 		parser.printMessage();
 		help(argv);
 		return 0;
 	}
-
-	double ep = parser.get<double>("e"); // epsilon
-	std::string motion_type = parser.get<std::string>("m"); // motion type or warp type
-	bool manual_option_key = parser.has("M"); // Manual option key
 
 	//Parser Check
 	//if (!parser.check()) {
@@ -46,10 +49,7 @@ int main(int argc, char** argv) {
 	//}
 
 	// Variables 
-	cv::Mat src, copy_src, template_src, template_copy_src, image_aligned;
-
-	// Warp matrix
-	cv::Mat warp_matrix;
+	cv::Mat src, copy_src, template_src, template_copy_src;
 
 	/* ----------------------------------------------------------------------------------- */
 	/* --------------------------------- Input Processing -------------------------------- */
@@ -66,7 +66,7 @@ int main(int argc, char** argv) {
 	}
 	// Copy it into another image as gray scale
 	cvtColor(src, copy_src, cv::COLOR_BGR2GRAY);
-	
+
 	// Check if the image has been eqaulized.
 	//cv::imshow("Hist : before equalized", getGrayHistImage(calcGrayHist(copy_src)));
 
@@ -74,42 +74,59 @@ int main(int argc, char** argv) {
 	cv::equalizeHist(copy_src, copy_src);
 	cv::imshow("after equaliztion", copy_src);
 	cv::imshow("Hist : Copy_src", getGrayHistImage(calcGrayHist(copy_src)));
-	
+
 	// Apply historgram equalization to enhance the edges.
 	cv::equalizeHist(template_src, template_copy_src);
+
 	//cv::waitKey();
 
 	/* ----------------------------------------------------------------------------------- */
 	/* ----------------------------- Motion Type & Warp Type ----------------------------- */
+
 	// Check the motion_type
 	if (!(motion_type == "translation" || motion_type == "euclidean"
-		|| motion_type == "affine" || motion_type == "homography")) {
+		|| motion_type == "affine" || motion_type == "homography"))
+	{
 		std::cerr << "Invalid motion transformation" << std::endl;
 		return -1;
 	}
+
 	// Convert warp type from string to built-in enumerated type
-	int mode_temp;
-	if (motion_type == "translation")
-		mode_temp = cv::MOTION_TRANSLATION;
-	else if (motion_type == "euclidean")
-		mode_temp = cv::MOTION_EUCLIDEAN;
-	else if (motion_type == "affine")
-		mode_temp = cv::MOTION_AFFINE;
-	else
-		mode_temp = cv::MOTION_HOMOGRAPHY;
+	int warp_mode = get_warpMode(motion_type);
+
+	// Warp matrix 
+	cv::Mat warp_mat;
 
 	/* ----------------------------------------------------------------------------------- */
+	/* --------------------			Registeration				-------------------------- */
 	//Manual registration
 	if (manual_option_key) {
 		std::cout << "Manul Option Key has been pressed " << std::endl;
-		// do something with manual option key --> use mouse control. callbackfunction ?
-		// or just take the point as cin.
 	}
 	else {
-		//Automatic registration
-		//do something
+		// Automatic registration
+
+		// Create the identity matrix depending on warp_mode
+		/*
+			cv::MOTION_TRANSLATION = 0,
+			cv::MOTION_EUCLIDEAN = 1,
+			cv::MOTION_AFFINE = 2,
+			cv::MOTION_HOMOGRAPHY = 3
+		*/
+
+		// If warp_mode is 3 (Homography), then create (3, 3) matrix. 
+		if (warp_mode == 3)
+			warp_mat = cv::Mat::eye(3, 3, CV_32F);
+		else
+			warp_mat = cv::Mat::eye(2, 3, CV_32F);
+
+		// If warp file doesn't exist, give an error msg. Otherwise, read warp matrix.
+		if (warp_file_path.empty()) {
+			if (copy_src.size() != template_copy_src.size())
+				std::cout << "Identity matrix for each warp should have same size" << std::endl;
+		}
+		else {
+
+		}
 	}
-
-	/* ----------------------------------------------------------------------------------- */
-
 }
