@@ -49,32 +49,21 @@ cv::Mat getGrayHistImage(const cv::Mat& hist)
 	return imgHist;
 }
 
-// Mouse Control
-void CallBackFunc(int event, float x, float y, int flags,  void* userdata)
+void print_vector_info(std::vector<cv::Point> const vec)
 {
-	if (event == cv::EVENT_LBUTTONDOWN) {
-		std::cout << " Press three points with left click" << std::endl;
-		std::cout << "Lbuttondown down" << x << y << std::endl;;
-		cv::circle(*(cv::Mat*)userdata, cv::Point(x, y), 2, CV_RGB(255, 0, 0), 3);
-
-		// You might be able to push some x and y coordinates to vector.
-	}
-}
-void print_array_info(cv::Point2f point[])
-{
-	for (int i = 0; i < 3; i++) {
-		std::cout << point[i] << " ";
+	for (int i = 0; i < vec.size(); i++) {
+		std::cout << vec.at(i) << " ";
 	}
 	std::cout << "\n";
 }
 
-bool check_warpType(const std::string warp_type) {
-	if (!(warp_type == "translation" || warp_type == "euclidean"
-		|| warp_type == "affine" || warp_type == "homography")) {
-		std::cerr << "Invalid motion transformation" << std::endl;
-		return 0;
-	}
-}
+//bool check_warpType(const std::string warp_type) {
+//	if (!(warp_type == "translation" || warp_type == "euclidean"
+//		|| warp_type == "affine" || warp_type == "homography")) {
+//		std::cerr << "Invalid motion transformation" << std::endl;
+//		return 0;
+//	}
+//}
 
 // Return the warp type
 int get_warpMode(const std::string warp_type) {

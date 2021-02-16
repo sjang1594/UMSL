@@ -6,23 +6,11 @@
 #include "register.hpp"
 #include "utill.hpp"
 
-// CommandLineparser Keys
-std::string keys =
-"{h help         |    false			| This is help message }"
-"{M manual       |					| Perform manual registration }"
-"{e epsilon      |    0.0001		| ECC's convergence epsilon }"
-"{m motion_type  |    affine		| type of motion : translation, euclidean, affine, homography}"
-"{o output_warp  |  out_warp.ecc    | Output warp matrix filename }"
-"{w warp_img_file|  warped_ecc.jpg  | Warped Image }"
-"{@image_file    |  home_day.jpg    | input image }"
-"{@template_file |  home_night.jpg  | template image for alignment}"
-"{@warp_file     |		            | Input file containing warp matrix}";
-
 
 int main(int argc, char** argv) {
 
 	cv::CommandLineParser parser(argc, argv, keys);
-
+	
 	double ep = parser.get<double>("e"); // epsilon
 	std::string motion_type = parser.get<std::string>("m"); // motion type or warp type
 	std::string final_warp = parser.get<std::string>("o"); // final output 
@@ -113,35 +101,56 @@ int main(int argc, char** argv) {
 		std::cout << "Manul Option Key has been pressed " << std::endl;
 		std::cout << "(Source) Input three pairs of points within this size : "
 			<< copy_src.size() << std::endl;
-
-		// Push all the elements for source
-		for (int i = 0; i < 3; i++) {
-			std::cout << "(Source) Taking the points \n";
-			std::cout << "X points : ";
-			std::cin >> x1;
-			std::cout << "Y points : ";
-			std::cin >> y1;
-			input_points[i] = cv::Point2f((float) x1, (float) y1);
-		}
-
-		std::cout << "(Template) Input three pairs of points within this size : " 
-			<< template_copy_src.size() << std::endl;
-		for (int i = 0; i < 3; i++) {
-			std::cout << "(Template) Taking the points \n";
-			std::cout << "X points : ";
-			std::cin >> x2;
-			std::cout << "Y points : ";
-			std::cin >> y2;
-			template_points[i] = cv::Point2f((float)x2, (float)y2);
-		}
-
-		// Look at the content
-		//print_array_info(input_points);
-		//print_array_info(template_points);
 		
+		//Mouse Control
+		std::cout << "(Source) Input three pairs of points within this size : "
+			<< template_copy_src.size() << std::endl;
+		cv::namedWindow("src image", 1);
+		cv::setMouseCallback("src image", CallBackFunc_1, &src);
+		while (1){
+			cv::imshow("src image", src);
+			if (cv::waitKey(10) > 0 || input_points.size() == 3)
+				break;
+
+		}
+		cv::destroyWindow("src image");
+
+		std::cout << "(Template) Input three pairs of points within this size : "
+			<< template_copy_src.size() << std::endl;
+		cv::namedWindow("template image", 1);
+		cv::setMouseCallback("template image", CallBackFunc_2, &template_src);
+		while (1) {
+			cv::imshow("template image", template_src);
+			if (cv::waitKey(10) > 0 || template_points.size() == 3)
+				break;
+
+		}
+		cv::destroyWindow("template image");
+		
+
+		// Copy over the vector vals into array.
+		cv::Point2f input_pt[3];
+		cv::Point2f template_pt[3];
+		for (int i = 0; i < input_points.size(); i++) {
+			input_pt[i] = input_points[i];
+		}
+
+		for (int i = 0; i < template_points.size(); i++) {
+			template_pt[i] = template_points[i];
+		}
+
+
 		// Calculate the Affine Transform
-		warp_mat = cv::getAffineTransform(input_points, template_points);
+		warp_mat = cv::getAffineTransform(input_pt, template_pt);
 		std::cout << warp_mat << std::endl;
+		
+		// printing & saving warp image
+		cv::Mat warp_dst = cv::Mat::zeros(src.rows, src.cols, src.type());
+		cv::warpAffine(src, warp_dst, warp_mat, warp_dst.size());
+		cv::imshow("Warp", warp_dst);
+		cv::imwrite("warp_image.jpg", warp_dst);
+		cv::waitKey();
+
 	}
 	else { // Automatic registration
 		// Create the identity matrix depending on warp_mode
@@ -183,6 +192,35 @@ int main(int argc, char** argv) {
 		const double toc_final = (double)cv::getTickCount();
 		const double total_time = (toc_final - tic_init) / (cv::getTickFrequency());
 
-		saveWarp(final_warp, warp_mat, warp_mode);
+		//saveWarp(final_warp, warp_mat, warp_mode);
 	}
+}
+
+/* ----------------------------------------------------------------------------------- */
+/* ---------------------------------  Mouse Control	 -------------------------------- */
+void CallBackFunc_1(int event, int x, int y, int flags, void* userdata)
+{
+	if (event == cv::EVENT_LBUTTONDOWN) {
+		std::cout << " Press three points with left click" << std::endl;
+		printf("lLBUTTONDOWN down %d, %d \n", x, y);
+		cv::circle(*(cv::Mat*)userdata, cv::Point2f((float)x, (float)y), 2, CV_RGB(255, 0, 0), 3);
+
+		input_points.push_back(cv::Point2f((float)x, (float)y));
+
+		// You might be able to push some x and y coordinates to vector.
+	}
+	//print_array_info(input_points);
+}
+
+void CallBackFunc_2(int event, int x, int y, int flags, void* userdata)
+{
+	if (event == cv::EVENT_LBUTTONDOWN) {
+		std::cout << " Press three points with left click" << std::endl;
+		printf("lLBUTTONDOWN down %d, %d \n", x, y);
+		cv::circle(*(cv::Mat*)userdata, cv::Point2f((float)x, (float)y), 2, CV_RGB(255, 255, 255), 3);
+
+		template_points.push_back(cv::Point2f((float)x, (float)y));
+		// You might be able to push some x and y coordinates to vector.
+	}
+	//print_array_info(template_points);
 }
