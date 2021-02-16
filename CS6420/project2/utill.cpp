@@ -50,7 +50,7 @@ cv::Mat getGrayHistImage(const cv::Mat& hist)
 }
 
 // Mouse Control
-void CallBackFunc(int event, int x, int y, int flags,  void* userdata)
+void CallBackFunc(int event, float x, float y, int flags,  void* userdata)
 {
 	if (event == cv::EVENT_LBUTTONDOWN) {
 		std::cout << " Press three points with left click" << std::endl;
@@ -59,6 +59,13 @@ void CallBackFunc(int event, int x, int y, int flags,  void* userdata)
 
 		// You might be able to push some x and y coordinates to vector.
 	}
+}
+void print_array_info(cv::Point2f point[])
+{
+	for (int i = 0; i < 3; i++) {
+		std::cout << point[i] << " ";
+	}
+	std::cout << "\n";
 }
 
 bool check_warpType(const std::string warp_type) {
@@ -106,6 +113,34 @@ const int readWarp(std::string Filename, cv::Mat& warp, int motionType) {
 	else {
 		std::cout << "Unable to open file " << Filename.c_str() << std::endl;
 		ret_value = 0;
+	}
+
+	return ret_value;
+}
+
+// Save warp image
+int saveWarp(std::string Filename, const cv::Mat& warp, int motionType)
+{
+	CV_Assert(warp.type() == CV_32FC1);
+	
+	const float* matPtr = warp.ptr<float>(0);
+	int ret_value;
+
+	std::ofstream outFile(Filename.c_str());
+	if (!outFile) {
+		std::cerr << "Error Occured for saving warp image" << Filename.c_str() << std::endl;
+		ret_value = 0;
+	}
+	else{ // save the warp's element
+		outFile << matPtr[0] << " " << matPtr[1] << " " << matPtr[2] << std::endl;
+		outFile << matPtr[3] << " " << matPtr[4] << " " << matPtr[5] << std::endl;
+
+		// if homography, add three more elements 
+		if (motionType == cv::MOTION_HOMOGRAPHY) {
+			outFile << matPtr[6] << " " << matPtr[7] << " " << matPtr[8] << std::endl;
+		}
+
+		ret_value = 1;
 	}
 
 	return ret_value;

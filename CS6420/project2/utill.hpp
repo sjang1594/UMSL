@@ -12,8 +12,7 @@
 #include <string>
 #include <fstream>
 #include <time.h>
-
-const int niters = 50;
+#include <vector>
 
 // Help message
 void help(char** argv);
@@ -23,11 +22,18 @@ cv::Mat calcGrayHist(const cv::Mat& );
 cv::Mat getGrayHistImage(const cv::Mat& );
 
 // callback function - mouse control.
-void CallBackFunc(int, int, int, int, void* );
+void CallBackFunc(int, float, float, int, void* );
+float x1, y1, x2, y2;
+cv::Point2f input_points[3];
+cv::Point2f template_points[3];
+
+// print the content of vector
+void print_array_info(cv::Point2f point[]);
 
 // Warp Utility
 int get_warpMode(const std::string);
 bool check_warpType(const std::string);
 
-// ReadWarp
+// ReadWarp & SaveWarp - Automatic Registration.
 const int readWarp(std::string Filename, cv::Mat& warp, int motionType);
+static int saveWarp(std::string Filename, const cv::Mat& warp, int motionType);

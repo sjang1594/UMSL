@@ -72,24 +72,22 @@ int main(int argc, char** argv) {
 
 	// Apply histogram equalization to enhance the edges
 	cv::equalizeHist(copy_src, copy_src);
-	cv::imshow("after equaliztion", copy_src);
-	cv::imshow("Hist : Copy_src", getGrayHistImage(calcGrayHist(copy_src)));
+	//cv::imshow("after equaliztion", copy_src);
+	//cv::imshow("Hist : Copy_src", getGrayHistImage(calcGrayHist(copy_src)));
 
 	// Apply historgram equalization to enhance the edges.
 	cv::equalizeHist(template_src, template_copy_src);
-
-	//cv::waitKey();
 
 	/* ----------------------------------------------------------------------------------- */
 	/* ----------------------------- Motion Type & Warp Type ----------------------------- */
 
 	// Check the motion_type
-	if (!(motion_type == "translation" || motion_type == "euclidean"
+	/*if (!(motion_type == "translation" || motion_type == "euclidean"
 		|| motion_type == "affine" || motion_type == "homography"))
 	{
 		std::cerr << "Invalid motion transformation" << std::endl;
 		return -1;
-	}
+	}*/
 
 	// Convert warp type from string to built-in enumerated type
 	int warp_mode = get_warpMode(motion_type);
@@ -97,15 +95,55 @@ int main(int argc, char** argv) {
 	// Warp matrix 
 	cv::Mat warp_mat;
 
+	// Specificy the number of iterations
+	const int niters = 50;
+
+	//Check the input image size
+	std::cout << "Image Size : " << copy_src.size() << std::endl;
+	//Check the template image size
+	std::cout << "Template image Size : " << template_copy_src.size() << std::endl;
+
+
 	/* ----------------------------------------------------------------------------------- */
-	/* --------------------			Registeration				-------------------------- */
-	//Manual registration
+	/* --------------------			Registration				-------------------------- */
+	// Manual registration
+	// - Take the user inputs for points on image. (How many points --> three points)
+	// - Create the affine warp matrix for image.- 
 	if (manual_option_key) {
 		std::cout << "Manul Option Key has been pressed " << std::endl;
-	}
-	else {
-		// Automatic registration
+		std::cout << "(Source) Input three pairs of points within this size : "
+			<< copy_src.size() << std::endl;
 
+		// Push all the elements for source
+		for (int i = 0; i < 3; i++) {
+			std::cout << "(Source) Taking the points \n";
+			std::cout << "X points : ";
+			std::cin >> x1;
+			std::cout << "Y points : ";
+			std::cin >> y1;
+			input_points[i] = cv::Point2f((float) x1, (float) y1);
+		}
+
+		std::cout << "(Template) Input three pairs of points within this size : " 
+			<< template_copy_src.size() << std::endl;
+		for (int i = 0; i < 3; i++) {
+			std::cout << "(Template) Taking the points \n";
+			std::cout << "X points : ";
+			std::cin >> x2;
+			std::cout << "Y points : ";
+			std::cin >> y2;
+			template_points[i] = cv::Point2f((float)x2, (float)y2);
+		}
+
+		// Look at the content
+		//print_array_info(input_points);
+		//print_array_info(template_points);
+		
+		// Calculate the Affine Transform
+		warp_mat = cv::getAffineTransform(input_points, template_points);
+		std::cout << warp_mat << std::endl;
+	}
+	else { // Automatic registration
 		// Create the identity matrix depending on warp_mode
 		/*
 			cv::MOTION_TRANSLATION = 0,
@@ -121,12 +159,30 @@ int main(int argc, char** argv) {
 			warp_mat = cv::Mat::eye(2, 3, CV_32F);
 
 		// If warp file doesn't exist, give an error msg. Otherwise, read warp matrix.
-		if (warp_file_path.empty()) {
-			if (copy_src.size() != template_copy_src.size())
-				std::cout << "Identity matrix for each warp should have same size" << std::endl;
+		if (warp_file_path != "") {
+			int readflag = readWarp(warp_file_path, warp_mat, warp_mode);
+			if ((!readflag) || warp_mat.empty()) {
+				std::cerr << "Error Occured opening warp file " << std::endl << std::flush;
+				return -1;
+			}
+		
 		}
 		else {
-
+			std::cout << "\n ->Performance Warning: Identity warp ideally assumes images of "
+				"similar size. If the deformation is strong, the identity warp may not "
+				"be a good initialization. \n";
 		}
+
+		if (warp_mode != cv::MOTION_HOMOGRAPHY)
+			warp_mat.rows = 2;
+
+		//timing
+		const double tic_init = (double)cv::getTickCount();
+		//double cc = cv::findTransformECC(template_copy_src)
+
+		const double toc_final = (double)cv::getTickCount();
+		const double total_time = (toc_final - tic_init) / (cv::getTickFrequency());
+
+		saveWarp(final_warp, warp_mat, warp_mode);
 	}
 }
