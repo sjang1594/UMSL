@@ -24,7 +24,7 @@ Image registration has a wide variety of applications: it is essential as soon a
 ```./project2 [-h] [-M] [-e epsilon] [-m motion_type] [-o output_warp] [-w warp_img] [@image_file] [@template_file] [warp_file]```
 
 **Here is the information for each arguments :**
-- register          : Name of executable
+- ./project2        : Name of executable (register)
 - M                 : Perform Manual Registration
 - e epsilon         : ECC's convergence epsilon [default: 0.0001]
 - m motion_type     : Type of motion (translation/euclidean/affine/homography) [default: affine]
