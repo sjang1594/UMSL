@@ -16,7 +16,9 @@ Image registration has a wide variety of applications: it is essential as soon a
 ## Project Description
 
 ### Usage : 
+
 ``cd build && cmake ..``, then `make`
+
 ---
 **Command Line Argument**
 ```register [-h] [-M] [-e epsilon] [-m motion_type] [-o output_warp] [-w warp_img] [@image_file] [@template_file] [warp_file]```
