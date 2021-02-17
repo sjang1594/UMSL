@@ -12,15 +12,15 @@
 // CommandLineparser Keys
 const std::string keys =
 {
-	"{h help         |false| This is help message }"
-	"{M manual		 |<none>| Perform manual registration }"
-	"{e epsilon      |0.0001| ECC's convergence epsilon }"
-	"{m motion_type  |affine | type of motion (translation, euclidean, affine, homography)}"
-	"{o output_warp  |out_warp.ecc| Output warp matrix filename }"
-	"{w warp_img_file|warped_ecc.jpg| Warped Image }"
-	"{@image_file    |home_day.jpg| input image }"
+	"{h help |false| This is help message }"
+	"{M | | Perform manual registration }"
+	"{e epsilon |0.0001| ECC's convergence epsilon }"
+	"{m motion_type |affine| type of motion (translation, euclidean, affine, homography)}"
+	"{o output_warp |../result/out_warp.ecc| Output warp matrix filename }"
+	"{w warp_img_file |warped_ecc.jpg| Warped Image }"
+	"{@image_file |home_day.jpg| input image }"
 	"{@template_file |home_night.jpg| template image for alignment}"
-	"{@warp_file     |<none>| Input file containing warp matrix}"
+	"{@warp_file | | Input file containing warp matrix}"
 };
 
 // Specificy the number of iterations

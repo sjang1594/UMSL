@@ -12,33 +12,31 @@ int main(int argc, char** argv) {
 	cv::CommandLineParser parser(argc, argv, keys);
 	
 	double ep = parser.get<double>("e"); // epsilon
-	std::string motion_type = parser.get<cv::String>("motion_type"); // motion type or warp type
-	std::string final_warp = parser.get<cv::String>("o"); // final output 
-	std::string warp_img_file = parser.get<cv::String>("w"); // warp image file 
-	std::string manual_option_key = parser.get<cv::String>("M"); // Manual option key
-	 
+	cv::String motion_type = parser.get<cv::String>("motion_type"); // motion type or warp type
+	cv::String final_warp = parser.get<cv::String>("o"); // final output
+	cv::String warp_img_file = parser.get<cv::String>("w"); // warp image file
+	bool manual_option_key = parser.has("M");
+
 	//Load the image, template path, and warp file path
 	const cv::String img_path = parser.get<cv::String>("@image_file"); //0
 	const cv::String template_path = parser.get<cv::String>("@template_file"); //1
 	const cv::String warp_file_path = parser.get<cv::String>("@warp_file"); //2
 
 	// Either argc is one or help, show help message
-	parser.about("Use this script to run image registeration.");
+	parser.about("Use this script to run image registration.");
 	if (argc < 1 || parser.get<bool>("help")) {
 		parser.printMessage();
 		help(argv);
 		return 0;
 	}
 
-	//std::cout << manual_option_key << std::endl;
-
 	//Parser Check
-	/*if (!parser.check()) {
+	if (!parser.check()) {
 		parser.printErrors();
 		return -1;
-	}*/
+	}
 
-	// Variables 
+	// Mat Variables
 	cv::Mat src, copy_src, template_src, template_copy_src;
 
 	/* ----------------------------------------------------------------------------------- */
@@ -53,23 +51,17 @@ int main(int argc, char** argv) {
 		// print out the help message
 		return -1;
 	}
+
 	// Copy it into another image as gray scale
 	cvtColor(src, copy_src, cv::COLOR_BGR2GRAY);
-
-	// Check if the image has been eqaulized.
-	//cv::imshow("Hist : before equalized", getGrayHistImage(calcGrayHist(copy_src)));
-
 	// Apply histogram equalization to enhance the edges
 	cv::equalizeHist(copy_src, copy_src);
-	//cv::imshow("after equaliztion", copy_src);
-	//cv::imshow("Hist : Copy_src", getGrayHistImage(calcGrayHist(copy_src)));
 
-	// Apply historgram equalization to enhance the edges.
+	// Apply the histogram equalization to enhance the edges.
 	cv::equalizeHist(template_src, template_copy_src);
 
 	/* ----------------------------------------------------------------------------------- */
 	/* ----------------------------- Motion Type & Warp Type ----------------------------- */
-	std::cout << motion_type << std::endl;
 	// Check the motion_type
 	if (!(motion_type == "translation" || motion_type == "euclidean"
 		|| motion_type == "affine" || motion_type == "homography"))
@@ -80,11 +72,9 @@ int main(int argc, char** argv) {
 
 	// Convert warp type from string to built-in enumerated type
 	int warp_mode = get_warpMode(motion_type);
-	std::cout << warp_mode << std::endl;
 
 	// Warp matrix 
 	cv::Mat warp_mat;
-
 
 	//Check the input image size
 	std::cout << "Image Size : " << copy_src.size() << std::endl;
@@ -97,7 +87,7 @@ int main(int argc, char** argv) {
 	// Manual registration
 	// - Take the user inputs for points on image. (How many points --> three points)
 	// - Create the affine warp matrix for image.- 
-	if (manual_option_key == "M") {
+	if (manual_option_key) {
 		std::cout << "Manul Option Key has been pressed " << std::endl;
 		std::cout << "(Source) Input three pairs of points within this size : "
 			<< copy_src.size() << std::endl;
@@ -147,7 +137,7 @@ int main(int argc, char** argv) {
 		cv::Mat warp_dst = cv::Mat::zeros(src.rows, src.cols, src.type());
 		cv::warpAffine(src, warp_dst, warp_mat, warp_dst.size());
 		cv::imshow("Warp", warp_dst);
-		cv::imwrite("warp_image.jpg", warp_dst);
+		cv::imwrite("../result/warp_image.jpg", warp_dst);
 		cv::waitKey();
 
 	}
@@ -214,7 +204,7 @@ int main(int argc, char** argv) {
 		cv::imshow("warped image", warped_image);
 		cv::waitKey();
 
-		cv::imwrite("./result/warped_file.jpg", warped_image);
+		cv::imwrite("../result/warped_file.jpg", warped_image);
 
 		cv::Mat error_image;
 		cv::subtract(template_copy_src, warped_image, error_image);
@@ -222,7 +212,7 @@ int main(int argc, char** argv) {
 		cv::minMaxLoc(error_image, NULL, &max_of_errors);
 		cv::imshow("error", abs(error_image)*255/max_of_errors);
 		cv::waitKey();
-		cv::imwrite("./result/error.jpg", abs(error_image) * 255 / max_of_errors);
+		cv::imwrite("../result/error.jpg", abs(error_image) * 255 / max_of_errors);
 	}
 
 	return 0;
