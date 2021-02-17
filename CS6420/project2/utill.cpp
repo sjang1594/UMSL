@@ -134,3 +134,36 @@ int saveWarp(std::string Filename, const cv::Mat& warp, int motionType)
 
 	return ret_value;
 }
+
+static void draw_warped_roi(cv::Mat& image, const int width, const int height, cv::Mat& W)
+{
+	cv::Point2f top_left, top_right, bottom_left, bottom_right;
+	cv::Mat  H = cv::Mat(3, 1, CV_32F);
+	cv::Mat  U = cv::Mat(3, 1, CV_32F);
+	cv::Mat warp_mat = cv::Mat::eye(3, 3, CV_32F);
+	for (int y = 0; y < W.rows; y++)
+		for (int x = 0; x < W.cols; x++)
+			warp_mat.at<float>(y, x) = W.at<float>(y, x);
+	//warp the corners of rectangle
+	// top-left
+	HOMO_VECTOR(H, 1, 1);
+	gemm(warp_mat, H, 1, 0, 0, U);
+	GET_HOMO_VALUES(U, top_left.x, top_left.y);
+	// top-right
+	HOMO_VECTOR(H, width, 1);
+	gemm(warp_mat, H, 1, 0, 0, U);
+	GET_HOMO_VALUES(U, top_right.x, top_right.y);
+	// bottom-left
+	HOMO_VECTOR(H, 1, height);
+	gemm(warp_mat, H, 1, 0, 0, U);
+	GET_HOMO_VALUES(U, bottom_left.x, bottom_left.y);
+	// bottom-right
+	HOMO_VECTOR(H, width, height);
+	gemm(warp_mat, H, 1, 0, 0, U);
+	GET_HOMO_VALUES(U, bottom_right.x, bottom_right.y);
+	// draw the warped perimeter
+	line(image, top_left, top_right, cv::Scalar(255));
+	line(image, top_right, bottom_right, cv::Scalar(255));
+	line(image, bottom_right, bottom_left, cv::Scalar(255));
+	line(image, bottom_left, top_left, cv::Scalar(255));
+}

@@ -14,6 +14,16 @@
 #include <time.h>
 #include <vector>
 
+#define HOMO_VECTOR(H, x, y)\
+    H.at<float>(0,0) = (float)(x);\
+    H.at<float>(1,0) = (float)(y);\
+    H.at<float>(2,0) = 1.;
+
+
+#define GET_HOMO_VALUES(X, x, y)\
+    (x) = static_cast<float> (X.at<float>(0,0)/X.at<float>(2,0));\
+    (y) = static_cast<float> (X.at<float>(1,0)/X.at<float>(2,0));
+
 // Help message
 void help(char** argv);
 
@@ -26,8 +36,7 @@ void print_vector_info(std::vector<cv::Point> vec);
 
 // Warp Utility
 int get_warpMode(const std::string);
-//bool check_warpType(const std::string);
 
 // ReadWarp & SaveWarp - Automatic Registration.
 const int readWarp(std::string Filename, cv::Mat& warp, int motionType);
-static int saveWarp(std::string Filename, const cv::Mat& warp, int motionType);
+int saveWarp(std::string Filename, const cv::Mat& warp, int motionType);

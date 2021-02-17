@@ -12,11 +12,11 @@ int main(int argc, char** argv) {
 	cv::CommandLineParser parser(argc, argv, keys);
 	
 	double ep = parser.get<double>("e"); // epsilon
-	std::string motion_type = parser.get<std::string>("m"); // motion type or warp type
-	std::string final_warp = parser.get<std::string>("o"); // final output 
-	std::string warp_img_file = parser.get<std::string>("w"); // warp image file 
-	bool manual_option_key = parser.has("M"); // Manual option key
-
+	std::string motion_type = parser.get<cv::String>("motion_type"); // motion type or warp type
+	std::string final_warp = parser.get<cv::String>("o"); // final output 
+	std::string warp_img_file = parser.get<cv::String>("w"); // warp image file 
+	std::string manual_option_key = parser.get<cv::String>("M"); // Manual option key
+	 
 	//Load the image, template path, and warp file path
 	const cv::String img_path = parser.get<cv::String>("@image_file"); //0
 	const cv::String template_path = parser.get<cv::String>("@template_file"); //1
@@ -30,11 +30,13 @@ int main(int argc, char** argv) {
 		return 0;
 	}
 
+	//std::cout << manual_option_key << std::endl;
+
 	//Parser Check
-	//if (!parser.check()) {
-	//	parser.printErrors();
-	//	return -1;
-	//}
+	/*if (!parser.check()) {
+		parser.printErrors();
+		return -1;
+	}*/
 
 	// Variables 
 	cv::Mat src, copy_src, template_src, template_copy_src;
@@ -49,7 +51,6 @@ int main(int argc, char** argv) {
 	if (src.empty() || template_src.empty()) {
 		std::cout << "Error Occured while opening input files \n" << std::endl;
 		// print out the help message
-
 		return -1;
 	}
 	// Copy it into another image as gray scale
@@ -68,23 +69,22 @@ int main(int argc, char** argv) {
 
 	/* ----------------------------------------------------------------------------------- */
 	/* ----------------------------- Motion Type & Warp Type ----------------------------- */
-
+	std::cout << motion_type << std::endl;
 	// Check the motion_type
-	/*if (!(motion_type == "translation" || motion_type == "euclidean"
+	if (!(motion_type == "translation" || motion_type == "euclidean"
 		|| motion_type == "affine" || motion_type == "homography"))
 	{
 		std::cerr << "Invalid motion transformation" << std::endl;
 		return -1;
-	}*/
+	}
 
 	// Convert warp type from string to built-in enumerated type
 	int warp_mode = get_warpMode(motion_type);
+	std::cout << warp_mode << std::endl;
 
 	// Warp matrix 
 	cv::Mat warp_mat;
 
-	// Specificy the number of iterations
-	const int niters = 50;
 
 	//Check the input image size
 	std::cout << "Image Size : " << copy_src.size() << std::endl;
@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
 	// Manual registration
 	// - Take the user inputs for points on image. (How many points --> three points)
 	// - Create the affine warp matrix for image.- 
-	if (manual_option_key) {
+	if (manual_option_key == "M") {
 		std::cout << "Manul Option Key has been pressed " << std::endl;
 		std::cout << "(Source) Input three pairs of points within this size : "
 			<< copy_src.size() << std::endl;
@@ -127,7 +127,6 @@ int main(int argc, char** argv) {
 		}
 		cv::destroyWindow("template image");
 		
-
 		// Copy over the vector vals into array.
 		cv::Point2f input_pt[3];
 		cv::Point2f template_pt[3];
@@ -160,7 +159,7 @@ int main(int argc, char** argv) {
 			cv::MOTION_AFFINE = 2,
 			cv::MOTION_HOMOGRAPHY = 3
 		*/
-
+		std::cout << warp_mode << std::endl;
 		// If warp_mode is 3 (Homography), then create (3, 3) matrix. 
 		if (warp_mode == 3)
 			warp_mat = cv::Mat::eye(3, 3, CV_32F);
@@ -168,46 +167,77 @@ int main(int argc, char** argv) {
 			warp_mat = cv::Mat::eye(2, 3, CV_32F);
 
 		// If warp file doesn't exist, give an error msg. Otherwise, read warp matrix.
-		if (warp_file_path != "") {
-			int readflag = readWarp(warp_file_path, warp_mat, warp_mode);
-			if ((!readflag) || warp_mat.empty()) {
-				std::cerr << "Error Occured opening warp file " << std::endl << std::flush;
-				return -1;
+		if (warp_file_path.empty()) {
+			if (copy_src.size() != template_copy_src.size()) {
+				std::cout <<  "\n ->Performance Warning: Identity warp ideally assumes images of "
+				"similar size. If the deformation is strong, the identity warp may not "
+					"be a good initialization. \n";
 			}
-		
 		}
 		else {
-			std::cout << "\n ->Performance Warning: Identity warp ideally assumes images of "
-				"similar size. If the deformation is strong, the identity warp may not "
-				"be a good initialization. \n";
+			readWarp(warp_file_path, warp_mat, warp_mode);
 		}
 
 		if (warp_mode != cv::MOTION_HOMOGRAPHY)
 			warp_mat.rows = 2;
 
-		//timing
+		// Start time
 		const double tic_init = (double)cv::getTickCount();
-		//double cc = cv::findTransformECC(template_copy_src)
+
+		// Find the geometric transform (warp) between src and template. 
+		double cc = cv::findTransformECC(template_copy_src, copy_src, warp_mat, warp_mode,
+			cv::TermCriteria(cv::TermCriteria::COUNT + cv::TermCriteria::EPS, niters, ep));
 
 		const double toc_final = (double)cv::getTickCount();
 		const double total_time = (toc_final - tic_init) / (cv::getTickFrequency());
+		std::cout << "Alignment Time (" << motion_type << "transformation) : " << total_time << " sec" << std::endl;
+		saveWarp(final_warp, warp_mat, warp_mode);
 
-		//saveWarp(final_warp, warp_mat, warp_mode);
+		/* ----------------------------------------------------------------------------------- */
+		/* --------------------			Final Warp					-------------------------- */
+		cv::Mat warped_image = cv::Mat(template_copy_src.rows, template_copy_src.cols, CV_32FC1);
+		
+		// If it is not homography image, then warpAffine(). if it is homography image, then warpPerspective
+		if (warp_mode != cv::MOTION_HOMOGRAPHY)
+			warpAffine(copy_src, warped_image, warp_mat, warped_image.size(),
+				cv::INTER_LINEAR + cv::WARP_INVERSE_MAP);
+		else
+			warpPerspective(copy_src, warped_image, warp_mat, warped_image.size(),
+				cv::INTER_LINEAR + cv::WARP_INVERSE_MAP);
+
+		/* ----------------------------------------------------------------------------------- */
+		/* --------------------			Compute Error				-------------------------- */
+
+		//Show final Warp
+		cv::imshow("input ", src);
+		cv::imshow("template", template_copy_src);
+		cv::imshow("warped image", warped_image);
+		cv::waitKey();
+
+		cv::imwrite("./result/warped_file.jpg", warped_image);
+
+		cv::Mat error_image;
+		cv::subtract(template_copy_src, warped_image, error_image);
+		double max_of_errors;
+		cv::minMaxLoc(error_image, NULL, &max_of_errors);
+		cv::imshow("error", abs(error_image)*255/max_of_errors);
+		cv::waitKey();
+		cv::imwrite("./result/error.jpg", abs(error_image) * 255 / max_of_errors);
 	}
+
+	return 0;
 }
 
 /* ----------------------------------------------------------------------------------- */
-/* ---------------------------------  Mouse Control	 -------------------------------- */
+/* ---------------------------------  Mouse Controls  -------------------------------- */
 void CallBackFunc_1(int event, int x, int y, int flags, void* userdata)
 {
 	if (event == cv::EVENT_LBUTTONDOWN) {
 		std::cout << " Press three points with left click" << std::endl;
 		printf("lLBUTTONDOWN down %d, %d \n", x, y);
 		cv::circle(*(cv::Mat*)userdata, cv::Point2f((float)x, (float)y), 2, CV_RGB(255, 0, 0), 3);
-
-		input_points.push_back(cv::Point2f((float)x, (float)y));
-
 		// You might be able to push some x and y coordinates to vector.
+		input_points.push_back(cv::Point2f((float)x, (float)y));
 	}
 	//print_array_info(input_points);
 }
@@ -218,9 +248,8 @@ void CallBackFunc_2(int event, int x, int y, int flags, void* userdata)
 		std::cout << " Press three points with left click" << std::endl;
 		printf("lLBUTTONDOWN down %d, %d \n", x, y);
 		cv::circle(*(cv::Mat*)userdata, cv::Point2f((float)x, (float)y), 2, CV_RGB(255, 255, 255), 3);
-
-		template_points.push_back(cv::Point2f((float)x, (float)y));
 		// You might be able to push some x and y coordinates to vector.
+		template_points.push_back(cv::Point2f((float)x, (float)y));
 	}
 	//print_array_info(template_points);
 }
