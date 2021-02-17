@@ -40,4 +40,5 @@ The list of courses/project that I worked on.
 
 ### CS6420 : Topics in Computer Vision & Image Processing
 - Project 1 : Porter-Duff Operations (Bitwise Operation).
-- Project 2 : Image Registeration. 
+- Project 2 : Image Registeration (Warp Image & Manual & Automatic)
+- Project 3 : 
