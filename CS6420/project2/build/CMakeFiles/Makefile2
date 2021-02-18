@@ -53,7 +53,7 @@ CMAKE_BINARY_DIR = /home/seungho/Desktop/UMSL/CS6420/project2/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/project2.dir/all
+all: CMakeFiles/register.dir/all
 
 .PHONY : all
 
@@ -63,36 +63,36 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/project2.dir/clean
+clean: CMakeFiles/register.dir/clean
 
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/project2.dir
+# Target rules for target CMakeFiles/register.dir
 
 # All Build rule for target.
-CMakeFiles/project2.dir/all:
-	$(MAKE) -f CMakeFiles/project2.dir/build.make CMakeFiles/project2.dir/depend
-	$(MAKE) -f CMakeFiles/project2.dir/build.make CMakeFiles/project2.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/seungho/Desktop/UMSL/CS6420/project2/build/CMakeFiles --progress-num=1,2,3 "Built target project2"
-.PHONY : CMakeFiles/project2.dir/all
+CMakeFiles/register.dir/all:
+	$(MAKE) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/depend
+	$(MAKE) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/seungho/Desktop/UMSL/CS6420/project2/build/CMakeFiles --progress-num=1,2,3 "Built target register"
+.PHONY : CMakeFiles/register.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/project2.dir/rule: cmake_check_build_system
+CMakeFiles/register.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/seungho/Desktop/UMSL/CS6420/project2/build/CMakeFiles 3
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/project2.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/register.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/seungho/Desktop/UMSL/CS6420/project2/build/CMakeFiles 0
-.PHONY : CMakeFiles/project2.dir/rule
+.PHONY : CMakeFiles/register.dir/rule
 
 # Convenience name for target.
-project2: CMakeFiles/project2.dir/rule
+register: CMakeFiles/register.dir/rule
 
-.PHONY : project2
+.PHONY : register
 
 # clean rule for target.
-CMakeFiles/project2.dir/clean:
-	$(MAKE) -f CMakeFiles/project2.dir/build.make CMakeFiles/project2.dir/clean
-.PHONY : CMakeFiles/project2.dir/clean
+CMakeFiles/register.dir/clean:
+	$(MAKE) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/clean
+.PHONY : CMakeFiles/register.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

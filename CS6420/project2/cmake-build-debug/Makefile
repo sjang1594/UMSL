@@ -131,17 +131,17 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named project2
+# Target rules for targets named register
 
 # Build rule for target.
-project2: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 project2
-.PHONY : project2
+register: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 register
+.PHONY : register
 
 # fast build rule for target.
-project2/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project2.dir/build.make CMakeFiles/project2.dir/build
-.PHONY : project2/fast
+register/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/build
+.PHONY : register/fast
 
 register.o: register.cpp.o
 
@@ -149,7 +149,7 @@ register.o: register.cpp.o
 
 # target to build an object file
 register.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project2.dir/build.make CMakeFiles/project2.dir/register.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/register.cpp.o
 .PHONY : register.cpp.o
 
 register.i: register.cpp.i
@@ -158,7 +158,7 @@ register.i: register.cpp.i
 
 # target to preprocess a source file
 register.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project2.dir/build.make CMakeFiles/project2.dir/register.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/register.cpp.i
 .PHONY : register.cpp.i
 
 register.s: register.cpp.s
@@ -167,7 +167,7 @@ register.s: register.cpp.s
 
 # target to generate assembly for a file
 register.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project2.dir/build.make CMakeFiles/project2.dir/register.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/register.cpp.s
 .PHONY : register.cpp.s
 
 utill.o: utill.cpp.o
@@ -176,7 +176,7 @@ utill.o: utill.cpp.o
 
 # target to build an object file
 utill.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project2.dir/build.make CMakeFiles/project2.dir/utill.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/utill.cpp.o
 .PHONY : utill.cpp.o
 
 utill.i: utill.cpp.i
@@ -185,7 +185,7 @@ utill.i: utill.cpp.i
 
 # target to preprocess a source file
 utill.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project2.dir/build.make CMakeFiles/project2.dir/utill.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/utill.cpp.i
 .PHONY : utill.cpp.i
 
 utill.s: utill.cpp.s
@@ -194,7 +194,7 @@ utill.s: utill.cpp.s
 
 # target to generate assembly for a file
 utill.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/project2.dir/build.make CMakeFiles/project2.dir/utill.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/register.dir/build.make CMakeFiles/register.dir/utill.cpp.s
 .PHONY : utill.cpp.s
 
 # Help Target
@@ -205,7 +205,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... project2"
+	@echo "... register"
 	@echo "... register.o"
 	@echo "... register.i"
 	@echo "... register.s"
