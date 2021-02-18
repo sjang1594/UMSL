@@ -16,12 +16,15 @@ Image registration has a wide variety of applications: it is essential as soon a
 ## Project Description
 
 ### Usage : 
+
 ``cd build && cmake ..``, then `make`
+
 ---
 **Command Line Argument**
-```register [-h] [-M] [-e epsilon] [-m motion_type] [-o output_warp] [-w warp_img] [@image_file] [@template_file] [warp_file]```
-Here is the information for each arguments :
-- register          : Name of executable
+```./project2 [-h] [-M] [-e epsilon] [-m motion_type] [-o output_warp] [-w warp_img] [@image_file] [@template_file] [warp_file]```
+
+**Here is the information for each arguments :**
+- ./project2        : Name of executable (register)
 - M                 : Perform Manual Registration
 - e epsilon         : ECC's convergence epsilon [default: 0.0001]
 - m motion_type     : Type of motion (translation/euclidean/affine/homography) [default: affine]
@@ -31,6 +34,8 @@ Here is the information for each arguments :
 - template_file     : Template image for alignment
 - warped_file       : Input file containing warp matrix
 
+### Results :
+All the results image & ecc files are stored in `./result` folder 
 ## Reference :
 [Image Registeration](https://www.sicara.ai/blog/2019-07-16-image-registration-deep-learning)
 [Image_Alignment](https://docs.opencv.org/master/dd/d93/samples_2cpp_2image_alignment_8cpp-example.html#a39)
