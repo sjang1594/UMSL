@@ -1,8 +1,9 @@
 ## Semester Project - CS6420
 
 ## Topics : Depth Esitmation
-- Reference : https://arxiv.org/pdf/1609.03677.pdf
-	    :  https://people.eecs.berkeley.edu/~tinghuiz/projects/SfMLearner/cvpr17_sfm_final.pdf 
+Reference 
+1. https://arxiv.org/pdf/1609.03677.pdf
+2. https://people.eecs.berkeley.edu/~tinghuiz/projects/SfMLearner/cvpr17_sfm_final.pdf 
 
 ## Data : KITTI & CS(Cityscapes)
 
