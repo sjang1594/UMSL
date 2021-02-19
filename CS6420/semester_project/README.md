@@ -1,8 +1,6 @@
 ## Semester Project - CS6420
 
 ## Topics : Monocular Depth Esitmation & Stereo Matching
-## Datasets 
-## Topics : Monocular Depth Esitmation & Stereo Matching
 
 ## Dataset
 
