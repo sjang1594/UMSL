@@ -2,7 +2,7 @@
 
 ## Topics : Depth Esitmation
 - Reference : https://arxiv.org/pdf/1609.03677.pdf
-	          :  https://people.eecs.berkeley.edu/~tinghuiz/projects/SfMLearner/cvpr17_sfm_final.pdf 
+	    :  https://people.eecs.berkeley.edu/~tinghuiz/projects/SfMLearner/cvpr17_sfm_final.pdf 
 
 ## Data : KITTI & CS(Cityscapes)
 
@@ -14,4 +14,5 @@
 ## Technical Objective : 
 Learn how to use pytorch 
 
-## Technical shortcoming would be computation resource
+## Technical shortcoming 
+There might be be computation resource limited in Google Colab.
