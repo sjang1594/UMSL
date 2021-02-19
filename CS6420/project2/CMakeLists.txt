@@ -7,8 +7,6 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 set(CMAKE_CXX_STANDARD 14)
 ADD_COMPILE_OPTIONS(-g -Wall)
 
-include_directories(${OpenCV_INCLUDE_DIRS})
-
 add_executable(register
         register.cpp
         register.hpp
