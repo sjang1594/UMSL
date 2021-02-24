@@ -46,5 +46,5 @@ Here are the following results of the default shapes and operation result
 
 ## Bonus : Bernie Sanders is sitting on the space
 <p align="center">
-  <img src="./image/Bernie.PNG" width="500" height="320" >
+  <img src="./image/Bernie.PNG" width="500" height="280" >
 </p>
