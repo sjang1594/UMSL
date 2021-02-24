@@ -37,6 +37,6 @@ Image registration has a wide variety of applications: it is essential as soon a
 ### Results :
 All the results image & ecc files are stored in `./result` folder 
 ## Reference :
-[Image Registeration](https://www.sicara.ai/blog/2019-07-16-image-registration-deep-learning)
-[Image_Alignment](https://docs.opencv.org/master/dd/d93/samples_2cpp_2image_alignment_8cpp-example.html#a39)
-[CommandLineParer](https://docs.opencv.org/3.4/d9/d8d/samples_2dnn_2classification_8cpp-example.html#_a0)
+* [Image Registeration](https://www.sicara.ai/blog/2019-07-16-image-registration-deep-learning)
+* [Image_Alignment](https://docs.opencv.org/master/dd/d93/samples_2cpp_2image_alignment_8cpp-example.html#a39)
+* [CommandLineParer](https://docs.opencv.org/3.4/d9/d8d/samples_2dnn_2classification_8cpp-example.html#_a0)
