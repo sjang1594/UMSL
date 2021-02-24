@@ -16,35 +16,35 @@ The project detail is located in ./doc folder.
 Here are the following results of the default shapes and operation result
 ## Input Images:
 <p align="center">
-  <img src="./image/Input_image.PNG" width="400" height="160" >
+  <img src="./image/Input_image.PNG" width="380" height="160" >
 </p>
 
 ## over:
 <p align="center">
-  <img src="./image/over.PNG" width="400" height="160" >
+  <img src="./image/over.PNG" width="380" height="160" >
 </p>
 
 ## inside:
 <p align="center">
-  <img src="./image/inside.PNG" width="400" height="160" >
+  <img src="./image/inside.PNG" width="380" height="160" >
 </p>
 
 ## out:
 <p align="center">
-  <img src="./image/outside.PNG" width="400" height="160" >
+  <img src="./image/outside.PNG" width="380" height="160" >
 </p>
 
 ## atop:
 <p align="center">
-  <img src="./image/atop.PNG" width="400" height="160" >
+  <img src="./image/atop.PNG" width="380" height="160" >
 </p>
 
 ## XOR :
 <p align="center">
-  <img src="./image/xor.PNG" width="400" height="160" >
+  <img src="./image/xor.PNG" width="380" height="160" >
 </p>
 
 ## Bonus : Bernie Sanders is sitting on the space
 <p align="center">
-  <img src="./image/xor.PNG" width="400" height="160" >
+  <img src="./image/Bernie.PNG" width="380" height="160" >
 </p>
