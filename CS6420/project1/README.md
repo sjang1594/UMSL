@@ -16,7 +16,7 @@ The project detail is located in ./doc folder.
 Here are the following results of the default shapes and operation result
 ## Input Images:
 <p align="center">
-  <img src="./image/Input_image.PNG" width="400" height="320" >
+  <img src="./image/Input_image.PNG" width="400" height="160" >
 </p>
 
 ## over:
@@ -40,6 +40,11 @@ Here are the following results of the default shapes and operation result
 </p>
 
 ## XOR :
+<p align="center">
+  <img src="./image/xor.PNG" width="400" height="160" >
+</p>
+
+## Bonus : Bernie Sanders is sitting on the space
 <p align="center">
   <img src="./image/xor.PNG" width="400" height="160" >
 </p>
