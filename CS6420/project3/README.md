@@ -1,7 +1,5 @@
-<p align="center">
-  <img src="./img" width="860" height="320" >
-</p>
-
+# Project 3 : Denoising the periodic noise in frequency domain.
+---
 
 ## Project Description
 
@@ -20,12 +18,12 @@
 
 ### Input Image:
 <p align="center">
-  <img src="./img/input.jpg" width="860" height="320" >
+  <img src="./img/input.jpg" width="620" height="320" >
 </p>
 
 ### Results :
 <p align="center">
-  <img src="./img/Filtered_img.jpg" width="860" height="320" >
+  <img src="./img/Filtered_img.jpg" width="620" height="320" >
 </p>
 
 ## Reference :
