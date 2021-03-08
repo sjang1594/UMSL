@@ -1,5 +1,5 @@
-# Project 3 : Denoising the periodic noise in frequency domain. (Automatic Denoising Filter)
----
+## Project 3 : Denoising the periodic noise in frequency domain. (Automatic Denoising Filter)
+
 
 ## Project Description
 
