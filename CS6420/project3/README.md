@@ -16,10 +16,10 @@
 - input_image       : Perform Manual Registration
 - output_image      : ECC's convergence epsilon [default: 0.0001]
 
-### Input & Output Image
+### I/O Image
 <p align="center">
-  <img src="./img/input.jpg" width="620" height="320" >
-  <img src="./img/Filtered_img.jpg" width="620" height="320" >
+  <img src="./img/input.jpg" width="320" height="320" >
+  <img src="./img/Filtered_img.jpg" width="320" height="320" >
 </p>
 
 
