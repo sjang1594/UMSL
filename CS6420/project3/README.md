@@ -22,18 +22,19 @@
   <img src="./img/Filtered_img.jpg" width="320" height="200" >
 </p>
 
-### Contour Process
+### Contour Process & Merging Process
 1. Threshold the magnitude image by looking at the histogram.
 2. Find the all contours.
 3. Loop through all the contours, find the maximum area.
 4. Get rid of rest of the outlines and fill with the outlines using `filled`.
+5. Multiply the result of a contour with complex plane( imaginary & magnitude ).
+6. Create the `final plane` to store the product from the step above.
+7. Merge two plane into one.
+8. Run the `Inverse Descrete Fourier Transform`
 
-### Merging Process
-1. Multiply the result of a contour with complex plane( imaginary & magnitude ).
-2. Create the `final plane` to store the product from the step above.
-3. Merge two plane into one.
-4. Run the `Inverse Descrete Fourier Transform`
-
+<p align="center">
+  <img src="./img/input.jpg" width="320" height="200" >
+</p>
 
 ## Suggestion
 1. It would be good to try to find the contours based on arclength rather than area because it can take more restrictions and more flexible depending on arc length of contours.
