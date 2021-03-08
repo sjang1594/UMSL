@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/project3.dir/freq_filter.cpp.o CMakeFiles/project3.dir/utill.cpp.o  -o project3 

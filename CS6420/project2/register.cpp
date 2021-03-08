@@ -149,7 +149,7 @@ int main(int argc, char** argv) {
 			cv::MOTION_AFFINE = 2,
 			cv::MOTION_HOMOGRAPHY = 3
 		*/
-		//std::cout << warp_mode << std::endl;
+		std::cout << warp_mode << std::endl;
 		// If warp_mode is 3 (Homography), then create (3, 3) matrix. 
 		if (warp_mode == 3)
 			warp_mat = cv::Mat::eye(3, 3, CV_32F);
