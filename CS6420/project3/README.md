@@ -16,15 +16,14 @@
 - input_image       : Perform Manual Registration
 - output_image      : ECC's convergence epsilon [default: 0.0001]
 
-### Input Image:
+### Input & Output Image
 <p align="center">
   <img src="./img/input.jpg" width="620" height="320" >
-</p>
-
-### Results :
-<p align="center">
   <img src="./img/Filtered_img.jpg" width="620" height="320" >
 </p>
+
+
+### 
 
 ## Reference :
 * [Descrete Fourier Transform](https://docs.opencv.org/3.4/de/dbc/tutorial_py_fourier_transform.html)
