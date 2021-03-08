@@ -18,8 +18,8 @@
 
 ### I/O Image
 <p align="center">
-  <img src="./img/input.jpg" width="320" height="320" >
-  <img src="./img/Filtered_img.jpg" width="320" height="320" >
+  <img src="./img/input.jpg" width="320" height="200" >
+  <img src="./img/Filtered_img.jpg" width="320" height="200" >
 </p>
 
 
