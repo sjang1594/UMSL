@@ -33,8 +33,9 @@
 7. Merge two plane into one.
 8. Run the `Inverse Descrete Fourier Transform`
 
+The image below is the result of contours
 <p align="center">
-  <img src="./img/input.jpg" width="320" height="200" >
+  <img src="./img/contour.PNG" width="320" height="200" >
 </p>
 
 ## Suggestion
