@@ -9,12 +9,13 @@
 
 ---
 **Command Line Argument**
-```./freq_filter [-h] input_image [output_image]```
+```./freq_filter [-h] [-M] input_image [output_image]```
 
 **Here is the information for each arguments :**
 - ./freq_filter     : Name of executable (register)
-- input_image       : Perform Manual Registration
-- output_image      : ECC's convergence epsilon [default: 0.0001]
+- M                 : Manual / Automatic Filtering
+- input_image       : Input (Periodic Noise Image)
+- output_image      : Output of filtered Image
 
 ### I/O Image
 <p align="center">

@@ -18,6 +18,9 @@ cv::Mat swap_coordinate(const cv::Mat& img);
 
 // Draw the histogram
 // This is helper function to see whether the image has been equalized 
-cv::Mat plotHistogram(cv::Mat image);
+cv::Mat plotHistogram(cv::Mat& img);
 
-cv::Mat rotate(cv::Mat src, double angle);
+cv::Mat hist_helper(cv::Mat& img);
+
+// Manual Filter like Notch reject filter
+void manual_filter(cv::Mat& inputOutput, cv::Point center, int radius);

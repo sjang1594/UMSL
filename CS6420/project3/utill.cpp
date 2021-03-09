@@ -34,7 +34,7 @@ cv::Mat swap_coordinate(const cv::Mat &img)
 	return img;
 }
 
-cv::Mat plotHistogram(cv::Mat image)
+cv::Mat plotHistogram(cv::Mat& img)
 {
 	const unsigned int NUMBER_OF_BINS = 256;
 	const unsigned int WINDOW_HEIGHT = NUMBER_OF_BINS;
@@ -45,7 +45,7 @@ cv::Mat plotHistogram(cv::Mat image)
 
 	// Let's compute the histogram.
 	cv::MatIterator_<uchar> it, end;
-	for (it = image.begin<uchar>(), end = image.end<uchar>();
+	for (it = img.begin<uchar>(), end = img.end<uchar>();
 		it != end;
 		++it)
 	{
@@ -72,13 +72,16 @@ cv::Mat plotHistogram(cv::Mat image)
 	return histogramImage;
 }
 
-cv::Mat rotate(cv::Mat src, double angle)   //rotate function returning mat object with parametres imagefile and angle    
+void manual_filter(cv::Mat& inputOutput, cv::Point center, int radius)
 {
-	cv::Mat dst;      //Mat object for output image file
-	cv::Point2f pt(src.cols / 2., src.rows / 2.);          //point from where to rotate    
-	cv::Mat r = cv::getRotationMatrix2D(pt, angle, 1.0);      //Mat object for storing after rotation
-	warpAffine(src, dst, r, cv::Size(src.cols, src.rows));  ///applie an affine transforation to image.
-	return dst;         //returning Mat object for output image file
+	cv::circle(inputOutput, center, radius, 0, -1, 8);
 }
 
-
+cv::Mat hist_helper(cv::Mat& img) {
+	cv::Mat dst, hist;
+	cv::normalize(img, dst, 0, 1, cv::NORM_MINMAX);
+	dst *= 255;
+	dst.convertTo(dst, CV_8U);
+	hist = plotHistogram(dst);
+	return hist;
+}
