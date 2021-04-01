@@ -29,5 +29,7 @@
 
 * [Unsupervised Learning of Stereo Matching](https://openaccess.thecvf.com/content_ICCV_2017/papers/Zhou_Unsupervised_Learning_of_ICCV_2017_paper.pdf)
 
+* [KITTI Odometry Dataset](https://www.youtube.com/watch?v=SXW0CplaTTQ&list=PLrHDCRerOaI9HfgZDbiEncG5dx7S3Nz6X&ab_channel=NateCibik)
+ 
 ## Technical shortcoming 
 There might be be computation resource limited in Google Colab.
