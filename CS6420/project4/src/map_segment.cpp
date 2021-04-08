@@ -46,31 +46,33 @@ int main(int argc, char** argv)
 	// --------------------- Cluster image (K-Mean) -------------------------- //
 	cv::Mat img;
 	cv::Point2i pt(-1, -1); // User Point initialization
-	cv::Mat contour_result(src.size(), CV_8U, cv::Scalar(0)); //Final Mask Result
+	//cv::Mat contour_result(src.size(), CV_8U, cv::Scalar(0)); //Final Mask Result
 
-	std::vector<cv::Mat> every_contours;
-	
+	std::vector<cv::Mat> images;
+	cv::Mat final_result = cv::Mat::zeros(src.rows, src.cols, CV_8UC3);
+
 	src.convertTo(img, CV_32FC3);
 	std::vector<cv::Vec3f> sample;
 	sample.assign((cv::Vec3f*)img.datastart, (cv::Vec3f*)img.dataend);
 
-	int nClusters = 14; // # of clusters
+	std::cout << "--- K mean ---" << std::endl;
+	int nClusters = 13; // # of clusters
 	cv::Mat labels;
 	cv::Mat centers;
 	kmeans(sample, nClusters, labels, cv::TermCriteria(cv::TermCriteria::EPS + cv::TermCriteria::COUNT, 10, 1.0), 3, cv::KMEANS_PP_CENTERS, centers);
 	cv::Mat mask;
 
 	cv::namedWindow("USA MAP", cv::WINDOW_NORMAL);
-	imshow("USA MAP", src);
+	cv::imshow("USA MAP", src);
 	cv::setMouseCallback("USA MAP", mouse_handler, (void*)&pt);
-	cv::waitKey();
-	int maxCluster = 0, ind = -1;
+	double flag = -1;
+
 	for (int i = 0; i < nClusters; i++)
 	{
 		// Save all labels into Mat. 
 		cv::Mat cloud = (labels == i);
 
-		cv::namedWindow(cv::format("Cluster %d", i), cv::WINDOW_NORMAL);
+		//cv::namedWindow(cv::format("Cluster %d", i), cv::WINDOW_NORMAL);
 		cv::Mat result = cv::Mat::zeros(src.rows, src.cols, CV_8UC3);
 
 		if (cloud.isContinuous())
@@ -81,11 +83,12 @@ int main(int argc, char** argv)
 		//----- Find the contours -----//
 		std::vector<std::vector<cv::Point>> contours;
 		cv::findContours(mask.clone(), contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_NONE);
+		cv::Mat contour_result(src.size(), CV_8U, cv::Scalar(0)); //Final Mask Result
 		contour_result.setTo(cv::Scalar(0));
 
 		//----- Arc Length Threshold -----//
-		int cmin = 500; 
-		int cmax = 3000;
+		int cmin = 300; 
+		int cmax = 4000;
 		std::vector<std::vector<cv::Point>>::const_iterator itc = contours.begin();
 		while (itc != contours.end()) {
 	
@@ -95,32 +98,67 @@ int main(int argc, char** argv)
 				++itc;
 		} 
 		cv::drawContours(contour_result, contours, -1, cv::Scalar(255, 255, 255), cv::FILLED);       
-		
-		//----- Matching user-points and Contours -----//
-		std::cout << contours.size() << std::endl;
-		std::cout << "The Key Information" << std::endl;
-		std::cout << " X : " << pt.x << " Y : " << pt.y << std::endl; // Look at the user input is available in this loop.
-
-		//----- Check Each Contours to find whether the user-pixel "Inside of" Contours -----//
-		for (size_t i = 0; i < contours.size(); i++) {
-
-		}
-
-		int m = countNonZero(contour_result);
-		if (m > maxCluster)
-		{
-			maxCluster = m;
-			ind = i;
-		}
-		src.copyTo(result, contour_result);
-		imshow(cv::format("Cluster %d", i), result);
-		imwrite(cv::format("Cluster%d.png", i), result);
+		images.push_back(contour_result);
 	}
-	std::cout << "Cluster max is " << ind << " with " << maxCluster << " pixels";
+
+
 	cv::waitKey();
+	std::cout << src.size() << std::endl;
+	std::cout << "The Key Information" << std::endl;
+	std::cout << " X : " << pt.x << " Y : " << pt.y << std::endl;
 
+	std::vector<std::vector<cv::Point>> last_contours;
+	//std::vector<std::vector<cv::Point>> contours_final;
+	//std::vector<cv::Rect> contour_rect;
+	
+	// Images are consist of cluster of mask. 
+	for (int i = 0; i < nClusters; i++) {
+		std::vector<std::vector<cv::Point>> contours_final;
+		cv::findContours(images[i], contours_final, cv::RETR_CCOMP, cv::CHAIN_APPROX_NONE);
+		//std::vector<std::vector<cv::Point>> contours_poly( contours_final.size());
+		//std::vector<cv::Rect> boundRect(contours_final.size());
+		if (contours_final.size() == 0) {
+			continue;
+		}
+		else {
+			for (size_t j = 0; j < contours_final.size(); j++) {
+				flag = cv::pointPolygonTest(contours_final[j], cv::Point2f((float)pt.x, (float)pt.y), false);
+			/*	cv::approxPolyDP(contours_final[j], contours_poly[j], 3, true);
+				boundRect[j] = cv::boundingRect(contours_poly[j]);
+				cv::groupRectangles(boundRect, 3, 0.2);*/
 
+				// If it is inside of circle, then push it t
+				if (flag == 1) {
+					//contour_rect.push_back(boundRect[j]);
+					last_contours.push_back(contours_final[j]);
+				}
+			}
+		}
+		//cv::groupRectangles(boundRect, 1, 0.2);
+	}
 
+	// Extract the color information from the user
+	cv::Vec3b color = src.at<cv::Vec3b>(cv::Point(pt.x, pt.y));
+
+	// Resizing the contours
+	double scale = 2.0;
+	cv::Moments contour_center = cv::moments(last_contours[0]);
+	int center_x = (int)(contour_center.m10 / contour_center.m00);
+	int center_y = (int)(contour_center.m01 / contour_center.m00);
+
+	// Increase the region of interests ( Contours )
+	std::vector<cv::Point> final_contour(last_contours[0].size());
+	for (size_t i = 0; i < last_contours[0].size(); i++) {
+		final_contour[i] = last_contours[0][i] - cv::Point(center_x, center_y);
+		final_contour[i] *= 1.5;
+		final_contour[i] = final_contour[i] + cv::Point(center_x, center_y);
+	}
+	cv::fillPoly(src, final_contour, color, cv::LINE_8);
+
+	// Increase the region of interest
+	cv::namedWindow("Output_Window", cv::WINDOW_NORMAL);
+	cv::imshow("Output_Window", src);
+	cv::waitKey();
 	return 0;
 }
 

@@ -13,3 +13,5 @@
 
 // Help Message
 void help(char**);
+
+double polygonTestFunc(std::vector<std::vector<cv::Point>> &cnt, cv::Point2f &pt);
