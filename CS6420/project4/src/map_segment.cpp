@@ -87,7 +87,7 @@ int main(int argc, char** argv)
 		contour_result.setTo(cv::Scalar(0));
 
 		//----- Arc Length Threshold -----//
-		int cmin = 300; 
+		int cmin = 200; 
 		int cmax = 4000;
 		std::vector<std::vector<cv::Point>>::const_iterator itc = contours.begin();
 		while (itc != contours.end()) {
@@ -100,7 +100,6 @@ int main(int argc, char** argv)
 		cv::drawContours(contour_result, contours, -1, cv::Scalar(255, 255, 255), cv::FILLED);       
 		images.push_back(contour_result);
 	}
-
 
 	cv::waitKey();
 	std::cout << src.size() << std::endl;
@@ -115,17 +114,13 @@ int main(int argc, char** argv)
 	for (int i = 0; i < nClusters; i++) {
 		std::vector<std::vector<cv::Point>> contours_final;
 		cv::findContours(images[i], contours_final, cv::RETR_CCOMP, cv::CHAIN_APPROX_NONE);
-		//std::vector<std::vector<cv::Point>> contours_poly( contours_final.size());
-		//std::vector<cv::Rect> boundRect(contours_final.size());
+
 		if (contours_final.size() == 0) {
 			continue;
 		}
 		else {
 			for (size_t j = 0; j < contours_final.size(); j++) {
 				flag = cv::pointPolygonTest(contours_final[j], cv::Point2f((float)pt.x, (float)pt.y), false);
-			/*	cv::approxPolyDP(contours_final[j], contours_poly[j], 3, true);
-				boundRect[j] = cv::boundingRect(contours_poly[j]);
-				cv::groupRectangles(boundRect, 3, 0.2);*/
 
 				// If it is inside of circle, then push it t
 				if (flag == 1) {
@@ -134,7 +129,6 @@ int main(int argc, char** argv)
 				}
 			}
 		}
-		//cv::groupRectangles(boundRect, 1, 0.2);
 	}
 
 	// Extract the color information from the user
@@ -150,7 +144,7 @@ int main(int argc, char** argv)
 	std::vector<cv::Point> final_contour(last_contours[0].size());
 	for (size_t i = 0; i < last_contours[0].size(); i++) {
 		final_contour[i] = last_contours[0][i] - cv::Point(center_x, center_y);
-		final_contour[i] *= 1.5;
+		final_contour[i] *= 2;
 		final_contour[i] = final_contour[i] + cv::Point(center_x, center_y);
 	}
 	cv::fillPoly(src, final_contour, color, cv::LINE_8);
