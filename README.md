@@ -35,7 +35,7 @@
 ### CS 5880 : Independent Study
 - Project 1 : Basic Drawing functions. (BitMap)
 - Project 2 : Historgram Equalization & Stretching.
-- Project 3 : Morphology. (Errosion & Dillusion)
+- Project 3 : Morphology Operation (Erode, Dilate, Opening, and Closing)
 
 ### CS6420 : Topics in Computer Vision & Image Processing
 - Project 1 : Porter-Duff Operations (Bitwise Operation).
