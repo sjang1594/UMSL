@@ -43,3 +43,4 @@ The list of courses/project that I worked on.
 - Project 2 : Image Registeration (Warp Image & Manual & Automatic)
 - Project 3 : Frequency Domain Filtering & Enhancement
 - Project 4 : Image Segmentation - USA Map (K - Means)
+- Project 5 : Image Segmentation - SLIC Algorithm
