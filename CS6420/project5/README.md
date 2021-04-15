@@ -23,5 +23,5 @@
 
 ### I/O Image
 <p align="center">
-  <img src="./img/korea.jpg" width="270" height="337.5" >
+  <img src="./img/korea.jpg" width="270" height="334" >
 </p>
