@@ -24,11 +24,7 @@
 ### Input Image
 <p align="center">
 <<<<<<< HEAD
-  <img src="./img/usa.png" width="320" height="200" >
+  <img src="./img/korea.jpg" width="270" height="334" >
 </p>
 
 ### Output Image
-=======
-  <img src="./img/korea.jpg" width="270" height="334" >
-</p>
->>>>>>> 908a0a15733f1dcadcdb3eff4e96fb7dc3d4a2a3
