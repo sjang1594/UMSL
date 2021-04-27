@@ -23,7 +23,6 @@
 
 ### Input Image
 <p align="center">
-<<<<<<< HEAD
   <img src="./img/korea.jpg" width="270" height="334" >
 </p>
 
