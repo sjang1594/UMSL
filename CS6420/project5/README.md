@@ -21,7 +21,9 @@
 - size             : Chooses an average super-pixel size measured in pixels [default: 10]
 - ruler            : Chooses the enforcement of super-pixel smoothness [default: 10.0]
 
-### I/O Image
+### Input Image
 <p align="center">
   <img src="./img/usa.png" width="320" height="200" >
 </p>
+
+### Output Image
