@@ -29,4 +29,4 @@
 ### Output Image
 Solarized dark             |  Solarized Ocean
 :-------------------------:|:-------------------------:
-![](https://...Dark.png)  |  ![](https://...Ocean.png)
+![]("./img/korea.jpg")  |  ![]("./img/korea.jpg")
