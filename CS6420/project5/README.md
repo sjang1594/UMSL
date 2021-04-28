@@ -27,6 +27,7 @@
 </p>
 
 ### Output Image
+`left to right algorithm SLIC, SLICO and MSLIC. (Constant : Size)`
 <p float="center">
   <img src="./img/korea_slic_-a=0_-s=25.jpg" width="270" />
   <img src="./img/korea_slic_-a=1_-s=25.jpg" width="270" /> 
