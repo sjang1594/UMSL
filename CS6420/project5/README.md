@@ -28,7 +28,7 @@
 
 ### Output Image
 <p float="left">
-  <img src="/korea.jpg" width="100" />
-  <img src="/korea.jpg" width="100" /> 
-  <img src="/korea.jpg" width="100" />
+  <img src="./img/korea.jpg" width="100" />
+  <img src="./img/korea.jpg" width="100" /> 
+  <img src="./img/korea.jpg" width="100" />
 </p>
