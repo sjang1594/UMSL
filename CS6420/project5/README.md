@@ -27,11 +27,17 @@
 </p>
 
 ### Output Image
-`left to right algorithm SLIC, SLICO and MSLIC. (Constant : Size)`
+`left to right algorithm SLIC, SLICO and MSLIC. (Constant Size = 25)`
 <p float="center">
   <img src="./img/korea_slic_-a=0_-s=25.jpg" width="270" />
   <img src="./img/korea_slic_-a=1_-s=25.jpg" width="270" /> 
   <img src="./img/korea_slic_-a=2_-s=25.jpg" width="270" />
 </p>
 
+`left to right algorithm SLIC, SLICO and MSLIC. (Constant Size = 50)`
+<p float="center">
+  <img src="./img/korea_slic_-a=0_-s=50.jpg" width="270" />
+  <img src="./img/korea_slic_-a=1_-s=50.jpg" width="270" /> 
+  <img src="./img/korea_slic_-a=2_-s=50.jpg" width="270" />
+</p>
 
