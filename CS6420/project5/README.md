@@ -28,7 +28,9 @@
 
 ### Output Image
 <p float="left">
-  <img src="./img/korea.jpg" width="100" />
-  <img src="./img/korea.jpg" width="100" /> 
-  <img src="./img/korea.jpg" width="100" />
+  <img src="./img/korea_slic_-a=0_-s=25.jpg" width="100" />
+  <img src="./img/korea_slic_-a=1_-s=25.jpg" width="100" /> 
+  <img src="./img/korea_slic_-a=2_-s=25.jpg" width="100" />
 </p>
+
+
