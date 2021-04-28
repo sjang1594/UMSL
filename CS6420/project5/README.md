@@ -27,6 +27,8 @@
 </p>
 
 ### Output Image
-Solarized dark             |  Solarized Ocean
-:-------------------------:|:-------------------------:
-![]("./img/korea.jpg")  |  ![]("./img/korea.jpg")
+<p float="left">
+  <img src="/korea.jpg" width="100" />
+  <img src="/korea.jpg" width="100" /> 
+  <img src="/korea.jpg" width="100" />
+</p>
