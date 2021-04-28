@@ -27,9 +27,7 @@
 </p>
 
 ### Output Image
-![alt-text-1](./img/korea_slic_-a=0_-s=25.jpg "title-1") ![alt-text-2](./img/korea_slic_-a=1_-s=25.jpg "title-2")
-
-<p float="left">
+<p float="center">
   <img src="./img/korea_slic_-a=0_-s=25.jpg" width="270" />
   <img src="./img/korea_slic_-a=1_-s=25.jpg" width="270" /> 
   <img src="./img/korea_slic_-a=2_-s=25.jpg" width="270" />
