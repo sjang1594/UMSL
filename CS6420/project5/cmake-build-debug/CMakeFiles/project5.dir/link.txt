@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/project5.dir/src/slic.cpp.o CMakeFiles/project5.dir/src/utill.cpp.o  -o project5 

@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/project4.dir/src/map_segment.cpp.o CMakeFiles/project4.dir/src/utill.cpp.o  -o project4 
