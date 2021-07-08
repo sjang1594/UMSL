@@ -4,8 +4,8 @@
 
 1. Data preparation
 - Collect the images or take pictures
-- If you are extracting images from a video make sure that the images are not too easy to predict
-- Crop/resize them all to same dimensions (height = width)
+- If you are extracting images from a video, make sure that the images are not too easy to predict
+- Crop/Resize them all to same dimensions (height = width)
 - Visualize sample images and discuss the distribution of output labels
 - Discuss data normalization
 
