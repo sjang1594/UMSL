@@ -35,6 +35,38 @@ Image registration has a wide variety of applications: it is essential as soon a
 - warped_file       : Input file containing warp matrix
 
 ### Results :
+
+**I/O Image**
+
+<p align="center">
+  <img src="./images/home_day.jpg" width="320" height="320" >
+  <img src="./images/home_night.jpg"width="320" height="320"> 
+</p>
+
+
+
+**Manual Registration [Default : Affine Transformation]**
+
+The manual registration requires a human to identify a set of points(3 pts) in the reference image as well as the corresponding points in the target image.
+
+<p align="center">
+  <img src="./images/warp_image.jpg" width="300" height="240" >
+</p>
+
+**Automatic Warp Registration [Default : Homography]**
+
+<p align="center">
+  <img src="./result/warped_file.jpg" width="300" height="240" >
+</p>
+
+**Error Image**
+
+The amount of translation and scaling in the resulting image compared to the input image
+
+<p align="center">
+  <img src="./result/error.jpg" width="300" height="240" >
+</p>
+
 All the results image & ecc files are stored in `./result` folder 
 ## Reference :
 * [Image Registeration](https://www.sicara.ai/blog/2019-07-16-image-registration-deep-learning)

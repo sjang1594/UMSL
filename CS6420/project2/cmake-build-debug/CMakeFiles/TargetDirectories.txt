@@ -1,3 +1,0 @@
-/home/seungho/Desktop/UMSL/CS6420/project2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/seungho/Desktop/UMSL/CS6420/project2/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/seungho/Desktop/UMSL/CS6420/project2/cmake-build-debug/CMakeFiles/register.dir
